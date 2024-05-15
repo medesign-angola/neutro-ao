@@ -114,7 +114,8 @@
 @media screen and (min-width: 1900px) {
   .limited-container{
       /* max-width: 1536px; */
-      max-width: 1456px;
+      /* max-width: 1920px; */
+      max-width: 90%;
   }
 }
 

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BannerItemsModel } from '@core/data/models/banner-items.model';
 
 @Component({
   selector: 'app-banner',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './banner.component.css'
 })
 export class BannerComponent {
-
+  @Input() bannerItems: BannerItemsModel[] = [];
 }
