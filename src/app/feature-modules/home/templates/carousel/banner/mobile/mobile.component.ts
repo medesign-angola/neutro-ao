@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { MobileBannerCarouselFunctionalities } from '@core/data/classes/mobile-banner-carousel.class';
-import { BannerItemsModel } from '@core/data/models/banner-items.model';
+import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 
 const IMAGES_ELEMENT_INDEX = 0;
 const CAROUSEL_SLIDER_INTERVAL = 2;
@@ -13,7 +13,7 @@ const CAROUSEL_SLIDER_INTERVAL = 2;
 })
 export class MobileBannerCarouselComponent
 extends MobileBannerCarouselFunctionalities
-implements OnInit, OnChanges, AfterViewInit {
+implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any
@@ -21,7 +21,7 @@ implements OnInit, OnChanges, AfterViewInit {
     super();
   }
 
-  @Input() bannerItems: BannerItemsModel[] = [];
+  @Input() bannerItems: CarouselItemsModel[] = [];
   @Input() showArrows: boolean = false;
   @Input() automatic: boolean = false;
   @ViewChild('imagesContainerElement') imagesContainerElement!: ElementRef<HTMLElement>;
@@ -41,6 +41,11 @@ implements OnInit, OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.imagesContainerElement.nativeElement;
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.carouselInterval);
+    clearTimeout(this.carouselRestartingTimeout);
   }
 
   override next(){

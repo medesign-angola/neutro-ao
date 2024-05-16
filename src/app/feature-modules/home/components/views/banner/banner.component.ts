@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { BannerItemsModel } from '@core/data/models/banner-items.model';
+import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 
 @Component({
   selector: 'app-banner',
@@ -7,5 +7,5 @@ import { BannerItemsModel } from '@core/data/models/banner-items.model';
   styleUrl: './banner.component.css'
 })
 export class BannerComponent {
-  @Input() bannerItems: BannerItemsModel[] = [];
+  @Input() bannerItems: CarouselItemsModel[] = [];
 }

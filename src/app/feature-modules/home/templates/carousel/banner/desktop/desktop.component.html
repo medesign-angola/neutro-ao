@@ -5,16 +5,21 @@
                 <div class="indicator w-2 h-2 bg-[#EFEFEF] rounded-full"
                     (click)="slideTo($index)"
                     [ngClass]="{
-                        'active': $index === activeIndex
+                        'active': $index === activeIndexToDotIndicators
                     }"></div>
             }
         </div>
     </div>
     <div class="container-sections w-full h-full flex justify-between items-stretch">
         <div class="banner-half-1 w-full h-full bg-white">
-            <div class="images-container relative mt-10">
+            <div class="images-container relative mt-0">
                 @for (item of evenItems; track $index) {
-                    <div class="image absolute duration-[.6s] top-0 left-[50%] -translate-x-[50%]">
+                    <div class="image absolute duration-[.3s] top-0 left-[50%] -translate-x-[50%]"
+                    [ngClass]="{
+                        'opacity-0': !item.isActive,
+                        'opacity-1': item.isActive
+                    }"
+                    >
                         <img
                         class="mx-auto max-w-[440px]"
                         [src]="item.imagePath"
@@ -23,6 +28,22 @@
                 }
             </div>
         </div>
-        <div class="banner-half-2 w-full h-full bg-[#F5F5F5]"></div>
+        <div class="banner-half-2 w-full h-full bg-[#F5F5F5]">
+            <div class="images-container relative mt-0">
+                @for (item of oddItems; track $index) {
+                    <div class="image absolute duration-[.2s] top-0 left-[50%] -translate-x-[50%]"
+                    [ngClass]="{
+                        'opacity-0': !item.isActive,
+                        'opacity-1': item.isActive,
+                    }"
+                    >
+                        <img
+                        class="mx-auto max-w-[440px]"
+                        [src]="item.imagePath"
+                        [alt]="item.alternativeDescription">
+                    </div>
+                }
+            </div>
+        </div>
     </div>
 </div>

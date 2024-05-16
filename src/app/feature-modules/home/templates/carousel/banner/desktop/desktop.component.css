@@ -1,0 +1,6 @@
+.idicators-container .indicator{
+    transition: .6s;
+}
+.idicators-container .indicator.active{
+    background-color: black;
+}

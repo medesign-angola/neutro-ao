@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BannerItemsModel } from '@core/data/models/banner-items.model';
+import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +7,7 @@ import { BannerItemsModel } from '@core/data/models/banner-items.model';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  bannerItems: BannerItemsModel[] = [
+  bannerItems: CarouselItemsModel[] = [
     {
       imagePath: 'assets/images/home/banner/img-1.png',
     },
@@ -22,6 +22,9 @@ export class HomeComponent {
     },
     {
       imagePath: 'assets/images/home/banner/img-5.png',
+    },
+    {
+      imagePath: 'assets/images/home/banner/img-6.png',
     },
   ];
 }

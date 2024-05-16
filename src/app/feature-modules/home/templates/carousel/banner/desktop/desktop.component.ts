@@ -1,38 +1,123 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { BannerItemsModel } from '@core/data/models/banner-items.model';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
+import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
+
+const DELAY_ODD_CAROUSEL: number = 2;
+const CAROUSEL_INTERVAL_IN_SECONDS: number = 5;
+
+interface LocalCarouselItems{
+  imagePath: string,
+  alternativeDescription?: string,
+  isActive: boolean,
+  indexOnBannerItems: number
+}
 
 @Component({
   selector: 'app-desktop-banner-carousel',
   templateUrl: './desktop.component.html',
   styleUrl: './desktop.component.css'
 })
-export class DesktopBannerCarouselComponent implements OnInit {
+export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDestroy {
 
-  @Input() bannerItems: BannerItemsModel[] = [];
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any
+  ) {}
+
+  @Input() bannerItems: CarouselItemsModel[] = [];
   @Input() automatic: boolean = false;
-  evenItems: BannerItemsModel[] = [];
-  oddItems: BannerItemsModel[] = [];
+  evenItems: LocalCarouselItems[] = [];
+  oddItems: LocalCarouselItems[] = [];
 
-  activeIndex: number = 0;
+  activeIndexToDotIndicators: number = 1;
+
+  carouselInterval: any;
+  carouselTimeOut: any;
 
   ngOnInit(): void {
+
+  }
+  
+  ngOnChanges(changes: SimpleChanges): void {
     this.evenItems = this.evenIndexItems();
     this.oddItems = this.oddIndexItems();
-    this.startChangingItems();
+    this.determineTheActiveItemAndStartChanging(this.evenItems);
+    this.determineTheActiveItemAndStartChanging(this.oddItems, DELAY_ODD_CAROUSEL);
   }
 
-  slideTo(index: number){}
-
-  evenIndexItems(): BannerItemsModel[]{
-    return this.bannerItems.filter((item, index) => index % 2 === 0);
+  ngOnDestroy(): void {
+    clearInterval(this.carouselInterval);
+    clearTimeout(this.carouselTimeOut);
   }
 
-  oddIndexItems(): BannerItemsModel[]{
-    return this.bannerItems.filter((item, index) => index % 2 !== 0);
+  slideTo(index: number){
+    // identificar se é par ou ímpar
+    // Colocar falso em todos os itens activos do grupo pertencente
+    // colocar activo o item em questão.
+    // Parar a troca automatica
   }
 
-  startChangingItems(){
+  // items com index par
+  evenIndexItems(): LocalCarouselItems[]{
+    let theItems: LocalCarouselItems[] = this.bannerItems.flatMap((item, index) => (
+                                  {
+                                    imagePath: item.imagePath,
+                                    alternativeDescription: item.alternativeDescription,
+                                    isActive: item.isActive ?? false,
+                                    indexOnBannerItems: index
+                                  }
+                                ))
+                                .filter((item, index) => item.indexOnBannerItems % 2 === 0)
+
+    return theItems
+  }
+
+  // items com index ímpar
+  oddIndexItems(): LocalCarouselItems[]{
+    let theItems: LocalCarouselItems[] = this.bannerItems.flatMap((item, index) => (
+                                  {
+                                    imagePath: item.imagePath,
+                                    alternativeDescription: item.alternativeDescription,
+                                    isActive: item.isActive ?? false,
+                                    indexOnBannerItems: index
+                                  }
+                                ))
+                                .filter((item, index) => item.indexOnBannerItems % 2 !== 0)
+
+    return theItems
+  }
+
+  determineTheActiveItemAndStartChanging(items: LocalCarouselItems[], delay: number = 0){
+    if(items.findIndex(item => item.isActive) === -1){
+      items.flatMap((item, index) => (index === 0) ? item.isActive = true : item.isActive = false );
+    }
+    this.startChangingAfter(items, delay);
+  }
+
+  startChangingAfter(items: LocalCarouselItems[], delay: number){
     
+    if(!isPlatformBrowser(this.platformId)) return;
+
+    setTimeout(() => {
+      
+      this.carouselInterval = setInterval(() => {
+        let activeItemIndex = items.findIndex(item => item.isActive);
+        this.goToNextItem(activeItemIndex, items);
+      }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
+    
+    }, delay * 1000);
+
+
+
+  }
+
+  goToNextItem(activeIndex: number, itemsArray: LocalCarouselItems[]){
+    itemsArray[activeIndex].isActive = false;
+    (itemsArray[activeIndex + 1] !== undefined) ? itemsArray[activeIndex + 1].isActive = true : itemsArray[0].isActive = true;
+    this.activeIndexToDotIndicators = this.getTheActiveItem(itemsArray).indexOnBannerItems ?? 0;
+  }
+
+  getTheActiveItem(itemArray: LocalCarouselItems[]): LocalCarouselItems{
+    return (itemArray.filter(item => item.isActive))[0];
   }
 
 }
