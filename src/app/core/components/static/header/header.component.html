@@ -1,4 +1,4 @@
-<div class="header bg-white py-6 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]">
+<div class="header bg-white py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]">
     <div class="limited-container flex justify-between items-center">
         <div class="section flex gap-x-[4.563rem] justify-start items-center">
             <div class="logo">
@@ -40,13 +40,104 @@
                         </clipPath>
                         </defs>
                     </svg>                    
-                </a>            </div>
+                </a>
+            </div>
             <div class="menu-items hidden md-905:block">
-                <nav>
+                <nav class="" #desktopNavbar>
                     <ul class="flex gap-x-8 justify-start items-center">
                         <li><a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">Homens</a></li>
                         <li><a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">Mulheres</a></li>
-                        <li><a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">Neutro</a></li>
+                        <li
+                        class="neutro-item py-8"
+                        (mouseover)="this.openDesktopDropdown()"
+                        (mouseleave)="this.closeDesktopDropdown()"
+                        >
+                            <a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">
+                                Neutro
+                            </a>
+
+                            
+                            <div class="desktop-dropdown absolute w-full bg-white top-full left-0 duration-[.6s] hidden xl:block overflow-hidden"
+                            [ngClass]="{
+                                'h-0': !this.showDesktopDropdown,
+                                'h-[70vh] py-10': this.showDesktopDropdown
+                            }"
+                            >
+                                <div
+                                class="limited-container pt-0 flex justify-between items-stretch">
+                                    <div
+                                        class="dropdown-container"
+                                        [style.marginLeft.px]="197"
+                                        >
+                                        <ul class="overflow-hidden flex flex-col gap-y-5">
+                                            <li
+                                            (mouseover)="this.setHoveredItem('about-us')"
+                                            (mouseleave)="this.setHoveredItem('')"
+                                            class="flex gap-4 w-fit -ml-[40px] hover:ml-[0px] duration-[.6s] justify-start items-center"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <a
+                                                [routerLink]="['/']"
+                                                class=" font-['Bricolage-Grotesque'] text-[2.5rem] font-bold text-primary tracking-[-0.8px]"
+                                                >Sobre nós</a>
+                                            </li>
+                                            <li
+                                            (mouseover)="this.setHoveredItem('faq')"
+                                            (mouseleave)="this.setHoveredItem('')"
+                                            class="flex gap-4 w-fit -ml-[40px] hover:ml-[0px] duration-[.6s] justify-start items-center"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <a
+                                                [routerLink]="['/']"
+                                                class=" font-['Bricolage-Grotesque'] text-[2.5rem] font-bold text-primary tracking-[-0.8px]"
+                                                >FAQ</a>
+                                            </li>
+                                            <li
+                                            (mouseover)="this.setHoveredItem('contact')"
+                                            (mouseleave)="this.setHoveredItem('')"
+                                            class="flex gap-4 w-fit -ml-[40px] hover:ml-[0px] duration-[.6s] justify-start items-center"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <a
+                                                [routerLink]="['/']"
+                                                class=" font-['Bricolage-Grotesque'] text-[2.5rem] font-bold text-primary tracking-[-0.8px]"
+                                                >Contacto</a>
+                                            </li>
+                                            <li
+                                            (mouseover)="this.setHoveredItem('terms')"
+                                            (mouseleave)="this.setHoveredItem('')"
+                                            class="flex gap-4 w-fit -ml-[40px] hover:ml-[0px] duration-[.6s] justify-start items-center"
+                                            >
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                <a
+                                                [routerLink]="['/']"
+                                                class=" font-['Bricolage-Grotesque'] text-[2.5rem] font-bold text-primary tracking-[-0.8px]"
+                                                >Termos & Serviços</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <aside class="aside-images relative w-[300px] h-[330px] rounded-lg overflow-hidden">
+                                        @for (item of this.desktopDropdownItems; track $index) {
+                                            <div
+                                            [ngClass]="{ 'active': this.itemHovered === item.section }"
+                                            class="image absolute overflow-hidden -left-[100px] duration-[.4s] opacity-0 bg-[#F5F5F5] flex justify-center items-end w-[300px] h-[330px]"
+                                            >
+                                                <img [src]="item.imagePath" class="w-full appear-from-left h-full max-w-[226px] object-cover object-top" alt="">
+                                            </div>
+                                        }
+                                    </aside>
+                                </div>
+                            </div>
+
+                        </li>
                     </ul>
                 </nav>
             </div>

@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, Input, PLATFORM_ID } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +9,47 @@ import { HeaderItemsModel } from '@core/data/models/header-items.model';
   styleUrl: './header.component.css'
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
-  constructor(@Inject(PLATFORM_ID) private platformId: any) { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any,
+    private changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   @Input() headerItems: HeaderItemsModel[] = [];
-
+  @ViewChild('desktopNavbar') desktopNavbar!: ElementRef<HTMLElement>;
+  desktopDropdownContainerMarginLeft: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   isMenuOpen: boolean = false;
+  showDesktopDropdown = false;
+
+  desktopDropdownItems = [
+    { section: 'about-us', imagePath: 'assets/images/static/header/image-1.png' },
+    { section: 'faq', imagePath: 'assets/images/static/header/image-2.png' },
+    { section: 'contact', imagePath: 'assets/images/static/header/image-3.png' },
+    { section: 'terms', imagePath: 'assets/images/static/header/image-4.png' },
+  ];
+
+  itemHovered: string = '';
+
+  ngOnInit(): void {
+    
+  }
+
+  ngAfterViewInit(): void {
+    this.desktopDropdownContainerMarginLeft.next(this.desktopNavbar.nativeElement.offsetLeft);
+    this.changeDetectorRef.detectChanges();
+  }
+
+  openDesktopDropdown(){
+    this.showDesktopDropdown = true;
+  }
+  closeDesktopDropdown(){
+    this.showDesktopDropdown = false;
+  }
+
+  setHoveredItem(section: string){
+    this.itemHovered = section;
+  }
 
   openMenu(){
     this.isMenuOpen = true;

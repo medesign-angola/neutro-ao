@@ -6,6 +6,10 @@ import { HomeComponent } from './components/containers/home.component';
 import { BannerComponent } from './components/views/banner/banner.component';
 import { MobileBannerCarouselComponent } from './templates/carousel/banner/mobile/mobile.component';
 import { DesktopBannerCarouselComponent } from './templates/carousel/banner/desktop/desktop.component';
+import { WindowFocusDirective } from './directives/carousel/window-focus.directive';
+import { AppearOnMobileDirective } from '@core/directives/responsivity/appear-on-mobile.directive';
+import { AppearOnDesktopDirective } from '@core/directives/responsivity/appear-on-desktop.directive';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -13,11 +17,14 @@ import { DesktopBannerCarouselComponent } from './templates/carousel/banner/desk
     HomeComponent,
     BannerComponent,
     MobileBannerCarouselComponent,
-    DesktopBannerCarouselComponent
+    DesktopBannerCarouselComponent,
+    WindowFocusDirective,
   ],
   imports: [
-    CommonModule,
-    HomeRoutingModule
+    SharedModule,
+    HomeRoutingModule,
+    AppearOnMobileDirective,
+    AppearOnDesktopDirective
   ]
 })
 export class HomeModule { }

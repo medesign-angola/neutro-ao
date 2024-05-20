@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
+import { CarouselService } from '@core/services/carousel/carousel.service';
 
 const DELAY_ODD_CAROUSEL: number = 2;
 const CAROUSEL_INTERVAL_IN_SECONDS: number = 5;
@@ -20,11 +21,13 @@ interface LocalCarouselItems{
 export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDestroy {
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) private platformId: any,
+    private carouselService: CarouselService
   ) {}
 
   @Input() bannerItems: CarouselItemsModel[] = [];
   @Input() automatic: boolean = false;
+  // @Input() appWindowFocus!: boolean | undefined;
   evenItems: LocalCarouselItems[] = [];
   oddItems: LocalCarouselItems[] = [];
 
@@ -105,12 +108,11 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
       }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
     
     }, delay * 1000);
-
-
-
   }
 
   goToNextItem(activeIndex: number, itemsArray: LocalCarouselItems[]){
+    // console.log(this.carouselService.ableToChange().getValue())
+    // if(!this.carouselService.ableToChange().getValue()) return;
     itemsArray[activeIndex].isActive = false;
     (itemsArray[activeIndex + 1] !== undefined) ? itemsArray[activeIndex + 1].isActive = true : itemsArray[0].isActive = true;
     this.activeIndexToDotIndicators = this.getTheActiveItem(itemsArray).indexOnBannerItems ?? 0;
