@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
 import { BehaviorSubject } from 'rxjs';
 
@@ -31,11 +31,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   itemHovered: string = '';
 
+  @ViewChild('headerContentElement') headerContentElement!: ElementRef<HTMLElement>;
+  @Output() contentMarginTop: EventEmitter<number> =  new EventEmitter<number>();
+
   ngOnInit(): void {
     
   }
 
   ngAfterViewInit(): void {
+    this.contentMarginTop.emit(this.headerContentElement.nativeElement.clientHeight);
     this.desktopDropdownContainerMarginLeft.next(this.desktopNavbar.nativeElement.offsetLeft);
     this.changeDetectorRef.detectChanges();
   }

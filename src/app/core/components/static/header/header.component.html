@@ -1,4 +1,4 @@
-<div class="header bg-white py-6 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]">
+<header class="header bg-white py-6 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]"  #headerContentElement>
     <div class="limited-container flex justify-between items-center">
         <div class="section flex gap-x-[4.563rem] justify-start items-center">
             <div class="logo">
@@ -48,7 +48,7 @@
                         <li><a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">Homens</a></li>
                         <li><a [routerLink]="['/']" class="text-base font-normal font-['Bricolage-Grotesque']">Mulheres</a></li>
                         <li
-                        class="neutro-item py-8"
+                        class="neutro-item py-10"
                         (mouseover)="this.openDesktopDropdown()"
                         (mouseleave)="this.closeDesktopDropdown()"
                         >
@@ -203,4 +203,4 @@
             </nav>
         </div>
     </div>
-</div>
+</header>

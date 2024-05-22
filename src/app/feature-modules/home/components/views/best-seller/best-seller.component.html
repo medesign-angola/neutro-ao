@@ -1,0 +1,56 @@
+<div class="section-content">
+    <div class="head-content">
+        <div class="limited-container" #limitedContainerElementRef>
+            <div class="description">
+                <h1 class="mb-4 text-[2rem] md:text-[2.5rem] font-['Bricolage-Grotesque'] text-primary font-medium leading-[38.4px] -tracking-[0.64px]">Produtos mas vendidos</h1>
+                <p class="text-lg leading-[27px] text-primary">Descubra os favoritos dos clientes em nossas coleções</p>
+            </div>
+            <div class="cta my-12 flex justify-between items-center">
+                <div class="categories">
+                    <div class="chips-container flex flex-wrap gap-x-6 gap-y-3">
+                        
+                        <div class="chip w-fit">
+                            <a
+                            class="duration-[.3s] block text-black/60 bg-[#EFEFEF] rounded-full py-2 px-4 font-['Bricolage-Grotesque'] text-base"
+                            [ngClass]="{
+                                'active': this.activeCategoryIndex === -1
+                            }"
+                            (click)="select(-1)"
+                            >
+                                Todos
+                            </a>
+                        </div>
+                        @for (chip of this.betterSaleHeaderCategories; track $index) {
+                            <div class="chip w-fit">
+                                <a
+                                class="duration-[.3s] block text-black/60 bg-[#EFEFEF] rounded-full py-2 px-4 font-['Bricolage-Grotesque'] text-base"
+                                [ngClass]="{
+                                    'active': $index === this.activeCategoryIndex
+                                }"
+                                (click)="select($index)"
+                                >
+                                    {{ translatorFromSlug(chip) }}
+                                </a>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+                <div class="see-all hidden md:block">
+                    <a [routerLink]="['']" class="text-base text-primary font-semibold font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center">
+                        Ver todos os produtos
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="body-content">
+        <app-product-cards-container-with-scroll
+        [productsArray]="displayableProducts"
+        [paddingX]="scrollerPaddingX"
+        />
+    </div>
+</div>

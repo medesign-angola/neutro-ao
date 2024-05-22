@@ -10,6 +10,7 @@ import { WindowFocusDirective } from './directives/carousel/window-focus.directi
 import { AppearOnMobileDirective } from '@core/directives/responsivity/appear-on-mobile.directive';
 import { AppearOnDesktopDirective } from '@core/directives/responsivity/appear-on-desktop.directive';
 import { SharedModule } from '@shared/shared.module';
+import { BestSellerComponent } from './components/views/best-seller/best-seller.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { SharedModule } from '@shared/shared.module';
     MobileBannerCarouselComponent,
     DesktopBannerCarouselComponent,
     WindowFocusDirective,
+    BestSellerComponent,
   ],
   imports: [
     SharedModule,

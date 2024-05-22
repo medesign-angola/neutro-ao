@@ -1,6 +1,8 @@
 <div class="content-header">
-    <app-header />
+    <app-header (contentMarginTop)="contentMarginTopHandler($event)"/>
 </div>
-<div class="content-body mt-[102px]">
+<div class="content-body"
+[style.marginTop.px]="contentMarginTop"
+>
     <router-outlet />
 </div>

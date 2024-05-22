@@ -44,7 +44,6 @@ export class MobileBannerCarouselFunctionalities{
 
     @HostListener('wheel', ['$event'])
     public carouselWheelEventHandler($event: any){
-        
         this.initialX = $event.clientX;
         this.initialY = $event.clientY;
         
@@ -65,6 +64,6 @@ export class MobileBannerCarouselFunctionalities{
         this.initialX = null;
         this.initialY = null;
 
-    } 
+    }
 
 }
