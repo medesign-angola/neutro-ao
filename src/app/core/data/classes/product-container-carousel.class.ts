@@ -24,8 +24,6 @@ export class ProductContainerCarouselFuncionalities{
     @HostListener('touchmove', ['$event'])
     public carouselTouchMoveEventHandler($event: any){
 
-        $event.preventDefault();
-
         if(this.initialX === null || this.initialY === null) return;
         var currentX = $event.touches[0].clientX;
         var currentY = $event.touches[0].clientY;
@@ -34,6 +32,7 @@ export class ProductContainerCarouselFuncionalities{
         var deltaY = currentY - this.initialY;
 
         if(Math.abs(deltaX) > Math.abs(deltaY)){
+            $event.preventDefault();
             if(deltaX < 0){
                 this.next();
             }else{
