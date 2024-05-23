@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '@core/data/models/product.model';
+import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
 
 @Component({
   selector: 'app-product-cards-container-no-scroll',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './product-cards-container-no-scroll.component.css'
 })
 export class ProductCardsContainerNoScrollComponent {
-
+  @Input() productsArray: Product[] = [];
+  @Input() paddingX: number = 0;
+  productCardSizeEnum = ProductCardSizeEnum;
 }

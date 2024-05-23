@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { ProductImagesCarouselFuncionalities } from '@core/data/classes/product-image-carousel.class';
 import { colorRepresentionalImage, productColor } from '@core/data/models/product.model';
+import { ScreenService } from '@core/services/screen/screen.service';
+import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
 
 const IMAGES_SCROLLER_ELEMENT_INDEX = 0;
 
@@ -14,7 +16,11 @@ extends ProductImagesCarouselFuncionalities
 implements OnInit, OnChanges, AfterViewInit {
 
   @Input() productImagesFromColors: productColor[] = [];
+  sizesEnum = ProductCardSizeEnum;
+  @Input() size: ProductCardSizeEnum = ProductCardSizeEnum.LARGE_ON_BOTH;
   productImages: colorRepresentionalImage[] = [];
+
+  screenService = inject(ScreenService);
 
   constructor(){
     super();

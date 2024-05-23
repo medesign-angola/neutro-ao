@@ -1,8 +1,14 @@
 <div class="product-card appear-softly w-full flex gap-y-4 flex-col justify-between">
-    <div class="product-image-carousel w-full h-[283px]">
+    <div class="product-image-carousel w-full"
+    [ngClass]="{
+        'h-[171px] md:h-[283px]': size === this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_ON_DESKTOP,
+        'h-[283px]': size !== this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_ON_DESKTOP,
+    }"
+    >
         <app-image-carousel
         class="w-full h-full"
         [productImagesFromColors]="product.colors"
+        [size]="size"
         />
     </div>
     <div class="card-body">

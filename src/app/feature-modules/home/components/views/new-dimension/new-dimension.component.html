@@ -1,0 +1,30 @@
+<div class="section-content flex flex-col gap-y-12">
+    <div class="limited-container w-full flex flex-col items-center" #limitedContainerElementRef>
+        <div class="title max-w-[671px] flex flex-col gap-y-4">
+            <div class="tiny">
+                <h1 class="text-primary font-['Bricolage-Grotesque'] text-sm flex gap-x-2 justify-center items-center">
+                    Essência Autêntica
+                    <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.832 5.83337V2.50004M4.16536 14.5V11.1667M11.1654 4.16671H14.4987M2.4987 12.8334H5.83203M4.83203 1.83337L4.30906 2.87932C4.13207 3.2333 4.04357 3.4103 3.92534 3.56367C3.82044 3.69977 3.69843 3.82178 3.56233 3.92669C3.40895 4.04491 3.23196 4.13341 2.87798 4.3104L1.83203 4.83337L2.87798 5.35635C3.23196 5.53334 3.40895 5.62184 3.56233 5.74006C3.69843 5.84497 3.82044 5.96698 3.92534 6.10308C4.04357 6.25645 4.13207 6.43344 4.30906 6.78743L4.83203 7.83337L5.355 6.78743C5.532 6.43344 5.62049 6.25645 5.73872 6.10308C5.84363 5.96698 5.96564 5.84497 6.10173 5.74006C6.25511 5.62184 6.4321 5.53334 6.78609 5.35635L7.83203 4.83337L6.78609 4.3104C6.4321 4.13341 6.25511 4.04491 6.10173 3.92669C5.96564 3.82178 5.84363 3.69977 5.73872 3.56367C5.62049 3.4103 5.532 3.2333 5.355 2.87932L4.83203 1.83337ZM11.832 8.50004L11.1979 9.76821C11.021 10.1222 10.9325 10.2992 10.8142 10.4526C10.7093 10.5887 10.5873 10.7107 10.4512 10.8156C10.2978 10.9338 10.1209 11.0223 9.76687 11.1993L8.4987 11.8334L9.76687 12.4675C10.1209 12.6445 10.2978 12.7329 10.4512 12.8512C10.5873 12.9561 10.7093 13.0781 10.8142 13.2142C10.9325 13.3676 11.021 13.5446 11.1979 13.8985L11.832 15.1667L12.4661 13.8985C12.6431 13.5446 12.7316 13.3676 12.8498 13.2142C12.9547 13.0781 13.0767 12.9561 13.2128 12.8512C13.3662 12.7329 13.5432 12.6445 13.8972 12.4675L15.1654 11.8334L13.8972 11.1993C13.5432 11.0223 13.3662 10.9338 13.2128 10.8156C13.0767 10.7107 12.9547 10.5887 12.8498 10.4526C12.7316 10.2992 12.6431 10.1222 12.4661 9.76821L11.832 8.50004Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </h1>
+            </div>
+            <div class="main">
+                <h1 class="text-primary text-center font-['Bricolage-Grotesque'] text-[2rem] xl:text-[2.5rem] leading-[38.4px] xl:leading-[48px] font-semibold tracking-[-0.64px] xl:tracking-[-0.8px]">
+                    Uma nova dimensão <br class="hidden md:block"> de estilo com nossos novos calções.
+                </h1>
+            </div>
+        </div>
+        <div class="section-description max-w-[671px] mt-4">
+            <p class="text-lg text-center text-primary">
+                Permita-se ser genuíno em cada aspecto da sua jornada.
+            </p>
+        </div>
+    </div>
+    <div class="products-scroller">
+        <app-product-cards-container-with-scroll
+        [productsArray]="productsArray"
+        [paddingX]="scrollerPaddingX"
+        />
+    </div>
+</div>

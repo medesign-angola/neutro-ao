@@ -1,0 +1,6 @@
+.categories .chips-container .chip a.active{
+    background-color: black;
+    color: white;
+    font-style: normal;
+    font-weight: 500;
+}

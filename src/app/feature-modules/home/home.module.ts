@@ -11,6 +11,9 @@ import { AppearOnMobileDirective } from '@core/directives/responsivity/appear-on
 import { AppearOnDesktopDirective } from '@core/directives/responsivity/appear-on-desktop.directive';
 import { SharedModule } from '@shared/shared.module';
 import { BestSellerComponent } from './components/views/best-seller/best-seller.component';
+import { MediaComponent } from './components/views/media/media.component';
+import { NewDimensionComponent } from './components/views/new-dimension/new-dimension.component';
+import { ProductsComponent } from './components/views/products/products.component';
 
 
 @NgModule({
@@ -21,6 +24,9 @@ import { BestSellerComponent } from './components/views/best-seller/best-seller.
     DesktopBannerCarouselComponent,
     WindowFocusDirective,
     BestSellerComponent,
+    MediaComponent,
+    NewDimensionComponent,
+    ProductsComponent,
   ],
   imports: [
     SharedModule,

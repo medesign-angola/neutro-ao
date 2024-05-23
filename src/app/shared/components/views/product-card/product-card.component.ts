@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Product } from '@core/data/models/product.model';
+import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
 
 @Component({
   selector: 'app-product-card',
@@ -8,6 +9,8 @@ import { Product } from '@core/data/models/product.model';
 })
 export class ProductCardComponent implements OnInit, OnChanges {
   @Input() product!: Product;
+  @Input() size: ProductCardSizeEnum = ProductCardSizeEnum.LARGE_ON_BOTH;
+  productCardSizeEnum = ProductCardSizeEnum;
 
   ngOnInit(): void {
     

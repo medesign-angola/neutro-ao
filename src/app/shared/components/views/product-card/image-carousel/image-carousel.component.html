@@ -2,7 +2,12 @@
     <div class="image-carousel w-full h-full relative rounded-lg overflow-hidden" #imagesContainerElement>
         <div class="images-scroller flex items-stretch w-max h-full">
             @for (image of productImages; track $index) {
-                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] w-[264px] xl:w-[304px] h-full">
+                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full"
+                [ngClass]="{
+                    'w-[171px] md:w-[264px] xl:w-[304px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_ON_DESKTOP,
+                    'w-[264px] xl:w-[304px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_ON_DESKTOP,
+                }"
+                >
                     <img
                     class="w-full h-full mx-auto object-contain object-top"
                     [src]="image.imagePath"
@@ -12,7 +17,7 @@
             }
         </div>
     </div>
-    <div *ngIf="productImages.length > 1" class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] flex justify-between items-center">
+    <div *ngIf="productImages.length > 1 && this.screenService.dimentions && this.screenService.dimentions.width > 400" class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] flex justify-between items-center">
         <div class="prev cursor-pointer">
             <a (click)="prev()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

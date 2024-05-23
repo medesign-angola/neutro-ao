@@ -1,11 +1,13 @@
-<div class="section-content">
+<div class="section-content mt-16">
     <div class="head-content">
         <div class="limited-container" #limitedContainerElementRef>
             <div class="description">
                 <h1 class="mb-4 text-[2rem] md:text-[2.5rem] font-['Bricolage-Grotesque'] text-primary font-medium leading-[38.4px] -tracking-[0.64px]">
-                    Produtos mais vendidos
+                    Todos os produtos Neutro
                 </h1>
-                <p class="text-lg leading-[27px] text-primary">Descubra os favoritos dos clientes em nossas coleções</p>
+                <p class="text-lg leading-[27px] text-primary">
+                    Criamos e selecionamos produtos para o seu conforto
+                </p>
             </div>
             <div class="cta my-12 flex justify-between items-center">
                 <div class="categories">
@@ -22,7 +24,7 @@
                                 Todos
                             </a>
                         </div>
-                        @for (chip of this.betterSaleHeaderCategories; track $index) {
+                        @for (chip of this.productsHeaderCategories; track $index) {
                             <div class="chip w-fit">
                                 <a
                                 class="duration-[.3s] block text-black/60 bg-[#EFEFEF] rounded-full py-2 px-4 font-['Bricolage-Grotesque'] text-base"
@@ -50,7 +52,7 @@
         </div>
     </div>
     <div class="body-content">
-        <app-product-cards-container-with-scroll
+        <app-product-cards-container-no-scroll
         [productsArray]="displayableProducts"
         [paddingX]="scrollerPaddingX"
         />

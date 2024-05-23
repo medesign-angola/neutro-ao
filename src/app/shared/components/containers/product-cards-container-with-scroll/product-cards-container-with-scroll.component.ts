@@ -1,8 +1,8 @@
-import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { ProductContainerCarouselFuncionalities } from '@core/data/classes/product-container-carousel.class';
 import { Product } from '@core/data/models/product.model';
-import { fromEvent, throttleTime } from 'rxjs';
+
+const PRODUCTS_CONTAINER_INDEX = 0;
 
 @Component({
   selector: 'app-product-cards-container-with-scroll',
@@ -57,9 +57,11 @@ implements OnInit, OnChanges, AfterViewInit {
   }
   
   scrollToActiveIndex(activeIndex: number){
-    let productContainerElementChildrensAsHtmlElement = this.productContainerElement.nativeElement.childNodes[0] as HTMLElement;
+    let productContainerElementChildrensAsHtmlElement = this.productContainerElement.nativeElement.childNodes[PRODUCTS_CONTAINER_INDEX] as HTMLElement;
     let getActiveItemByActiveIndexAsHtmlElement = productContainerElementChildrensAsHtmlElement.children[activeIndex] as HTMLElement;
+    // console.log(getActiveItemByActiveIndexAsHtmlElement.offsetLeft);
     this.productContainerElement.nativeElement.scrollTo(getActiveItemByActiveIndexAsHtmlElement.offsetLeft - this.paddingX, 0);
+    // this.productContainerElement.nativeElement.scrollTo(getActiveItemByActiveIndexAsHtmlElement.offsetLeft, 0);
   }
   
 }
