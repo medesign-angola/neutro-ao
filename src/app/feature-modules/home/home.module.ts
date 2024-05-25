@@ -14,6 +14,7 @@ import { BestSellerComponent } from './components/views/best-seller/best-seller.
 import { MediaComponent } from './components/views/media/media.component';
 import { NewDimensionComponent } from './components/views/new-dimension/new-dimension.component';
 import { ProductsComponent } from './components/views/products/products.component';
+import { SeekExcellenceComponent } from './components/views/seek-excellence/seek-excellence.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ProductsComponent } from './components/views/products/products.componen
     MediaComponent,
     NewDimensionComponent,
     ProductsComponent,
+    SeekExcellenceComponent,
   ],
   imports: [
     SharedModule,

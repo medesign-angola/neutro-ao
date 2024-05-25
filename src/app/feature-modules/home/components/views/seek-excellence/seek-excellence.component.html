@@ -1,0 +1,99 @@
+<div class="section-content relative flex flex-col gap-y-3">
+    <div class="limited-container w-full xl:!absolute xl:!left-[50%] xl:!translate-x-[-50%] xl:!mt-16 flex flex-col items-center xl:items-start" #limitedContainerElementRef>
+        <div class="title max-w-[467px] flex flex-col gap-y-4">
+            <div class="tiny">
+                <h1 class="text-primary font-['Bricolage-Grotesque'] text-sm flex gap-x-2 justify-center xl:justify-start items-center">
+                    Qualidade e Singularidade
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.49968 1.83337H5.66264C5.54298 1.83337 5.48316 1.83337 5.43034 1.85159C5.38363 1.8677 5.34109 1.894 5.30579 1.92857C5.26587 1.96766 5.23912 2.02117 5.18561 2.12819L2.38561 7.72819C2.25782 7.98377 2.19393 8.11155 2.20927 8.21543C2.22268 8.30613 2.27285 8.38731 2.34798 8.43986C2.43403 8.50004 2.5769 8.50004 2.86264 8.50004H6.99968L4.99968 15.1667L13.1284 6.73691C13.4027 6.45251 13.5398 6.31031 13.5478 6.18863C13.5548 6.08301 13.5112 5.98036 13.4303 5.91206C13.3371 5.83337 13.1396 5.83337 12.7445 5.83337H7.99968L9.49968 1.83337Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </h1>
+            </div>
+            <div class="main">
+                <h1 class="text-primary text-center xl:text-left font-['Bricolage-Grotesque'] text-[2rem] xl:text-[2.5rem] leading-[38.4px] xl:leading-[48px] font-semibold tracking-[-0.64px] xl:tracking-[-0.8px]">
+                    Buscamos a excelência <br class="hidden md:block"> em cada elemento.
+                </h1>
+            </div>
+        </div>
+        <div class="section-description max-w-[387px] mt-4">
+            <p class="text-lg text-center xl:text-left text-primary">
+                Cada detalhe é pensado para oferecer uma experiência única e exclusiva.
+            </p>
+        </div>
+    </div>
+
+    <div class="images-container relative bg-[url('assets/images/static/utils/noise.png')] bg-cover bg-no-repeat h-[438px] md:h-[660px] lg:h-[860px] xl:h-[1123px] overflow-hidden">
+        <!-- <div class="limited-container relative bg-red-400"> -->
+            @for (image of images; track $index) {
+                <div class="images-preview duration-[.4s] absolute top-0 left-0 w-full xl:left-[50%] xl:translate-x-[-50%] xl:max-w-[1000px] h-full"
+                [ngClass]="{
+                    'opacity-0': $index !== activeIndex,
+                    'opacity-1': $index === activeIndex,
+                }"
+                >
+                    <img
+                    class="w-full mt-[-73px] md:mt-[-160px] lg:mt-[-200px] object-cover object-top"
+                    [src]="image"
+                    alt="">
+                </div>
+            }
+        <!-- </div> -->
+        
+        <div class="chooser absolute bottom-4 md:bottom-8 xl:bottom-[50%] xl:translate-y-[50%] w-full">
+            <div class="limited-container w-full flex justify-center xl:justify-end items-center">
+                <div class="images-chip p-3 w-fit flex flex-row xl:flex-col gap-4 justify-center items-center bg-white rounded-full">
+                    @for (image of images; track $index) {
+                        <div
+                        class="image border-[1.5px] border-[#EFEFEF] cursor-pointer relative overflow-hidden w-[56px] h-[56px] rounded-full"
+                        (click)="showImage($index)"
+                        >
+                            <img
+                            class="w-full duration-[.4s] object-cover object-top"
+                            [ngClass]="{
+                                'grayscale': $index !== activeIndex,
+                                '': $index === activeIndex,
+                            }"
+                            [src]="image"
+                            alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mobile-controllers mt-[36px] xl:mt-0 xl:absolute xl:w-full xl:bottom-16">
+        <div class="limited-container flex justify-between items-center">
+
+            <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">
+                @for (dot of images; track $index) {
+                    <div class="dot w-2 h-2 rounded-full bg-[#EFEFEF]"
+                    [ngClass]="{ 'active': $index === activeIndex }"
+                    (click)="showImage($index)"
+                    ></div>
+                }
+            </div>
+            <div class="arrow-controllers flex gap-x-4 justify-start items-center">
+                <div class="prev cursor-pointer">
+                    <a (click)="prev()" class="">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === 0) ? '#EFEFEF' : 'black'"/>
+                            <path class="duration-[.2s]" d="M23 26L17 20L23 14" [attr.stroke]="(activeIndex === 0) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                            
+                    </a>
+                </div>
+                <div class="next cursor-pointer">
+                    <a (click)="next()" class="">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.images.length - 1) ? '#EFEFEF' : 'black'"/>
+                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.images.length - 1) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
