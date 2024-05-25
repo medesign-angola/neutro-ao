@@ -1,27 +1,41 @@
 <div class="components-container flex flex-col gap-y-20">
-    <div class="banner-section">
-        <app-banner
-            [bannerItems]="bannerItems" />
+    <div class="banner-section" #bannerSection>
+            @defer (on viewport(bannerSection)) {
+                <app-banner
+                    [bannerItems]="bannerItems" />
+            }
+        </div>
+    <div class="best-seller-section" #bestSellerSection>
+        @defer (on viewport(bestSellerSection)) {
+            <app-best-seller
+            [betterSaleHeaderCategories]="betterSaleHeadercategories"
+            [productsArray]="betterSaleProducts"
+            />
+        }
     </div>
-    <div class="best-seller-section">
-        <app-best-seller
-        [betterSaleHeaderCategories]="betterSaleHeadercategories"
-        [productsArray]="betterSaleProducts"
-        />
+    <div class="media-section" #mediaSection>
+        @defer (on viewport(mediaSection)) {
+            <app-media />
+        }
     </div>
-    <div class="media-section">
-        <app-media />
+    <div class="new-dimension-section" #newDimensionSection>
+        @defer (on viewport(newDimensionSection)) {
+            <app-new-dimension
+            [productsArray]="betterSaleProducts"
+            />
+        }
     </div>
-    <div class="new-dimension-section">
-        <app-new-dimension
-        [productsArray]="betterSaleProducts"
-        />
+    <div class="products" #productsSection>
+        @defer (on viewport(productsSection)) {
+            <app-products
+            [productsHeaderCategories]="productsHeadercategories"
+            [productsArray]="allProducts"
+            />
+        }
     </div>
-    <div class="products">
-        <app-products
-        [productsHeaderCategories]="productsHeadercategories"
-        [productsArray]="allProducts"
-        />
+    <div class="seek-excellence" #seekExcellence>
+        @defer (on viewport(seekExcellence)) {
+            <app-seek-excellence />
+        }
     </div>
-    <app-seek-excellence />
 </div>
