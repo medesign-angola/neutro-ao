@@ -46,6 +46,12 @@
 
 @font-face {
     font-family: 'Bricolage-Grotesque';
+    src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_72pt-ExtraLight.ttf');
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: 'Bricolage-Grotesque';
     src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_72pt-Light.ttf');
     font-weight: 300;
 }

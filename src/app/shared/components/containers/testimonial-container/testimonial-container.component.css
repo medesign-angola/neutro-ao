@@ -1,0 +1,53 @@
+.dot.active{
+    background-color: white;
+}
+.images-container > div[data-position="-1"]{
+    transform: translateX(70%) scale(.2);
+    z-index: 1;
+}
+.images-container > div.negative-fourth img,
+.images-container > div.negative-third img,
+.images-container > div.negative-second img,
+.images-container > div.negative-first img,
+.images-container > div.positive-first img,
+.images-container > div.positive-second img,
+.images-container > div.positive-third img,
+.images-container > div.positive-fourth img{
+    filter: grayscale(100%);
+}
+
+.images-container > div.negative-fourth{
+    transform: translateX(-120%) scale(.4);
+    z-index: 1;
+}
+.images-container > div.negative-third{
+    transform: translateX(-100%) scale(.6);
+    z-index: 2;
+}
+.images-container > div.negative-second{
+    transform: translateX(-70%) scale(.6);
+    z-index: 3;
+}
+.images-container > div.negative-first{
+    transform: translateX(-40%) scale(.8);
+    z-index: 4;
+}
+.images-container > div.active-image{
+    z-index: 5;
+}
+.images-container > div.positive-first{
+    transform: translateX(40%) scale(.8);
+    z-index: 4;
+}
+.images-container > div.positive-second{
+    transform: translateX(70%) scale(.6);
+    z-index: 3;
+}
+.images-container > div.positive-third{
+    transform: translateX(100%) scale(.4);
+    z-index: 2;
+}
+.images-container > div.positive-fourth{
+    transform: translateX(120%) scale(.2);
+    z-index: 1;
+}

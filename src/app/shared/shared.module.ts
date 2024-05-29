@@ -5,6 +5,7 @@ import { ProductCardsContainerNoScrollComponent } from './components/containers/
 import { ProductCardComponent } from './components/views/product-card/product-card.component';
 import { ImageCarouselComponent } from './components/views/product-card/image-carousel/image-carousel.component';
 import { ReplaceByPipe } from './pipes/replace-by.pipe';
+import { TestimonialContainerComponent } from './components/containers/testimonial-container/testimonial-container.component';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { ReplaceByPipe } from './pipes/replace-by.pipe';
     ProductCardsContainerNoScrollComponent,
     ProductCardComponent,
     ImageCarouselComponent,
-    ReplaceByPipe
+    ReplaceByPipe,
+    TestimonialContainerComponent
   ],
   imports: [
     CommonModule
@@ -21,7 +23,8 @@ import { ReplaceByPipe } from './pipes/replace-by.pipe';
     CommonModule,
     ProductCardsContainerWithScrollComponent,
     ProductCardsContainerNoScrollComponent,
-    ReplaceByPipe
+    ReplaceByPipe,
+    TestimonialContainerComponent
   ]
 })
 export class SharedModule { }

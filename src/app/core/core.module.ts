@@ -3,10 +3,12 @@ import { SharedModule } from '@shared/shared.module';
 import { HeaderComponent } from './components/static/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FaqComponent } from './components/static/faq/faq.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent
+    HeaderComponent,
+    FaqComponent
   ],
   imports: [
     SharedModule,
@@ -14,7 +16,8 @@ import { RouterModule } from '@angular/router';
     RouterModule
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
+    FaqComponent
   ]
 })
 export class CoreModule { }
