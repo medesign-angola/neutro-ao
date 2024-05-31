@@ -4,11 +4,13 @@ import { HeaderComponent } from './components/static/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FaqComponent } from './components/static/faq/faq.component';
+import { FooterComponent } from './components/static/footer/footer.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    FaqComponent
+    FaqComponent,
+    FooterComponent
   ],
   imports: [
     SharedModule,
@@ -17,7 +19,8 @@ import { FaqComponent } from './components/static/faq/faq.component';
   ],
   exports: [
     HeaderComponent,
-    FaqComponent
+    FaqComponent,
+    FooterComponent
   ]
 })
 export class CoreModule { }

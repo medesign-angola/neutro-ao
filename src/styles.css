@@ -88,6 +88,7 @@
 
 :root{
     --max-w: 90%;
+    --max-w-1536: 1536px;
     --primary-color: #030303;
 }
 
@@ -119,9 +120,9 @@
 }
 @media screen and (min-width: 1900px) {
   .limited-container{
-      /* max-width: 1536px; */
+      max-width: var(--max-w-1536);
       /* max-width: 1920px; */
-      max-width: 90%;
+      /* max-width: 90%; */
   }
 }
 
