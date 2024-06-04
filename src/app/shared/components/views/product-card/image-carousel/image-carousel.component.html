@@ -4,20 +4,33 @@
             @for (image of productImages; track $index) {
                 <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full"
                 [ngClass]="{
-                    'w-[171px] md:w-[264px] xl:w-[304px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_ON_DESKTOP,
-                    'w-[264px] xl:w-[304px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_ON_DESKTOP,
+                    'w-[171px] md:w-[264px] xl:w-[304px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
+                    'w-[264px] xl:w-[304px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_FROM_TABLET,
                 }"
                 >
                     <img
                     class="w-full h-full mx-auto object-contain object-top"
-                    [src]="image.imagePath"
+                    [ngSrc]="image.imagePath.genericPath"
+                    [srcset]="[image.imagePath.allSizes?.thumbnail, image.imagePath.allSizes?.medium, image.imagePath.allSizes?.large]"
+                    [width]="image.imagePath.allSizes?.['large-width']"
+                    [height]="image.imagePath.allSizes?.['large-height']"
                     [alt]="'Imagem ' + $index + ' do Produto '"
                     >
                 </div>
             }
         </div>
     </div>
-    <div *ngIf="productImages.length > 1 && this.screenService.dimentions && this.screenService.dimentions.width > 400" class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] flex justify-between items-center">
+    <div
+    class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] justify-between items-center"
+    [ngClass]="{
+        'hidden md:flex': size === sizesEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
+        'flex': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_FROM_TABLET,
+    }"
+    >
+    
+    <!-- *ngIf="productImages.length > 1" -->
+    <!-- appProductImageSlideControllerAppearOnTablet
+    (appearOnlyFromTablet)="productImagesCarouselControllersEventHandler($event)" -->
         <div class="prev cursor-pointer">
             <a (click)="prev()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

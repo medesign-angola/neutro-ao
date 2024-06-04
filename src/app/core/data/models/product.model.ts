@@ -1,9 +1,11 @@
+import { ImagePath } from "./image-path.model"
+
 export interface productSize{
     name: string
 }
 
 export interface colorRepresentionalImage{
-    imagePath: string
+    imagePath: ImagePath
 }
 
 export interface productColor{

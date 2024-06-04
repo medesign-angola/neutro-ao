@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FaqComponent } from './components/static/faq/faq.component';
 import { FooterComponent } from './components/static/footer/footer.component';
+import { NgOptimizedImage } from '@angular/common';
 
 @NgModule({
   declarations: [

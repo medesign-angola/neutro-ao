@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { MobileBannerCarouselFunctionalities } from '@core/data/classes/mobile-banner-carousel.class';
 import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 
@@ -16,7 +16,8 @@ extends MobileBannerCarouselFunctionalities
 implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   constructor(
-    @Inject(PLATFORM_ID) private platformId: any
+    @Inject(PLATFORM_ID) private platformId: any,
+    private ngZone: NgZone
   ) {
     super();
   }
@@ -76,9 +77,11 @@ implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   startAutomatizedSliding(intervalTimerInSeconds: number = CAROUSEL_SLIDER_INTERVAL){
     if(!isPlatformBrowser(this.platformId)) return;
 
-    this.carouselInterval = setInterval(() => {
-      this.next();
-    }, intervalTimerInSeconds * 1000);
+    this.ngZone.runOutsideAngular(() => {
+      this.carouselInterval = setInterval(() => {
+        this.next();
+      }, intervalTimerInSeconds * 1000);
+    });
 
   }
 

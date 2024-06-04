@@ -43,15 +43,20 @@
         </div>
     </div>
     <div class="images-container w-screen overflow-hidden mtt-[38px]" #imagesContainerElement>
-        <div class="images flex w-fit">
+        <div class="images relative flex w-fit">
             @for (item of bannerItems; track $index) {
                 <div
                 class="image relative w-screen h-full"
                 >
                     <img
-                    class="w-full md:w-[391px] h-full md:mx-auto object-cover md:object-cover"
-                    [src]="item.imagePath"
-                    [alt]="item.alternativeDescription ?? 'Imagem de banner ' + ($index+1)">
+                    class="w-full relative md:w-[391px] h-full md:mx-auto object-cover md:object-cover"
+                    [ngSrc]="item.imagePath.genericPath"
+                    [srcset]="[item.imagePath.allSizes?.thumbnail, item.imagePath.allSizes?.medium, item.imagePath.allSizes?.large]"
+                    [width]="item.imagePath.allSizes?.['large-width']"
+                    [height]="item.imagePath.allSizes?.['large-height']"
+                    [priority]="'priority'"
+                    [alt]="item.alternativeDescription ?? 'Imagem de banner ' + ($index + 1)"
+                    >
                 </div>
             }
         </div>

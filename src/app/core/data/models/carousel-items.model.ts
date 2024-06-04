@@ -1,5 +1,7 @@
+import { ImagePath } from "./image-path.model";
+
 export interface CarouselItemsModel{
-    imagePath: string,
+    imagePath: ImagePath,
     alternativeDescription?: string,
     isActive?: boolean
 }

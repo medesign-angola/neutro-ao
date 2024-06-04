@@ -1,28 +1,28 @@
 <div class="section-content">
     <div
-    class="mobile-carousel xl:hidden"
-    appAppearOnMobile
-    (appearOnlyOnMobile)="mobileBannerStatusEventHandler($event)"
+    class="mobile-carousel relative xl:hidden"
     >
-        @if (showMobileBanner$()) {
+    <!-- appAppearOnMobile
+    (appearOnlyOnMobile)="mobileBannerStatusEventHandler($event)" -->
+        <!-- @if (showMobileBanner$()) { -->
             <app-mobile-banner-carousel
                 [automatic]="true"
                 [bannerItems]="bannerItems"
                 appWindowFocus
             />
-        }@else {}
+        <!-- }@else {} -->
     </div>
     <div
-    class="desktop-carousel hidden xl:block"
-    appAppearOnDesktop
-    (appearOnlyOnDesktop)="desktopBannerStatusEventHandler($event)"
+    class="desktop-carousel relative hidden xl:block"
     >
-        @if (showDesktopBanner$()) {
+    <!-- appAppearOnDesktop
+    (appearOnlyOnDesktop)="desktopBannerStatusEventHandler($event)" -->
+        <!-- @if (showDesktopBanner$()) { -->
             <app-desktop-banner-carousel
                 [automatic]="true"
                 [bannerItems]="bannerItems"
                 appWindowFocus
             />
-        }@else {}
+        <!-- }@else {} -->
     </div>
 </div>

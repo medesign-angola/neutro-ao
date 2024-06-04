@@ -8,7 +8,8 @@
                 <div class="product w-[171px] md:w-[264px] xl:w-[304px]">
                     <app-product-card
                     [product]="product"
-                    [size]="this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_ON_DESKTOP"
+                    [controllerArrowsOnMobile]="false"
+                    [size]="this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET"
                     />
                 </div>
             }

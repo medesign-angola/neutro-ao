@@ -1,17 +1,13 @@
 <div class="components-container flex flex-col gap-y-0">
-    <div class="banner-section pb-20" #bannerSection>
-            @defer (on viewport(bannerSection)) {
-                <app-banner
-                    [bannerItems]="bannerItems" />
-            }
-        </div>
+    <div class="banner-section mb-20 h-[620px] md:h-[626px] xl:h-[704px]" #bannerSection>
+        <app-banner
+        [bannerItems]="bannerItems" />
+    </div>
     <div class="best-seller-section pb-20" #bestSellerSection>
-        @defer (on viewport(bestSellerSection)) {
-            <app-best-seller
-            [betterSaleHeaderCategories]="betterSaleHeadercategories"
-            [productsArray]="betterSaleProducts"
-            />
-        }
+        <app-best-seller
+        [betterSaleHeaderCategories]="betterSaleHeadercategories"
+        [productsArray]="betterSaleProducts"
+        />
     </div>
     <div class="media-section pb-20" #mediaSection>
         @defer (on viewport(mediaSection)) {
@@ -19,28 +15,20 @@
         }
     </div>
     <div class="new-dimension-section pb-20" #newDimensionSection>
-        @defer (on viewport(newDimensionSection)) {
-            <app-new-dimension
-            [productsArray]="betterSaleProducts"
-            />
-        }
+        <app-new-dimension
+        [productsArray]="betterSaleProducts"
+        />
     </div>
     <div class="products pb-20" #productsSection>
-        @defer (on viewport(productsSection)) {
-            <app-products
-            [productsHeaderCategories]="productsHeadercategories"
-            [productsArray]="allProducts"
-            />
-        }
+        <app-products
+        [productsHeaderCategories]="productsHeadercategories"
+        [productsArray]="allProducts"
+        />
     </div>
     <div class="seek-excellence mb-16 xl:mb-0" #seekExcellence>
-        @defer (on viewport(seekExcellence)) {
-            <app-seek-excellence />
-        }
+        <app-seek-excellence />
     </div>
     <div class="share-moments bg-primary" #shareMoments>
-        @defer (on viewport(shareMoments)) {
-            <app-share-moments />
-        }
+        <app-share-moments />
     </div>
 </div>

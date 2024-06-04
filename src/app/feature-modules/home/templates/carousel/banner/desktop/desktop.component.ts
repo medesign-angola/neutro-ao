@@ -1,13 +1,14 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, HostListener, Inject, Input, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
+import { Component, HostListener, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, inject } from '@angular/core';
 import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
+import { ImagePath } from '@core/data/models/image-path.model';
 import { CarouselService } from '@core/services/carousel/carousel.service';
 
 const DELAY_ODD_CAROUSEL: number = 2;
 const CAROUSEL_INTERVAL_IN_SECONDS: number = 5;
 
 interface LocalCarouselItems{
-  imagePath: string,
+  imagePath: ImagePath,
   alternativeDescription?: string,
   isActive: boolean,
   indexOnBannerItems: number
@@ -22,7 +23,8 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private carouselService: CarouselService
+    private ngZone: NgZone,
+    private carouselService: CarouselService,
   ) {}
 
   @Input() bannerItems: CarouselItemsModel[] = [];
@@ -100,14 +102,16 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
     
     if(!isPlatformBrowser(this.platformId)) return;
 
-    setTimeout(() => {
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        
+        this.carouselInterval = setInterval(() => {
+          let activeItemIndex = items.findIndex(item => item.isActive);
+          this.goToNextItem(activeItemIndex, items);
+        }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
       
-      this.carouselInterval = setInterval(() => {
-        let activeItemIndex = items.findIndex(item => item.isActive);
-        this.goToNextItem(activeItemIndex, items);
-      }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
-    
-    }, delay * 1000);
+      }, delay * 1000);
+    });
   }
 
   goToNextItem(activeIndex: number, itemsArray: LocalCarouselItems[]){

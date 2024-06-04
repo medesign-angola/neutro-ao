@@ -9,6 +9,7 @@ import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
 })
 export class ProductCardComponent implements OnInit, OnChanges {
   @Input() product!: Product;
+  @Input() controllerArrowsOnMobile: boolean = true;
   @Input() size: ProductCardSizeEnum = ProductCardSizeEnum.LARGE_ON_BOTH;
   productCardSizeEnum = ProductCardSizeEnum;
 

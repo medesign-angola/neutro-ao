@@ -31,7 +31,12 @@
                 </svg>                
             </div>
             <div class="overlay absolute top-0 md:top-32 left-0 z-[3] w-full h-full"></div>
-            <img src="assets/images/static/footer/cover-2.png" class="-mt-[25px] drop-shadow-[0px_0px_10.4px_rgba(0,0,0,0.80)] md:-mt-[60px] left-[50%] -translate-x-[50%] relative z-[2] object-cover object-top" alt="">
+            <img
+            [ngSrc]="'assets/images/static/footer/cover-2.png'"
+            [width]="827"
+            [height]="928"
+            class="-mt-[25px] drop-shadow-[0px_0px_10.4px_rgba(0,0,0,0.80)] md:-mt-[60px] left-[50%] -translate-x-[50%] relative z-[2] object-cover object-top"
+            alt="">
         </div>
         <div class="content absolute z-[5] w-full bottom-0 py-5">
             <div class="limited-container flex gap-y-4 flex-col md:flex-row md:justify-between">

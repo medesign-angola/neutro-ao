@@ -11,10 +11,17 @@ const routes: Routes = [
     path: 'coming-soon',
     loadChildren: () => import('./feature-modules/coming-soon/coming-soon.module').then(m => m.ComingSoonModule)
   },
+  {
+    path: 'products',
+    loadChildren: () => import('./feature-modules/products/products.module').then(m => m.ProductsModule)
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: 'enabled',
+    initialNavigation: 'enabledBlocking'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

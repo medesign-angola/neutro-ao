@@ -130,7 +130,11 @@
                                             [ngClass]="{ 'active': this.itemHovered === item.section }"
                                             class="image absolute overflow-hidden -left-[100px] duration-[.4s] opacity-0 bg-[#F5F5F5] flex justify-center items-end w-[300px] h-[330px]"
                                             >
-                                                <img [src]="item.imagePath" class="w-full appear-from-left h-full max-w-[226px] object-cover object-top" alt="">
+                                                <img
+                                                [ngSrc]="item.imagePath"
+                                                [fill]="'fill'"
+                                                class="w-full appear-from-left h-full max-w-[226px] object-cover object-top" alt=""
+                                                >
                                             </div>
                                         }
                                     </aside>

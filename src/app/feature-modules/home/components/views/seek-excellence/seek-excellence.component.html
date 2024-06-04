@@ -33,7 +33,9 @@
                 >
                     <img
                     class="w-full mt-[-73px] md:mt-[-160px] lg:mt-[-200px] object-cover object-top"
-                    [src]="image"
+                    [ngSrc]="image.genericPath"
+                    [width]="image.allSizes?.['large-width']"
+                    [height]="image.allSizes?.['large-height']"
                     alt="">
                 </div>
             }
@@ -53,7 +55,9 @@
                                 'grayscale': $index !== activeIndex,
                                 '': $index === activeIndex,
                             }"
-                            [src]="image"
+                            [ngSrc]="image.genericPath"
+                            [width]="image.allSizes?.['large-width']"
+                            [height]="image.allSizes?.['large-height']"
                             alt="">
                         </div>
                     }

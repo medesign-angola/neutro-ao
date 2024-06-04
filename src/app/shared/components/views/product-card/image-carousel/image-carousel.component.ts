@@ -16,6 +16,7 @@ extends ProductImagesCarouselFuncionalities
 implements OnInit, OnChanges, AfterViewInit {
 
   @Input() productImagesFromColors: productColor[] = [];
+  controllerArrowsOnMobile: boolean = false;
   sizesEnum = ProductCardSizeEnum;
   @Input() size: ProductCardSizeEnum = ProductCardSizeEnum.LARGE_ON_BOTH;
   productImages: colorRepresentionalImage[] = [];
@@ -66,6 +67,10 @@ implements OnInit, OnChanges, AfterViewInit {
     let imagesContainerElementChildrensAsHtmlElement = this.imagesContainerElement.nativeElement.childNodes[IMAGES_SCROLLER_ELEMENT_INDEX] as HTMLElement;
     let getActiveItemByActiveIndexAsHtmlElement = imagesContainerElementChildrensAsHtmlElement.children[activeIndex] as HTMLElement;
     this.imagesContainerElement.nativeElement.scrollTo(getActiveItemByActiveIndexAsHtmlElement.offsetLeft, 0);
+  }
+
+  productImagesCarouselControllersEventHandler($event: any){
+    this.controllerArrowsOnMobile = $event;
   }
 
 }

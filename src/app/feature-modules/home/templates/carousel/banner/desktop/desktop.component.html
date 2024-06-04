@@ -22,8 +22,12 @@
                     >
                         <img
                         class="mx-auto max-w-[440px]"
-                        [src]="item.imagePath"
-                        [alt]="item.alternativeDescription">
+                        [ngSrc]="item.imagePath.genericPath"
+                        [width]="item.imagePath.allSizes?.['large-width']"
+                        [height]="item.imagePath.allSizes?.['large-height']"
+                        [priority]="'priority'"
+                        [alt]="item.alternativeDescription ?? 'Imagem de banner ' + (item.indexOnBannerItems + 1)"
+                        >
                     </div>
                 }
             </div>
@@ -39,8 +43,11 @@
                     >
                         <img
                         class="mx-auto max-w-[440px]"
-                        [src]="item.imagePath"
-                        [alt]="item.alternativeDescription">
+                        [ngSrc]="item.imagePath.genericPath"
+                        [width]="item.imagePath.allSizes?.['large-width']"
+                        [height]="item.imagePath.allSizes?.['large-height']"
+                        [alt]="item.alternativeDescription ?? 'Imagem de banner ' + (item.indexOnBannerItems + 1)"
+                        >
                     </div>
                 }
             </div>

@@ -59,8 +59,10 @@
                         ></div>
                         <img
                         class="w-full h-full duration-[.5s] object-cover object-center"
-                        [src]="testimonial.photo"
-                        [alt]="''">
+                        [ngSrc]="testimonial.photo.genericPath"
+                        [width]="testimonial.photo.allSizes?.['large-width']"
+                        [height]="testimonial.photo.allSizes?.['large-height']"
+                        [alt]="'Foto partilhada pelo usuário do intagram: ' + testimonial.client">
                     </div>
                 }
             </div>

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './components/containers/home.component';
@@ -36,7 +36,8 @@ import { ShareMomentsComponent } from './components/views/share-moments/share-mo
     SharedModule,
     HomeRoutingModule,
     AppearOnMobileDirective,
-    AppearOnDesktopDirective
+    AppearOnDesktopDirective,
+    NgOptimizedImage
   ]
 })
 export class HomeModule { }
