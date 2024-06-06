@@ -9,9 +9,12 @@
                     Descubra os favoritos dos clientes em nossas coleções
                 </p>
             </div>
-            <div class="cta my-12 flex justify-between items-center">
+            <div class="cta my-12 flex md:flex-row-reverse justify-between items-center">
                 <div class="order md:block">
-                    <button class="text-base bg-white text-primary font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center">
+                    <button
+                    (click)="openOrderModal()"
+                    class="text-base bg-white text-primary font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
+                    >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -19,7 +22,10 @@
                     </button>
                 </div>
                 <div class="filters md:block">
-                    <button class="text-base bg-primary rounded-full px-4 py-2 text-white font-semibold font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center">
+                    <button
+                    (click)="openFilterModal()"
+                    class="text-base bg-primary rounded-full px-4 py-2 text-white font-semibold font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
+                    >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M4 8H12M2 4H14M6 12H10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -31,25 +37,101 @@
     </div>
     <div class="body-content">
         <app-product-cards-container-no-scroll
-        [productsArray]="productsArray"
+        [productsArray]="displayableProducts"
         [paddingX]="scrollerPaddingX"
         />
     </div>
 
-    <div class="modal-container w-full h-full bg-transparent absolute top-0 left-0">
-        <div class="modal-bg w-full h-full absolute z-[101] bg-black/40"></div>
-        <div class="bottom-modal p-6 h-[40vh] z-[102] fixed bottom-0 bg-white w-full rounded-t-3xl">
-            <div class="modal-header flex justify-between items-center">
-                <div class="w-full"></div>
-                <div class="title w-full text-center">
-                    <h4 class="text-primary font-['Bricolage-Grotesque'] text-2xl font-semibold">Ordenar</h4>
-                </div>
-                <div class="apply w-full text-right">
-                    <button class="underline">
-                        Aplicar
-                    </button>
-                </div>
+    <div class="modal-bg w-full h-full absolute top-0 left-0 z-[101] bg-black/40"
+    [ngClass]="{
+        'hidden': (!this.showOrderModal() && this.firstTimeOpeningModal()),
+        'disappear': (!this.showOrderModal() && !this.firstTimeOpeningModal()),
+        'appear': this.showOrderModal()
+    }"
+    ></div>
+    <div class="bottom-modal duration-[.7s] p-6 h-[45vh] z-[102] fixed bg-white w-full rounded-t-3xl"
+    [ngClass]="{
+        'bottom-0': this.showOrderModal(),
+        'bottom-[-50%]': !this.showOrderModal(),
+    }"
+    >
+        <div class="modal-header flex justify-between items-center">
+            <div class="w-full"></div>
+            <div class="title w-full text-center">
+                <h4 class="text-primary font-['Bricolage-Grotesque'] text-2xl font-semibold">Ordenar</h4>
+            </div>
+            <div class="apply w-full text-right">
+                <button class="underline" (click)="closeOrderModal()">
+                    Aplicar
+                </button>
+            </div>
+        </div>
+
+        <div class="modal-body mt-12">
+            <div class="option-1 flex flex-col gap-2">
+                @for (radio of orderOptions; track $index) {
+                    <div class="radio cursor-pointer flex py-2 gap-x-3 justify-start items-center"
+                    (click)="orderBy($index)"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle class="duration-[.2s]" cx="12" cy="12" r="6" [attr.fill]="($index === activeOrderByIndex) ? 'black' : '#EFEFEF'"/>
+                        </svg>
+                        <p class="">
+                            {{ radio.order }}
+                        </p>
+                    </div>
+                }
             </div>
         </div>
     </div>
+
+
+    <div class="modal-bg w-full h-full absolute top-0 left-0 z-[101] bg-black/40"
+    [ngClass]="{
+        'hidden': (!this.showFilterModal() && this.firstTimeOpeningModal()),
+        'disappear': (!this.showFilterModal() && !this.firstTimeOpeningModal()),
+        'appear': this.showFilterModal()
+    }"
+    ></div>
+    <div class="filter-modal w-full duration-[.7s] p-6 h-full md:max-w-[448px] absolute left-0 top-0 z-[103] bg-white"
+    [ngClass]="{
+        'left-0': this.showFilterModal(),
+        'left-[-100%]': !this.showFilterModal()
+    }"
+    >
+        <div class="filter-modal-header flex justify-end items-center">
+            <button
+            (click)="closeFilterModal()"
+            class="">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="24" fill="#F9F9F9"/>
+                    <path d="M29 19L19 29M19 19L29 29" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="filter-modal-body flex flex-col gap-y-6">
+            <div class="section-title">
+                <h1 class="">
+                    Filtros
+                </h1>
+            </div>
+            <div class="section-genre border-t border-[#F5F5F5]">
+                <h1 class="py-6">Género</h1>
+                <ul class="">
+                    <li class="py-2">
+                        <a [routerLink]="['/']">
+                            Homens
+                        </a>
+                    </li>
+                    <li class="py-2">
+                        <a [routerLink]="['/']">
+                            Mulheres
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        
 </div>

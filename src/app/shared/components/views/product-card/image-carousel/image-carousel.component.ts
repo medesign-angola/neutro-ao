@@ -34,7 +34,6 @@ implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.productImages = [];
     this.combineImages();
   }
 
@@ -43,6 +42,7 @@ implements OnInit, OnChanges, AfterViewInit {
   }
 
   combineImages(){
+    this.productImages = [];
     this.productImagesFromColors.forEach(item => {
       this.productImages = [...this.productImages, ...item.representationalImages];
     });
