@@ -172,6 +172,12 @@ export class HomeComponent implements OnInit {
         price: 18000,
         gender: productGenderEnum.MAN,
         promotionalPrice: 45000,
+        categories: [
+            {
+                name: 'Calção',
+                slug: 'calcao'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -256,6 +262,12 @@ export class HomeComponent implements OnInit {
         price: 18000,
         gender: productGenderEnum.WOMAN,
         promotionalPrice: 100.00,
+        categories: [
+            {
+                name: 'Calção',
+                slug: 'calcao'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -337,6 +349,12 @@ export class HomeComponent implements OnInit {
       price: 18000,
       gender: productGenderEnum.MAN,
       promotionalPrice: 45000,
+      categories: [
+        {
+            name: 'Calção',
+            slug: 'calcao'
+        }
+      ],
       details: [
           {
               name: 'Tecido',
@@ -419,6 +437,12 @@ export class HomeComponent implements OnInit {
         price: 18000,
         gender: productGenderEnum.MAN,
         promotionalPrice: 45000,
+        categories: [
+            {
+                name: 'Calção',
+                slug: 'calcao'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -503,6 +527,12 @@ export class HomeComponent implements OnInit {
         price: 18000,
         gender: productGenderEnum.WOMAN,
         promotionalPrice: 100.00,
+        categories: [
+            {
+                name: 'Calção',
+                slug: 'calcao'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -584,6 +614,12 @@ export class HomeComponent implements OnInit {
       price: 18000,
       gender: productGenderEnum.MAN,
       promotionalPrice: 45000,
+      categories: [
+        {
+            name: 'Calção',
+            slug: 'calcao'
+        }
+      ],
       details: [
           {
               name: 'Tecido',

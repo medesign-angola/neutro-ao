@@ -16,6 +16,12 @@ export class ProductsComponent {
         price: 18000,
         gender: productGenderEnum.MAN,
         promotionalPrice: 45000,
+        categories: [
+            {
+                name: 'Camiseta',
+                slug: 'camiseta'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -100,6 +106,12 @@ export class ProductsComponent {
         price: 18000,
         gender: productGenderEnum.WOMAN,
         promotionalPrice: 100.00,
+        categories: [
+            {
+                name: 'Calção',
+                slug: 'calcao'
+            }
+        ],
         details: [
             {
                 name: 'Tecido',
@@ -181,6 +193,12 @@ export class ProductsComponent {
       price: 18000,
       gender: productGenderEnum.MAN,
       promotionalPrice: 45000,
+      categories: [
+        {
+            name: 'Calção',
+            slug: 'calcao'
+        }
+      ],
       details: [
           {
               name: 'Tecido',

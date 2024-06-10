@@ -1,8 +1,8 @@
 <div class="product-card appear-softly w-full flex gap-y-4 flex-col justify-between">
     <div class="product-image-carousel w-full"
     [ngClass]="{
-        'h-[171px] md:h-[283px]': size === this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
-        'h-[283px]': size !== this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
+        'h-[171px] md:h-[283px]': size === this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
+        'h-[283px]': size !== this.productCardSizeEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
     }"
     >
         <app-image-carousel
@@ -13,7 +13,11 @@
     </div>
     <div class="card-body">
         <div class="product-name mb-1">
-            <h3 class="limited-text one-line text-base text-primary font-['Bricolage-Grotesque']">{{ product.name }}</h3>
+            <h3 class="limited-text one-line text-base text-primary font-['Bricolage-Grotesque']">
+                <a [routerLink]="['/product/' + product.slug]" class="">
+                    {{ product.name }}
+                </a>
+            </h3>
         </div>
         <div class="oneline-description">
             <p class="limited-text one-line text-sm text-primary/60">{{ product.description }}</p>

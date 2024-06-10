@@ -1,10 +1,10 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Inject, Input, OnChanges, OnInit, PLATFORM_ID, SimpleChanges, ViewChild, WritableSignal, signal } from '@angular/core';
-import { Product } from '@core/data/models/product.model';
+import { Product, productCategory, productColor, productGenderEnum, productSize } from '@core/data/models/product.model';
 import { OrderByEnum } from '../../../enums/order-by.enum';
 import { isPlatformBrowser } from '@angular/common';
 import { ModalSupporter } from '@core/data/classes/modal.class';
 
-interface OrderByModel{
+interface OrderBy{
   order: string,
   ref: OrderByEnum
 }
@@ -24,8 +24,16 @@ implements OnInit, OnChanges, AfterViewInit {
   @Input() productsArray: Product[] = [];
   displayableProducts:Product[]= [];
 
+  showOrderModal: WritableSignal<boolean> = signal(false);
+  showFilterModal: WritableSignal<boolean> = signal(false);
+
+  firstTimeOpeningOrderModal: WritableSignal<boolean> = signal(true);
+  firstTimeOpeningFilterModal: WritableSignal<boolean> = signal(true);
+
+
+  // Order
   activeOrderByIndex: number = 0;
-  orderOptions: OrderByModel[] = [
+  orderOptions: OrderBy[] = [
     {
       order: 'Mais Recentes',
       ref: OrderByEnum.MOST_RECENT
@@ -36,8 +44,58 @@ implements OnInit, OnChanges, AfterViewInit {
     }
   ];
 
-  showOrderModal: WritableSignal<boolean> = signal(false);
-  showFilterModal: WritableSignal<boolean> = signal(false);
+
+  // filters
+    // Gender
+  selectedGender: number = -1;
+  availableGenders: productGenderEnum[] = [
+    productGenderEnum.MAN,
+    productGenderEnum.WOMAN
+  ]
+
+    // Product Categories
+  selectedCategoriesId: number[] = [];
+  availableProductCategories: productCategory[] = [
+    {
+      name: 'Camiseta',
+      slug: 'camisetas'
+    },
+    {
+      name: 'Calção',
+      slug: 'calcao'
+    },
+    {
+      name: 'Underwear',
+      slug: 'underwear'
+    }
+  ];
+
+    // Product Colors
+  selectedColorsId: number[] = [];
+  availbaleProductColors: productColor[] = [
+    {
+      name: 'Preto',
+      representationalImages: []
+    },
+    {
+      name: 'Branco',
+      representationalImages: []
+    }
+  ];
+
+    // Product Sizes
+  selectedSizesId: number[] = [];
+  availableProductSizes: productSize[] = [
+    { name: 'XS' },
+    { name: 'S' },
+    { name: 'M' },
+    { name: 'L' },
+    { name: 'XL' },
+    { name: 'XXL' },
+  ];
+  
+    // Product Price Range
+  priceRangeValue = signal(0);
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
@@ -75,33 +133,42 @@ implements OnInit, OnChanges, AfterViewInit {
 
   }
 
-  getTheActiveOrder(): OrderByModel | undefined{
+  getTheActiveOrder(): OrderBy | undefined{
     return this.orderOptions.find((item, index) => index === this.activeOrderByIndex);
   }
 
   openOrderModal(){
     this.showOrderModal.update(value => value = true);
-    this.firstTimeOpeningModal.update(value => value = false);
-    this.showModalBackground.update(value => value = true);
+    this.firstTimeOpeningOrderModal.update(value => value = false);
     this.toggleOverflowHiddenBodyElement(true);
   }
 
+
   closeOrderModal(){
     this.showOrderModal.update(value => value = false);
-    this.showModalBackground.update(value => value = false);
     this.toggleOverflowHiddenBodyElement(false);
+  }
+
+  toggleDesktopOrderModal(){
+    this.showOrderModal.update(value => !value);
+  }
+
+  openDesktopOrderModal(){
+    this.showOrderModal.update(value => value = true);
+  }
+
+  closeDesktopOrderModal(){
+    this.showOrderModal.update(value => value = false);
   }
 
   openFilterModal(){
     this.showFilterModal.update(value => value = true);
-    this.firstTimeOpeningModal.update(value => value = false);
-    this.showModalBackground.update(value => value = true);
+    this.firstTimeOpeningFilterModal.update(value => value = false);
     this.toggleOverflowHiddenBodyElement(true);
   }
 
   closeFilterModal(){
     this.showFilterModal.update(value => value = false);
-    this.showModalBackground.update(value => value = false);
     this.toggleOverflowHiddenBodyElement(false);
   }
 

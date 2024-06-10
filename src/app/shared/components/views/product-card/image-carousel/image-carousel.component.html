@@ -2,14 +2,14 @@
     <div class="image-carousel w-full h-full relative rounded-lg overflow-hidden" #imagesContainerElement>
         <div class="images-scroller flex items-stretch w-max h-full">
             @for (image of productImages; track $index) {
-                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full"
+                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full xl:w-[304px]"
                 [ngClass]="{
-                    'w-[171px] md:w-[264px] xl:w-[304px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
-                    'w-[264px] xl:w-[304px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_FROM_TABLET,
+                    'w-[171px] md:w-[264px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
+                    'w-[264px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_STARTING_ON_TABLET,
                 }"
                 >
                     <img
-                    class="w-full h-full mx-auto object-contain object-top"
+                    class="w-full duration-[.7s] h-full mx-auto object-contain object-top"
                     [ngSrc]="image.imagePath.genericPath"
                     [srcset]="[image.imagePath.allSizes?.thumbnail, image.imagePath.allSizes?.medium, image.imagePath.allSizes?.large]"
                     [width]="image.imagePath.allSizes?.['large-width']"
@@ -23,8 +23,8 @@
     <div
     class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] justify-between items-center"
     [ngClass]="{
-        'hidden md:flex': size === sizesEnum.SMALL_ON_MOBILE_LARGE_FROM_TABLET,
-        'flex': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_FROM_TABLET,
+        'hidden md:flex': size === sizesEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
+        'flex': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_STARTING_ON_TABLET,
     }"
     >
     

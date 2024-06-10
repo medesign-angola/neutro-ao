@@ -23,12 +23,19 @@ export enum productGenderEnum{
     WOMAN = 'woman'
 }
 
+export interface productCategory{
+    id?: number,
+    name: string,
+    slug: string
+}
+
 export interface Product{
     id: number,
     name: string,
     slug: string,
     description: string,
     price: number,
+    categories: productCategory[],
     gender: productGenderEnum,
     promotionalPrice: number,
     details: productDetail[],

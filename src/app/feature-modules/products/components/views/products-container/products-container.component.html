@@ -10,16 +10,45 @@
                 </p>
             </div>
             <div class="cta my-12 flex md:flex-row-reverse justify-between items-center">
-                <div class="order md:block">
+                <div class="order relative p-1 md:block">
                     <button
                     (click)="openOrderModal()"
-                    class="text-base bg-white text-primary font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
+                    class="text-base bg-white text-primary xl:hidden font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                         Ordenar
                     </button>
+                    <button
+                    (click)="toggleDesktopOrderModal()"
+                    class="text-base bg-white text-primary hidden xl:flex font-['Bricolage-Grotesque'] gap-3 justify-center items-center"
+                    >
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Ordenar
+                    </button>
+                    @if (this.showOrderModal()) {
+                        <div
+                        class="desktop-order-modal absolute top-full w-max left-[50%] -translate-x-[50%] z-[2] bg-white p-4 rounded-lg shadow-[0px_16px_24px_0px_rgba(220,220,220,0.20)]"
+                        >
+                            @for (radio of orderOptions; track $index) {
+                                <div class="radio cursor-pointer flex py-2 gap-x-3 justify-start items-center"
+                                (click)="orderBy($index)"
+                                >
+                                    <div class="circle duration-[.3s] w-[6px] bg-[#EFEFEF] h-[6px] rounded-full"
+                                    [ngClass]="{
+                                        '!bg-black': ($index === activeOrderByIndex),
+                                    }"
+                                    ></div>
+                                    <p class="text-sm">
+                                        {{ radio.order }}
+                                    </p>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
                 <div class="filters md:block">
                     <button
@@ -42,14 +71,14 @@
         />
     </div>
 
-    <div class="modal-bg w-full h-full absolute top-0 left-0 z-[101] bg-black/40"
+    <div class="order-modal-bg w-full xl:hidden h-full fixed top-0 left-0 z-[101] bg-black/40"
     [ngClass]="{
-        'hidden': (!this.showOrderModal() && this.firstTimeOpeningModal()),
-        'disappear': (!this.showOrderModal() && !this.firstTimeOpeningModal()),
+        'hidden': (!this.showOrderModal() && this.firstTimeOpeningOrderModal()),
+        'disappear': (!this.showOrderModal() && !this.firstTimeOpeningOrderModal()),
         'appear': this.showOrderModal()
     }"
     ></div>
-    <div class="bottom-modal duration-[.7s] p-6 h-[45vh] z-[102] fixed bg-white w-full rounded-t-3xl"
+    <div class="bottom-modal xl:hidden duration-[.7s] p-6 h-[45vh] z-[102] fixed bg-white w-full rounded-t-3xl"
     [ngClass]="{
         'bottom-0': this.showOrderModal(),
         'bottom-[-50%]': !this.showOrderModal(),
@@ -87,20 +116,20 @@
     </div>
 
 
-    <div class="modal-bg w-full h-full absolute top-0 left-0 z-[101] bg-black/40"
+    <div class="filter-modal-bg w-full h-full fixed top-0 left-0 z-[101] bg-black/40"
     [ngClass]="{
-        'hidden': (!this.showFilterModal() && this.firstTimeOpeningModal()),
-        'disappear': (!this.showFilterModal() && !this.firstTimeOpeningModal()),
+        'hidden': (!this.showFilterModal() && this.firstTimeOpeningFilterModal()),
+        'disappear': (!this.showFilterModal() && !this.firstTimeOpeningFilterModal()),
         'appear': this.showFilterModal()
     }"
     ></div>
-    <div class="filter-modal w-full duration-[.7s] p-6 h-full md:max-w-[448px] absolute left-0 top-0 z-[103] bg-white"
+    <div class="filter-modal w-full overflow-y-auto no-scroller duration-[.7s] px-6 py-0 h-full md:max-w-[448px] fixed left-0 top-0 z-[103] bg-white"
     [ngClass]="{
         'left-0': this.showFilterModal(),
         'left-[-100%]': !this.showFilterModal()
     }"
     >
-        <div class="filter-modal-header flex justify-end items-center">
+        <div class="filter-modal-header pt-6 bg-white sticky top-0 flex justify-end items-center">
             <button
             (click)="closeFilterModal()"
             class="">
@@ -112,24 +141,157 @@
         </div>
         <div class="filter-modal-body flex flex-col gap-y-6">
             <div class="section-title">
-                <h1 class="">
+                <h1 class="text-primary text-2xl font-bold font-['Bricolage-Grotesque']">
                     Filtros
                 </h1>
             </div>
-            <div class="section-genre border-t border-[#F5F5F5]">
-                <h1 class="py-6">Género</h1>
+            <div class="gender-section border-t border-[#F5F5F5]">
+                <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
+                    Género
+                </h1>
                 <ul class="">
                     <li class="py-2">
-                        <a [routerLink]="['/']">
+                        <a [routerLink]="['/']" class="text-primary active">
                             Homens
                         </a>
                     </li>
                     <li class="py-2">
-                        <a [routerLink]="['/']">
+                        <a [routerLink]="['/']" class="text-primary/60">
                             Mulheres
                         </a>
                     </li>
                 </ul>
+            </div>
+            <div class="products-section border-t border-[#F5F5F5]">
+                <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
+                    Produtos
+                </h1>
+                <div class="checkboxes">
+                    <div class="check-option py-2 text-primary flex gap-3 justify-start items-center">
+                        <div class="checkbox w-[18px] h-[18px] bg-primary flex justify-center items-center rounded">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span>Camisetas</span>                            
+                    </div>
+                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
+                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
+                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> -->
+                        </div>
+                        <span>Calções</span>                            
+                    </div>
+                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
+                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
+                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> -->
+                        </div>
+                        <span>Underwear</span>                            
+                    </div>
+                </div>
+            </div>
+            <div class="colors-section border-t border-[#F5F5F5]">
+                <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
+                    Cores
+                </h1>
+                <div class="checkboxes">
+                    <div class="check-option py-2 text-primary flex gap-3 justify-start items-center">
+                        <div class="checkbox w-[18px] h-[18px] bg-primary flex justify-center items-center rounded">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <span>Preto</span>                            
+                    </div>
+                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
+                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
+                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> -->
+                        </div>
+                        <span>Branco</span>                            
+                    </div>
+                </div>
+            </div>
+            <div class="sizes-section border-t border-[#F5F5F5]">
+                <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
+                    Tamanhos
+                </h1>
+                <div class="chips flex flex-wrap gap-2 justify-start items-center">
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-primary text-center px-4 py-2 rounded-full text-sm text-white font-bold font-['Bricolage-Grotesque']">
+                            Todos
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            XS
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            S
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            M
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            L
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            XL
+                        </button>
+                    </div>
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
+                            XXL
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="price-section border-t border-[#F5F5F5]">
+                <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
+                    Compre por preços
+                </h1>
+                <div class="priceRange input flex flex-col gap-y-3"> 
+                    <div class="input-container relative bg-red-400 flex">
+                        <input type="range"
+                        name="priceRange"
+                        class="promotion-range relative w-full top-0"
+                        formControlNames="priceRange"
+                        [(ngModel)]="priceRangeValue"
+                        id="priceRange"
+                        >
+                        <div class="input-track absolute top-0 bg-black h-full"
+                        [style.width.%]="priceRangeValue()"
+                        ></div>
+                    </div>
+                    <div class="number-preview flex justify-between items-center mt-6">
+                        <span class="text-black">{{ priceRangeValue() }}</span>
+                        <span class="text-black">100</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="filter-modal-footer py-6 bg-white sticky bottom-0 flex justify-between items-center">
+            <div class="clear-chip">
+                <button class="text-primary px-6 py-3 font-medium font-['Bricolage-Grotesque']">
+                    Limpar todos
+                </button>
+            </div>
+            <div class="apply-chip ">
+                <button class="text-white bg-primary px-6 py-3 font-medium font-['Bricolage-Grotesque'] rounded-full">
+                    Aplicar
+                </button>
             </div>
         </div>
     </div>
