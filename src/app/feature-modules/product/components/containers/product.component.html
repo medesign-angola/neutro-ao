@@ -1,5 +1,7 @@
 <div class="components-container flex flex-col gap-y-0">
     <div class="product-details my-10 xl:my-28" #productDetails>
-        <app-product-details />
+        <app-product-details
+        [theProduct]="this.theProduct[0]"
+        />
     </div>
 </div>

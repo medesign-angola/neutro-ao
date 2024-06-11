@@ -1,7 +1,29 @@
 <div class="section-content">
     <div class="limited-container">
-        <div class="mobile-product-details">
-            Product details
+        <div class="mobile-product-details xl:hidden">
+            <h1 class="text-primary mb-2 font-['Bricolage-Grotesque'] text-2xl font-medium">
+                {{ theProduct.name }}
+            </h1>
+            <p class="text-base text-primary/60 limited-text one-line">
+                {{ theProduct.description }}
+            </p>
+            <div class="price mt-4">
+                <p class="text-primary text-2xl font-bold font-['Bricolage-Grotesque']">
+                    {{ theProduct.price| replaceBy }} AOA
+                </p>
+            </div>
         </div>
     </div>
+
+    <div class="product-content flex justify-between items-start">
+        <div class="product-images-carousel mt-12 w-full">
+            <app-product-images
+            [productImagesFromColors]="this.theProduct.colors"
+            />
+        </div>
+        <div class="product-details w-full">
+            detalhes
+        </div>
+    </div>
+    
 </div>
