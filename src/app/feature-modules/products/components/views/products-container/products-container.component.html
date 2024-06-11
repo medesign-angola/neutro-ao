@@ -31,7 +31,7 @@
                     </button>
                     @if (this.showOrderModal()) {
                         <div
-                        class="desktop-order-modal absolute top-full w-max left-[50%] -translate-x-[50%] z-[2] bg-white p-4 rounded-lg shadow-[0px_16px_24px_0px_rgba(220,220,220,0.20)]"
+                        class="desktop-order-modal hidden xl:block absolute top-full w-max left-[50%] -translate-x-[50%] z-[2] bg-white p-4 rounded-lg shadow-[0px_16px_24px_0px_rgba(220,220,220,0.20)]"
                         >
                             @for (radio of orderOptions; track $index) {
                                 <div class="radio cursor-pointer flex py-2 gap-x-3 justify-start items-center"
