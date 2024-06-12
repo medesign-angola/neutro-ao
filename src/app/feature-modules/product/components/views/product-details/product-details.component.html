@@ -4,7 +4,7 @@
             <h1 class="text-primary mb-2 font-['Bricolage-Grotesque'] text-2xl font-medium">
                 {{ theProduct.name }}
             </h1>
-            <p class="text-base text-primary/60 limited-text one-line">
+            <p class="text-base text-primary/60 limited-textx one-line">
                 {{ theProduct.description }}
             </p>
             <div class="price mt-4">
@@ -15,15 +15,167 @@
         </div>
     </div>
 
-    <div class="product-content flex justify-between items-start">
-        <div class="product-images-carousel mt-12 w-full">
+    <div class="product-content flex gap-y-10 xl:gap-x-20 flex-col xl:flex-row justify-start mx-auto items-start xl:max-w-[90%] 2xl:max-w-[var(--max-w)] 4xl:max-w-[75%] 5xl:max-w-[var(--max-w-1536)]">
+        <div class="product-images-carousel xl:max-w-[626px] mt-12 xl:mt-0 w-full">
             <app-product-images
-            [productImagesFromColors]="this.theProduct.colors"
+            [productActiveColorOneItemArray]="this.imagesArrayOfActiveColor"
             />
         </div>
-        <div class="product-details w-full">
-            detalhes
+        <div class="product-details w-[95%] mx-auto xl:w-full xl:mx-0 flex flex-col gap-y-8 xl:max-w-[367px] xl:px-3">
+            <div class="product-basic-info flex flex-col gap-y-10">
+                <div class="desktop-product-details hidden xl:block">
+                    <h1 class="text-primary mb-2 font-['Bricolage-Grotesque'] text-[2rem] leading-[41px] font-medium">
+                        {{ theProduct.name }}
+                    </h1>
+                    <p class="text-base text-primary/60 limited-textx three-lines">
+                        {{ theProduct.description }}
+                    </p>
+                    <div class="price mt-4">
+                        <p class="text-primary text-2xl font-bold font-['Bricolage-Grotesque']">
+                            {{ theProduct.price| replaceBy }} AOA
+                        </p>
+                    </div>
+                </div>
+    
+                <div class="product-colors">
+                    <div class="boxes flex gap-4 justify-start items-center">
+                        @for (item of this.theProduct.colors; track $index) {
+                            <div class="box cursor-pointer overflow-hidden w-[72px] h-[72px] rounded-lg border-[1.5px] bg-[#F5F5F5]"
+                            (click)="changeActiveColor($index)"
+                            [ngClass]="{
+                                ' border-black': $index === this.activeColor
+                            }"
+                            >
+                                <img
+                                class="max-w-[34px] mx-auto"
+                                [ngSrc]="item.representationalImages[0].imagePath.genericPath"
+                                [width]="item.representationalImages[0].imagePath.allSizes?.['large-width']"
+                                [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']"
+                                alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+    
+                <div class="product-sizes">
+                    <p class="mb-4 text-base text-primary">
+                        Seleccione os tamanhos
+                    </p>
+                    <div class="chips flex flex-wrap gap-2 justify-start items-center">
+                        @for (size of this.theProduct.sizes; track $index) {
+                            <div class="chip w-fit flex justify-center items-center">
+                                <button
+                                (click)="selectSizeIfNotExists(size)"
+                                class="bg-[#EFEFEF] duration-[.3s] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']"
+                                [ngClass]="{
+                                    'selected': getTheIndex(size) !== -1
+                                }"
+                                >
+                                    {{ size.name }}
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+    
+                <div class="product-quantities-by-size appear-softly flex flex-col gap-y-5"
+                *ngIf="this.selectedSizes.length > 0"
+                >
+                    @for (item of this.quantitiesPerSelection; track $index) {
+                        <div class="quantities-selector-container">
+                            <p class="mb-4 text-base text-primary">
+                                Quantidade - <span class="opacity-50">Tamanho {{ item.size.name }}</span>
+                            </p>
+                            <div class="operators flex gap-3 justify-start items-center">
+                                <div class="decrease">
+                                    <a
+                                    (click)="decreaseQuantity($index)"
+                                    class="cursor-pointer"
+                                    href="javascript:void(0)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="19.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                            <path d="M15.3333 20H24.6666" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="quantity-value p-3 w-fit min-w-10 h-10 rounded-full text-base bg-primary text-white flex justify-center items-center">
+                                    <p class=" font-['Bricolage-Grotesque']">{{ item.quantity }}</p>
+                                </div>
+                                <div class="increase">
+                                    <a
+                                    (click)="increaseQuantity($index)"
+                                    class="cursor-pointer"
+                                    href="javascript:void(0)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="19.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                            <path d="M20.0002 15.3333V24.6666M15.3335 19.9999H24.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="cta flex flex-col xl:flex-row gap-y-6 justify-between items-center">
+                <button class="px-6 py-4 rounded-full w-full xl:w-fit bg-primary font-['Bricolage-Grotesque'] text-white font-semibold flex gap-2 justify-center items-center">
+                    Comprar pelo whatsapp
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C10.2364 22 8.57709 21.5427 7.13692 20.7397L6.83171 20.5624L3.79975 21.4542C3.06936 21.6691 2.38822 21.0329 2.51987 20.3093L2.54581 20.2002L3.43756 17.1683C2.52505 15.6594 2 13.8896 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 13.5769 4.4552 15.0444 5.24098 16.2818C5.43935 16.5943 5.52374 16.9781 5.45652 17.3589L5.41832 17.5217L4.97667 19.0233L6.47827 18.5817C6.91075 18.4545 7.36114 18.5323 7.71817 18.759C8.95564 19.5448 10.4231 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM9.10162 7.18408C9.31746 7.09158 9.57889 7.1085 9.78556 7.25926C10.29 7.62722 10.6905 8.12076 11.0344 8.60344L11.3612 9.07746C11.4132 9.15417 11.4639 9.22933 11.5138 9.30228C11.6963 9.56921 11.6753 9.9239 11.4685 10.166L11.3927 10.2422L10.4693 10.928C10.3778 10.996 10.3473 11.1195 10.4022 11.2195C10.6112 11.5998 10.9834 12.1657 11.4093 12.5916C11.8357 13.018 12.4284 13.4143 12.8348 13.6467C12.9226 13.6969 13.0294 13.6811 13.101 13.6157L13.1394 13.5706L13.7402 12.6555C13.9705 12.349 14.4007 12.282 14.7134 12.4984L15.2563 12.8768C15.7957 13.2618 16.315 13.6757 16.7255 14.2014C16.8872 14.4085 16.9112 14.6792 16.8148 14.9042C16.4188 15.8283 15.4165 16.6153 14.374 16.5769L14.2155 16.5678L14.0235 16.5488C13.9889 16.5446 13.953 16.5399 13.9158 16.5346L13.6781 16.4952C12.7544 16.3208 11.2726 15.797 9.73827 14.2627C8.20397 12.7284 7.68017 11.2466 7.50573 10.3229L7.46632 10.0852L7.44126 9.87742L7.42756 9.70191C7.42606 9.67547 7.42491 9.65047 7.42404 9.62695C7.38562 8.58294 8.17688 7.5804 9.10162 7.18408Z" fill="white"/>
+                    </svg>
+                </button>
+                <button
+                class="add-to-cart p-4 rounded-full w-full xl:w-fit bg-[#F9F9F9] flex gap-2 justify-center items-center"
+                >
+                    <p class="xl:hidden rounded-full font-['Bricolage-Grotesque'] text-primary font-semibold">
+                        Adicionar ao cesto
+                    </p>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16.0004 9V6C16.0004 3.79086 14.2095 2 12.0004 2C9.79123 2 8.00037 3.79086 8.00037 6V9M3.59237 10.352L2.99237 16.752C2.82178 18.5717 2.73648 19.4815 3.03842 20.1843C3.30367 20.8016 3.76849 21.3121 4.35839 21.6338C5.0299 22 5.94374 22 7.77142 22H16.2293C18.057 22 18.9708 22 19.6423 21.6338C20.2322 21.3121 20.6971 20.8016 20.9623 20.1843C21.2643 19.4815 21.179 18.5717 21.0084 16.752L20.4084 10.352C20.2643 8.81535 20.1923 8.04704 19.8467 7.46616C19.5424 6.95458 19.0927 6.54511 18.555 6.28984C17.9444 6 17.1727 6 15.6293 6L8.37142 6C6.82806 6 6.05638 6 5.44579 6.28984C4.90803 6.54511 4.45838 6.95458 4.15403 7.46616C3.80846 8.04704 3.73643 8.81534 3.59237 10.352Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="aditional-informations w-full max-w-[95%] mx-auto xl:max-w-auto xl:mx-0">
+                <div class="one-line-obs">
+                    <p class="text-center xl:text-left text-xs text-primary">
+                        {{ this.theProduct.onelineObservation }}
+                    </p>
+                </div>
+
+                <div class="tabs flex flex-col gap-y-6 mt-6">
+                    <div class="tab border-t border-[#F5F5F5] ">
+                        <div class="py-4 tab-title cursor-pointer flex gap-y-4 justify-between items-center">
+                            <p class="font-['Bricolage-Grotesque'] font-semibold text-lg">
+                                Detalhes
+                            </p>
+                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 9.5L12 15.5L6 9.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="tab-body">
+                            <p class="">
+                                Feita com algodão de peso médio em nosso ajuste exclusivo Max90, esta camiseta Premium Essentials eleva um elemento essencial do dia a dia. O tratamento de tingimento dá a cada camiseta um acabamento único.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="tab border-t border-[#F5F5F5] ">
+                        <div class="py-4 tab-title cursor-pointer flex gap-y-4 justify-between items-center">
+                            <p class="font-['Bricolage-Grotesque'] font-semibold text-lg">
+                                Envios e Devoluções
+                            </p>
+                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 9.5L12 15.5L6 9.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div class="tab-body"></div>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
     
 </div>

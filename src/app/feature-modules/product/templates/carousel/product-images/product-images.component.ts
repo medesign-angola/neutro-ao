@@ -13,7 +13,7 @@ export class ProductImagesComponent
 extends MobileBannerCarouselFunctionalities
 implements OnInit, OnChanges, OnDestroy {
 
-  @Input() productImagesFromColors: productColor[] = [];
+  @Input() productActiveColorOneItemArray: productColor[] = [];
   productImages: colorRepresentionalImage[] = [];
   
   @Input() showArrows: boolean = true;
@@ -41,7 +41,7 @@ implements OnInit, OnChanges, OnDestroy {
 
   combineImages(){
     this.productImages = [];
-    this.productImagesFromColors.forEach(item => {
+    this.productActiveColorOneItemArray.forEach(item => {
       this.productImages = [...this.productImages, ...item.representationalImages];
     });
   }
