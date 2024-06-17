@@ -1,5 +1,7 @@
 <div class="content-header">
-    <app-header (contentMarginTop)="contentMarginTopHandler($event)"/>
+    <app-header
+    (contentMarginTop)="contentMarginTopHandler($event)"
+    />
 </div>
 <div class="content-body"
 [style.marginTop.px]="contentMarginTop"
@@ -7,9 +9,11 @@
     <router-outlet />
 </div>
 <footer>
-    <div class="footer-faqs">
-        <app-faq /> 
-    </div>
+    @if (showFaq$()) {
+        <div class="footer-faqs">
+            <app-faq /> 
+        </div>
+    }
     <div class="footer-content">
         <app-footer />
     </div>

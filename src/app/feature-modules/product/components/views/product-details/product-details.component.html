@@ -144,33 +144,34 @@
                     </p>
                 </div>
 
-                <div class="tabs flex flex-col gap-y-6 mt-6">
-                    <div class="tab border-t border-[#F5F5F5] ">
-                        <div class="py-4 tab-title cursor-pointer flex gap-y-4 justify-between items-center">
-                            <p class="font-['Bricolage-Grotesque'] font-semibold text-lg">
-                                Detalhes
-                            </p>
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18 9.5L12 15.5L6 9.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                <div class="tabs flex flex-col gap-y-6 mt-6" #tabContainerElementRef>
+                    @for (detail of this.theProduct.details; track $index) {
+                        <div class="tab border-t border-[#F5F5F5] ">
+                            <div
+                            class="py-4 tab-title cursor-pointer flex gap-y-4 justify-between items-center"
+                            (click)="selectTab($index)"
+                            >
+                                <p class="font-['Bricolage-Grotesque'] font-semibold text-lg">
+                                    {{ detail.name }}
+                                </p>
+                                <svg class="duration-[.4s]" width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                [ngClass]="{
+                                    'rotate-0': $index !== this.activeTab,
+                                    'rotate-180': $index === this.activeTab,
+                                }"
+                                >
+                                    <path d="M18 9.5L12 15.5L6 9.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="tab-body duration-[.4s] h-0 overflow-hidden"
+                            [style.height.px]="($index === this.activeTab) ? this.activeTabBodyHeight : 0"
+                            >
+                                <p class="">
+                                    {{ detail.description }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="tab-body">
-                            <p class="">
-                                Feita com algodão de peso médio em nosso ajuste exclusivo Max90, esta camiseta Premium Essentials eleva um elemento essencial do dia a dia. O tratamento de tingimento dá a cada camiseta um acabamento único.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="tab border-t border-[#F5F5F5] ">
-                        <div class="py-4 tab-title cursor-pointer flex gap-y-4 justify-between items-center">
-                            <p class="font-['Bricolage-Grotesque'] font-semibold text-lg">
-                                Envios e Devoluções
-                            </p>
-                            <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M18 9.5L12 15.5L6 9.5" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="tab-body"></div>
-                    </div>
+                    }
                 </div>
 
             </div>

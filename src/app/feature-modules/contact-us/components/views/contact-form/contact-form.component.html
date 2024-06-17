@@ -1,0 +1,69 @@
+<div class="section-content py-12 md:py-24 xl:py-36">
+    <div class="limited-container flex flex-col gap-y-20 items-center">
+        <div class="title max-w-[48rem] mx-auto">
+            <h1 class="text-primary mb-6 text-center font-['Bricolage-Grotesque'] text-[2.5rem] font-semibold leading-[48px] -tracking-[0.2px]">Contacte-nos</h1>
+            <p class="text-primary text-lg text-center">Qualquer dúvida? Estamos aqui para ajudar.</p>
+        </div>
+        <div class="form w-full md-905:max-w-[22.625rem] xl:max-w-[26rem]">
+            <form class="flex flex-col gap-y-6">
+                <div class="input flex flex-col gap-y-2">
+                    <label class="text-primary" for="name">
+                        Nome
+                    </label>
+                    <div class="w-full">
+                        <input
+                        class="px-3 py-4 w-full bg-[#F9F9F9] rounded-lg placeholder:text-primary/40"
+                        type="text"
+                        id="name"
+                        placeholder="Nome Completo"
+                        formControlName="name">
+                    </div>
+                </div>
+                <div class="input flex flex-col gap-y-2">
+                    <label class="text-primary" for="email">
+                        Email
+                    </label>
+                    <div class="w-full">
+                        <input
+                        class="px-3 py-4 w-full bg-[#F9F9F9] rounded-lg placeholder:text-primary/40"
+                        type="email"
+                        id="email"
+                        placeholder="Email"
+                        formControlName="email">
+                    </div>
+                </div>
+                <div class="input flex flex-col gap-y-2">
+                    <label class="text-primary" for="message">
+                        Mensagem
+                    </label>
+                    <div class="w-full">
+                        <textarea
+                        rows="6"
+                        class="px-3 py-4 w-full resize-none bg-[#F9F9F9] rounded-lg placeholder:text-primary/40"
+                        id="message"
+                        placeholder="Mensagem"
+                        formControlName="message"></textarea>
+                    </div>
+                </div>
+                <div class="terms flex gap-3 justify-center items-center">
+                    <input class="hidden" type="checkbox" formControlName="terms" id="terms">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="duration-[.4s]" d="M3 7.8C3 6.11984 3 5.27976 3.32698 4.63803C3.6146 4.07354 4.07354 3.6146 4.63803 3.32698C5.27976 3 6.11984 3 7.8 3H16.2C17.8802 3 18.7202 3 19.362 3.32698C19.9265 3.6146 20.3854 4.07354 20.673 4.63803C21 5.27976 21 6.11984 21 7.8V16.2C21 17.8802 21 18.7202 20.673 19.362C20.3854 19.9265 19.9265 20.3854 19.362 20.673C18.7202 21 17.8802 21 16.2 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V7.8Z" [attr.fill]="(this.termsAccepted()) ? 'black' : '#EFEFEF'"/>
+                        <path *ngIf="this.termsAccepted()" d="M16 9L10.5 14.5L8 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <label class="text-primary text-sm" for="terms">Eu aceito os <a class="underline" [routerLink]="['/terms-and-services']">termos</a></label>
+                </div>
+                <div class="submit">
+                    <button
+                    class="px-6 py-3 rounded-full w-full bg-primary font-semibold text-white flex gap-2 justify-center items-center"
+                    type="submit">
+                        Enviar mensagem
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.33301 4.66675L6.77629 8.47704C7.21707 8.78559 7.43746 8.93986 7.67718 8.99962C7.88894 9.0524 8.11041 9.0524 8.32217 8.99962C8.56189 8.93986 8.78228 8.78559 9.22306 8.47704L14.6663 4.66675M4.53301 13.3334H11.4663C12.5864 13.3334 13.1465 13.3334 13.5743 13.1154C13.9506 12.9237 14.2566 12.6177 14.4484 12.2414C14.6663 11.8136 14.6663 11.2535 14.6663 10.1334V5.86675C14.6663 4.74664 14.6663 4.18659 14.4484 3.75877C14.2566 3.38244 13.9506 3.07648 13.5743 2.88473C13.1465 2.66675 12.5864 2.66675 11.4663 2.66675H4.53301C3.4129 2.66675 2.85285 2.66675 2.42503 2.88473C2.0487 3.07648 1.74274 3.38244 1.55099 3.75877C1.33301 4.18659 1.33301 4.74664 1.33301 5.86675V10.1334C1.33301 11.2535 1.33301 11.8136 1.55099 12.2414C1.74274 12.6177 2.0487 12.9237 2.42503 13.1154C2.85285 13.3334 3.4129 13.3334 4.53301 13.3334Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

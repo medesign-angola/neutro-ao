@@ -1,0 +1,15 @@
+<div class="section-content py-20 xl:py-24">
+    <div class="limited-container" #limitedContainerElementRef>
+        <div class="section-title">
+            <h1 class="text-[2rem] xl:text-[2.5rem] font-['Bricolage-Grotesque'] font-medium leading-[38.4px] xl:leading-[48px] -tracking-[0.64px] xl:-tracking-[0.8px]">
+                Você também <br class=" md:hidden"> pode gostar
+            </h1>
+        </div>
+    </div>
+    <div class="sectio-content mt-12">
+        <app-product-cards-container-with-scroll
+        [productsArray]="this.products"
+        [paddingX]="scrollerPaddingX"
+        />
+    </div>
+</div>

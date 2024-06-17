@@ -1,6 +1,9 @@
 import { isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
+import { ThemeService } from '@core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -13,8 +16,11 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public themeService: ThemeService,
   ) { }
+
+  themeEnum = ThemeEnum;
 
   @Input() headerItems: HeaderItemsModel[] = [];
   @ViewChild('desktopNavbar') desktopNavbar!: ElementRef<HTMLElement>;

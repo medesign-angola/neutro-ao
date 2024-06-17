@@ -103,21 +103,25 @@
     max-width: 95%;
     margin: 0px auto;
 }
+/* xl */
 @media screen and (min-width: 1280px) {
     .limited-container{
         max-width: 90%;
     }
 }
+/* 2xl */
 @media screen and (min-width: 1440px) {
     .limited-container{
         max-width: var(--max-w);
     }
 }
+/* 4xl */
 @media screen and (min-width: 1600px) {
     .limited-container{
         max-width: 75%;
     }
 }
+/* 5xl */
 @media screen and (min-width: 1900px) {
   .limited-container{
       max-width: var(--max-w-1536);

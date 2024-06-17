@@ -151,12 +151,12 @@
                 </h1>
                 <ul class="">
                     <li class="py-2">
-                        <a [routerLink]="['/']" class="text-primary active">
+                        <a [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'" class="text-primary active">
                             Homens
                         </a>
                     </li>
                     <li class="py-2">
-                        <a [routerLink]="['/']" class="text-primary/60">
+                        <a [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'" class="text-primary/60">
                             Mulheres
                         </a>
                     </li>
