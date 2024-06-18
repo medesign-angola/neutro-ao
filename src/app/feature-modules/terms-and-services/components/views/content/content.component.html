@@ -1,0 +1,173 @@
+<div class="section-content py-12 md:py-24">
+    <div class="limited-container">
+        <div class="main-title mb-10 md:mb-20 flex flex-col gap-y-6">
+            <h1 class="text-[2rem] leading-[38.4px] md:text-5xl font-['Bricolage-Grotesque'] font-semibold md:-tracking-[0.16px]">
+                Termos de vendas e política de privacidade.
+            </h1>
+            <p class="text-lg text-black/60">
+                Data de vigência: <span class="text-primary">14 de fevereiro de 2024</span>
+            </p>
+        </div>
+
+        <div class="content mt-6 flex flex-col gap-y-6 xl:flex-row xl:justify-between xl:items-start">
+            <div class="aside w-full xl:w-[20rem] xl:h-fit">
+                <h4 class="mb-6 md:text-2xl font-['Bricolage-Grotesque'] font-semibold">Conteúdos</h4>
+                <div class="tab-sections relative bg-white">
+                    <div class="end-overlay absolute hidden z-[2] right-0 w-16 h-full bg-[linear-gradient(90deg,rgba(255,255,255,0.00)_-40.97%,#FFF_88.57%)]"></div>
+                    <div class="chips-container relative w-full overflow-x-auto">
+                        <div class="chips w-max flex flex-row xl:flex-col gap-2">
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.HOW_TO_BUY}"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.HOW_TO_BUY}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Como comprar
+                            </div>
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.REIMBURSEMENT }"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.REIMBURSEMENT}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Reembolso
+                            </div>
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.SHIPPING_POLICY }"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.SHIPPING_POLICY}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Política de Envio
+                            </div>
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.PRIVACY_POLICY }"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.PRIVACY_POLICY}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Política de privacidade
+                            </div>
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.TERMS_OF_SERVICES }"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.TERMS_OF_SERVICES}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Termos de serviços
+                            </div>
+                            <div
+                            [ngClass]="{ 'active': this.activeTab === this.tabEnum.COOKIE_SETTINGS }"
+                            [routerLink]="['/terms-and-services']"
+                            [queryParams]="{ content: this.tabEnum.COOKIE_SETTINGS}"
+                            [queryParamsHandling]="'merge'"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            >
+                                Definições de Cookies
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content md:max-w-[711px] md:mx-auto">
+                @switch (this.activeTab) {
+                    @case (this.tabEnum.HOW_TO_BUY) {
+                        <div class="buy">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Termo de Compra Neutro
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                            <p class="text-base">
+                                Aceitamos devoluções de produtos dentro de um prazo especificado e de acordo com nossas políticas de devolução. Consulte a seção de "Devoluções e Trocas" em nosso site para obter informações detalhadas sobre como iniciar o processo de devolução.
+                            </p>
+                            <p class="text-base">
+                                o possível para garantir que os produtos sejam entregues dentro do prazo estimado. No entanto, não podemos ser responsáveis por atrasos de entrega além do nosso controle, como problemas de transporte ou condições climáticas adversas.
+                            </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Informação de Pagamento</h1>
+                            <p class="text-base">
+                                Para concluir uma compra, você pode ser solicitado a fornecer informações de  pagamento válidas e atualizadas. Garantimos que todas as transações financeiras são seguras e protegidas.
+                            </p>
+                            <p class="text-base">
+                                Respeitamos a sua privacidade e garantimos a segurança das suas informações pessoais. Todas as informações fornecidas durante o processo de compra serão tratadas com total confidencialidade, de acordo com nossa política de privacidade.
+                            </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Garantia de Qualidade</h1>
+                            <p class="text-base">
+                                Aceitamos devoluções de produtos dentro de um prazo especificado e de acordo com nossas políticas de devolução. Consulte a seção de "Devoluções e Trocas" em nosso site para obter informações detalhadas sobre como iniciar o processo de devolução.
+                            </p>
+                            <div class="annotation mt-5 mb-8 pl-6 border-l-[2px] border-black">
+                                <p class="text-base italic">
+                                    Reservamo-nos o direito de fazer alterações nestes termos e políticas de compra a qualquer momento, sem aviso prévio. Recomendamos que você revise regularmente esta página para estar ciente de quaisquer atualizações ou alterações.
+                                </p>
+                            </div>
+                            <p class="text-base">
+                                Ao prosseguir com uma compra em nosso site, você indica que leu, entendeu e concorda com estes termos e políticas de compra. Se tiver alguma dúvida ou preocupação, não hesite em entrar em contato conosco. Agradecemos por escolher fazer negócios conosco na Compra Neutra.
+                            </p>
+                        </div>
+                    } @case (this.tabEnum.REIMBURSEMENT) {
+                        <div class="reimbursement">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Reembolso
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                        </div>
+                    } @case (this.tabEnum.SHIPPING_POLICY) {
+                        <div class="shipping-policy">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Política de envio
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                        </div>
+                    } @case (this.tabEnum.PRIVACY_POLICY) {
+                        <div class="privacy-policy">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Política de privacidade
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                        </div>
+                    } @case (this.tabEnum.TERMS_OF_SERVICES) {
+                        <div class="terms-of-service">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Termos de Serviços
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                        </div>
+                    } @case (this.tabEnum.COOKIE_SETTINGS) {
+                        <div class="cookie-settings">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Definições de Cookies
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            </p>
+                        </div>
+                    } @default {
+                        <div class="not-found">
+                            <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
+                                Opção não encontrada!
+                            </h1>
+                            <p class="font-semibold text-base">
+                                Encontrou uma opção inválida.
+                            </p>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { FaqService } from '@core/services/faq.service';
+import { TabEnum } from './feature-modules/terms-and-services/components/views/content/content.component';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
   private faqService = inject(FaqService);
   private router = inject(Router);
   
+  termsAndServicesTabsEnum = TabEnum;
   contentMarginTop: number = 0;
   showFaq$ = signal(false);
   

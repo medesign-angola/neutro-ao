@@ -32,8 +32,8 @@
                     Comprar
                 </h1>
                 <ul class="flex flex-col">
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Homens</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Mulheres</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'">Homens</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'">Mulheres</a></li>
                 </ul>
             </div>
             <div class="neutro w-[101px] xl:w-[130px]">
@@ -41,9 +41,9 @@
                     Neutro
                 </h1>
                 <ul class="flex flex-col">
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Sobre Nós</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">FAQs</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Contactos</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/about-us']">Sobre Nós</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/faqs']">FAQs</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/contact-us']">Contactos</a></li>
                 </ul>
             </div>
             <div class="sales w-fit md:hidden lg:block">
@@ -96,9 +96,13 @@
                     Vendas
                 </h1>
                 <ul>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Como Comprar</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Reembolso</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Política de Envio</a></li>
+                    <li>
+                        <a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']"[queryParams]="{ content: this.termsAndServicesTabsEnum.HOW_TO_BUY}" [queryParamsHandling]="'merge'">
+                            Como Comprar
+                        </a>
+                    </li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']"[queryParams]="{ content: this.termsAndServicesTabsEnum.REIMBURSEMENT}" [queryParamsHandling]="'merge'">Reembolso</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']"[queryParams]="{ content: this.termsAndServicesTabsEnum.SHIPPING_POLICY}" [queryParamsHandling]="'merge'">Política de Envio</a></li>
                 </ul>
             </div>
             <div class="social-media w-[101px] xl:w-[130px]">

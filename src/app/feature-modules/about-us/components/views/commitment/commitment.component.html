@@ -89,38 +89,36 @@
         </div>
     </div>
 
-    <div class="limited-containers xl:hidden">
-        <div class="controllers mt-12">
-            <div class="limited-container flex justify-between items-center">
-    
-                <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">
-                    @for (dot of itemsArray; track $index) {
-                        <div class="dot w-2 h-2 rounded-full bg-[rgba(239,239,239,0.40)]"
-                        [ngClass]="{ 'active': $index === activeIndex }"
-                        (click)="this.slideTo($index)"
-                        ></div>
-                    }
-                </div>
-                <div class="arrow-controllers flex gap-x-4 justify-start items-center">
-                    <div class="prev cursor-pointer">
-                        <a (click)="prev()" class="">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === 0) ? 'black' : '#EFEFEF'"/>
-                                <path class="duration-[.2s]" d="M23 26L17 20L23 14" [attr.stroke]="(activeIndex === 0) ? 'white' : '#7C7C7C'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>                            
-                        </a>
-                    </div>
-                    <div class="next cursor-pointer">
-                        <a (click)="next()" class="">
-                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.itemsArray.length - 1) ? 'black' : '#EFEFEF'"/>
-                                <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.itemsArray.length - 1) ? 'white' : '#7C7C7C'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                
+    <div class="controllers hidden md:block mt-12 xl:hidden">
+        <div class="limited-container flex justify-between items-center">
+
+            <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">
+                @for (dot of itemsArray; track $index) {
+                    <div class="dot w-2 h-2 rounded-full bg-[rgba(239,239,239,0.40)]"
+                    [ngClass]="{ 'active': $index === activeIndex }"
+                    (click)="this.slideTo($index)"
+                    ></div>
+                }
             </div>
+            <div class="arrow-controllers flex gap-x-4 justify-start items-center">
+                <div class="prev cursor-pointer">
+                    <a (click)="prev()" class="">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === 0) ? 'black' : '#EFEFEF'"/>
+                            <path class="duration-[.2s]" d="M23 26L17 20L23 14" [attr.stroke]="(activeIndex === 0) ? 'white' : '#7C7C7C'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                            
+                    </a>
+                </div>
+                <div class="next cursor-pointer">
+                    <a (click)="next()" class="">
+                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.itemsArray.length - 1) ? 'black' : '#EFEFEF'"/>
+                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.itemsArray.length - 1) ? 'white' : '#7C7C7C'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

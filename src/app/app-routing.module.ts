@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'about-us', loadChildren: () => import('./feature-modules/about-us/about-us.module').then(m => m.AboutUsModule) },
   { path: 'faqs', loadChildren: () => import('./feature-modules/faqs/faqs.module').then(m => m.FaqsModule) },
   { path: 'contact-us', loadChildren: () => import('./feature-modules/contact-us/contact-us.module').then(m => m.ContactUsModule) },
+  { path: 'terms-and-services', loadChildren: () => import('./feature-modules/terms-and-services/terms-and-services.module').then(m => m.TermsAndServicesModule) },
 ];
 
 @NgModule({

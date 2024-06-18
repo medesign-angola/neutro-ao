@@ -200,6 +200,8 @@ class="header duration-[.4s] py-6 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
 
     <div class="mobile-menu-dropped bg-white duration-[.6s] overflow-auto"
     [ngClass]="{
+        'opacity-0': this.rightDropdownVisible,
+        'opacity-1': !this.rightDropdownVisible,
         'h-screen mt-4': isMenuOpen,
         'h-0': !isMenuOpen
     }"
@@ -210,13 +212,41 @@ class="header duration-[.4s] py-6 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                     <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Homens</a></li>
                     <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Mulheres</a></li>
                     <li>
-                        <a class=" flex gap-3 cursor-pointer justify-center items-center text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">
+                        <a
+                        (click)="this.toggleRightDropdown()"
+                        class=" flex gap-3 cursor-pointer justify-center items-center text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">
                             Neutro
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </a>
                     </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="mobile-neutro-right-submenu absolute duration-[.7s] top-[102px] w-full h-full bg-white"
+    [ngClass]="{
+        '-right-full': !this.rightDropdownVisible,
+        'right-0': this.rightDropdownVisible
+    }"
+    >
+        <div class="limited-container pt-12">
+            <div class="goback mb-6">
+                <button (click)="this.hideRightDropdown()" class="flex justify-start gap-3 items-center">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.332 8H2.66536M2.66536 8L6.66536 4M2.66536 8L6.66536 12" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span class="underline font-['Bricolage-Grotesque'] font-semibold">Voltar</span>
+                </button>
+            </div>
+            <nav>
+                <ul class="flex flex-col gap-y-6 justify-start items-start">
+                    <li><a [routerLink]="['/about-us']" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Sobre Nós</a></li>
+                    <li><a [routerLink]="['/faqs']" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">FAQ</a></li>
+                    <li><a [routerLink]="['/contact-us']" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Contacto</a></li>
+                    <li><a [routerLink]="['/terms-and-services']" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Termos & Serviços</a></li>
                 </ul>
             </nav>
         </div>
