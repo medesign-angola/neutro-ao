@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { PresaleBeYourSelfComponent } from '@core/components/singleton/presale-be-your-self/presale-be-your-self.component';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,11 @@ import { SharedModule } from '@shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    SharedModule
+    SharedModule,
+    PresaleBeYourSelfComponent
   ],
   providers: [
+    provideHttpClient(withFetch()),
     provideClientHydration()
   ],
   bootstrap: [AppComponent]

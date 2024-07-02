@@ -1,0 +1,4 @@
+.input div input.is-invalid,
+.input div textarea.is-invalid{
+    border: 2px solid #e12349;
+}

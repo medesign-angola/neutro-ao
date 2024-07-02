@@ -48,10 +48,11 @@
                             >
                                 <img
                                 class="max-w-[34px] mx-auto"
-                                [ngSrc]="item.representationalImages[0].imagePath.genericPath"
-                                [width]="item.representationalImages[0].imagePath.allSizes?.['large-width']"
-                                [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']"
+                                [src]="item.representationalImages[0].imagePath.genericPath"
                                 alt="">
+                                <!-- [ngSrc]="item.representationalImages[0].imagePath.genericPath"
+                                [width]="item.representationalImages[0].imagePath.allSizes?.['large-width']"
+                                [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']" -->
                             </div>
                         }
                     </div>

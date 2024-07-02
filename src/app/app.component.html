@@ -7,11 +7,14 @@
 [style.marginTop.px]="contentMarginTop"
 >
     <router-outlet />
+
+    <app-presale-be-your-self/>
+
 </div>
 <footer>
     @if (showFaq$()) {
         <div class="footer-faqs">
-            <app-faq /> 
+            <app-faq [faqs]="faqs" /> 
         </div>
     }
     <div class="footer-content">
@@ -51,7 +54,7 @@
                 </div>
                 <div class="right-aside-container flex justify-start gap-12 items-center">
                     <div class="aditional-links flex flex-wrap gap-4 md:gap-3 justify-center md:justify-start items-center">
-                        <a [routerLink]="['/']" [queryParams]="{ content: this.termsAndServicesTabsEnum.PRIVACY_POLICY}" [queryParamsHandling]="'merge'" class="text-white/60 text-sm underline">
+                        <a [routerLink]="['/terms-and-services']" [queryParams]="{ content: this.termsAndServicesTabsEnum.PRIVACY_POLICY}" [queryParamsHandling]="'merge'" class="text-white/60 text-sm underline">
                             Política de Privacidade
                         </a>
                         <a [routerLink]="['/terms-and-services']" [queryParams]="{ content: this.termsAndServicesTabsEnum.TERMS_OF_SERVICES}" [queryParamsHandling]="'merge'" class="text-white/60 text-sm underline">

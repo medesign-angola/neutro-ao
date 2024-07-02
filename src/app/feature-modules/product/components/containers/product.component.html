@@ -1,6 +1,7 @@
 <div class="components-container flex flex-col gap-y-6">
     <div class="product-details my-10 xl:my-28" #productDetails>
         <app-product-details
+        *ngIf="this.theProduct.length > 0"
         [theProduct]="this.theProduct[0]"
         />
     </div>

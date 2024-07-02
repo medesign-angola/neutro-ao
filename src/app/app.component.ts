@@ -1,7 +1,11 @@
-import { ChangeDetectorRef, Component, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, inject, signal } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { FaqService } from '@core/services/faq.service';
 import { TabEnum } from './feature-modules/terms-and-services/components/views/content/content.component';
+import { environment } from 'src/environments/environment.development';
+import { ModalSupporter } from '@core/data/classes/modal.class';
+import { isPlatformBrowser } from '@angular/common';
+import { Faq } from '@core/data/models/faq.model';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +20,7 @@ export class AppComponent implements OnInit {
   termsAndServicesTabsEnum = TabEnum;
   contentMarginTop: number = 0;
   showFaq$ = signal(false);
+  faqs: Faq[] = [];
   
   constructor(
     private changeDetectorRef: ChangeDetectorRef
@@ -27,6 +32,7 @@ export class AppComponent implements OnInit {
       if(event instanceof NavigationEnd){
         const pathname = event.url.split('?')[0].split('/')[PATH_NAME_INDEX];
         this.showFaq$.update(val => val = this.faqService.showFaq(pathname));
+        this.faqs = this.faqService.getFaqForPage(pathname);
       }
     });
   }

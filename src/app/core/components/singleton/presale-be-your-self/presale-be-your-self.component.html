@@ -1,0 +1,148 @@
+<div class="presale-modal">
+    <div class="presale-modal-bg w-full h-full fixed top-0 left-0 z-[101] bg-black/40"
+    [ngClass]="{
+        'hidden': ((!this.showModalBackground()) && this.firstTimeOpeningModal()),
+        'disappear': (!this.showModalBackground() && !this.firstTimeOpeningModal()),
+        'appear': this.showModalBackground()
+    }"
+    ></div>
+    <div class="modal-content overflow-hidden fixed top-[50%] w-[480px] max-w-[480px] z-[102] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white"
+    [ngClass]="{
+        'hidden': ((!this.showModalBackground()) && this.firstTimeOpeningModal()),
+        'disappear': (!this.showModalBackground() && !this.firstTimeOpeningModal()),
+        'appear': this.showModalBackground()
+    }"
+    >
+        <div class="toolpit fixed w-[250px] z-[105] -top-[5px] -left-[33px] rotate-[-30deg] flex gap-2 justify-start items-center bg-black text-white font-['Bricolage-Grotesque'] p-[14px_61px_17px_45px]">
+            Pré-Venda
+            <svg width="29" height="26" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_2863_6357)">
+                <path d="M9.65724 10.9384L9.66432 10.934M4.17923 11.5986L6.14902 14.7646C6.36437 15.1107 6.47205 15.2837 6.61248 15.4223C6.73698 15.5451 6.88004 15.6476 7.03641 15.7259C7.21278 15.8143 7.41129 15.8605 7.80831 15.953L16.6103 18.0031C17.9739 18.3207 18.6557 18.4795 19.2384 18.3354C19.7509 18.2087 20.2101 17.923 20.5503 17.5192C20.937 17.0602 21.0958 16.3784 21.4134 15.0147L22.0047 12.4761C22.3223 11.1125 22.4811 10.4307 22.337 9.84801C22.2103 9.33549 21.9246 8.87625 21.5208 8.53611C21.0618 8.14942 20.3799 7.99061 19.0163 7.673L10.2144 5.62289C9.81733 5.53041 9.61881 5.48418 9.42156 5.48552C9.24667 5.4867 9.07306 5.51541 8.90709 5.57058C8.7199 5.63281 8.54684 5.74048 8.20071 5.95583L5.03471 7.92563C4.24217 8.41873 3.84589 8.66528 3.63914 9.00786C3.45728 9.3092 3.37549 9.66037 3.40548 10.0111C3.43958 10.4097 3.68613 10.806 4.17923 11.5986ZM10.011 10.7183C10.1326 10.9137 10.0727 11.1706 9.87735 11.2922C9.68197 11.4137 9.42502 11.3539 9.30346 11.1585C9.18189 10.9631 9.24174 10.7062 9.43713 10.5846C9.63252 10.463 9.88946 10.5229 10.011 10.7183Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                <clipPath id="clip0_2863_6357">
+                <rect width="20" height="20" fill="white" transform="translate(0.474609 8.79968) rotate(-31.8887)"/>
+                </clipPath>
+                </defs>
+            </svg>
+        </div>
+        <div class="modal-header flex justify-end items-center p-4">
+            <button class="">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="48" rx="24" fill="#F9F9F9"/>
+                    <path d="M30.6663 17.3333L17.333 30.6666M17.333 17.3333L30.6663 30.6666" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="modal-body p-6 overflow-y-auto h-[600px] max-h-[500px]">
+            <div class="product-details pt-7 flex flex-col gap-y-4">
+                <p class="text-sm font-['Bricolage-Grotesque'] text-primary flex justify-center items-center">
+                    Sua nova coleção chegou!
+                    <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.333 5.83331V2.49998M3.66634 14.5V11.1666M10.6663 4.16665H13.9997M1.99967 12.8333H5.33301M4.33301 1.83331L3.81004 2.87926C3.63304 3.23324 3.54455 3.41024 3.42632 3.56361C3.32141 3.69971 3.1994 3.82172 3.06331 3.92663C2.90993 4.04485 2.73294 4.13335 2.37895 4.31034L1.33301 4.83331L2.37895 5.35629C2.73294 5.53328 2.90993 5.62177 3.06331 5.74C3.1994 5.84491 3.32141 5.96692 3.42632 6.10302C3.54455 6.25639 3.63304 6.43338 3.81004 6.78737L4.33301 7.83331L4.85598 6.78737C5.03297 6.43338 5.12147 6.25639 5.2397 6.10302C5.3446 5.96692 5.46661 5.84491 5.60271 5.74C5.75609 5.62177 5.93308 5.53328 6.28706 5.35629L7.33301 4.83331L6.28706 4.31034C5.93308 4.13335 5.75608 4.04485 5.60271 3.92663C5.46661 3.82172 5.3446 3.69971 5.2397 3.56361C5.12147 3.41024 5.03297 3.23324 4.85598 2.87926L4.33301 1.83331ZM11.333 8.49998L10.6989 9.76815C10.5219 10.1221 10.4334 10.2991 10.3152 10.4525C10.2103 10.5886 10.0883 10.7106 9.9522 10.8155C9.79882 10.9337 9.62183 11.0222 9.26784 11.1992L7.99967 11.8333L9.26784 12.4674C9.62183 12.6444 9.79882 12.7329 9.9522 12.8511C10.0883 12.956 10.2103 13.078 10.3152 13.2141C10.4334 13.3675 10.5219 13.5445 10.6989 13.8985L11.333 15.1666L11.9671 13.8985C12.1441 13.5445 12.2326 13.3675 12.3508 13.2141C12.4557 13.078 12.5777 12.956 12.7138 12.8511C12.8672 12.7329 13.0442 12.6444 13.3982 12.4674L14.6663 11.8333L13.3982 11.1992C13.0442 11.0222 12.8672 10.9337 12.7138 10.8155C12.5777 10.7106 12.4557 10.5886 12.3508 10.4525C12.2326 10.2991 12.1441 10.1221 11.9671 9.76815L11.333 8.49998Z" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </p>
+                <h1 class="text-[2.5rem] text-center font-bold leading-[48px] tracking-[-0.2px] font-['Bricolage-Grotesque']">
+                    T-shirt Neutro Oversize
+                </h1>
+                <h3 class="text-lg font-bold font-['Bricolage-Grotesque'] text-primary text-center">
+                    Termina em: <span class="underline font-['Bricolage-Grotesque']">16-09h-73m-83</span>
+                </h3>
+            </div>
+            <div class="product-images-carousel relative my-6 h-[400px] overflow-hidden rounded-lg">
+                <div
+                class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] flex justify-between items-center">
+                    <div class="prev cursor-pointer">
+                        <a (click)="prev()">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="32" height="32" rx="16" transform="matrix(-1 0 0 1 32 0)" fill="white"/>
+                                <path d="M19 22L13 16L19 10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="next cursor-pointer">
+                        <a (click)="next()">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="32" height="32" rx="16" fill="white"/>
+                                <path d="M13 22L19 16L13 10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="images-container w-full h-full overflow-hidden" #imagesContainerElement>
+                    <div class="images w-max flex">
+                        @for (item of this.productImages; track $index) {
+                            <div class="image w-[480px] h-full">
+                                <img src="{{ item }}" class="w-full h-full object-contain object-center" alt="">
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="further-details flex flex-col gap-y-10 ">
+                <div class="top-content flex justify-between items-center">
+                    <span class="font-['Bricolage-Grotesque'] text-lg font-medium text-primary">Be your self</span>
+                    <p class="font-['Bricolage-Grotesque'] text-2xl font-bold text-primary">{{ 32000 | replaceBy }}</p>
+                </div>
+
+                <div class="remaining flex justify-between items-start">
+                    <div class="product-sizes">
+                        <p class="mb-4 text-base text-primary">
+                            Seleccione o tamanho
+                        </p>
+                        <div class="chips flex flex-wrap gap-2 justify-start items-center">
+                            @for (size of this.sizes; track $index) {
+                                <div class="chip w-fit flex justify-center items-center">
+                                    <button
+                                    (click)="selectSize($index)"
+                                    class="bg-[#EFEFEF] duration-[.3s] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']"
+                                    [ngClass]="{
+                                        'selected': $index === selectedSize
+                                    }"
+                                    >
+                                        {{ size.name }}
+                                    </button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="product-quantitiy flex flex-col gap-y-5">
+                        <div class="quantities-selector-container">
+                            <p class="mb-4 text-base text-primary">
+                                Quantidade
+                            </p>
+                            <div class="operators flex gap-3 justify-start items-center">
+                                <div class="decrease">
+                                    <a
+                                    (click)="decreaseQuantity()"
+                                    class="cursor-pointer"
+                                    href="javascript:void(0)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="19.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                            <path d="M15.3333 20H24.6666" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="quantity-value p-3 w-fit min-w-10 h-10 rounded-full text-base bg-primary text-white flex justify-center items-center">
+                                    <p class=" font-['Bricolage-Grotesque']">{{ quantity }}</p>
+                                </div>
+                                <div class="increase">
+                                    <a
+                                    (click)="increaseQuantity()"
+                                    class="cursor-pointer"
+                                    href="javascript:void(0)">
+                                        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <rect x="0.75" y="0.75" width="38.5" height="38.5" rx="19.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                            <path d="M20.0002 15.3333V24.6666M15.3335 19.9999H24.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -4,13 +4,11 @@ import { Directive, HostListener } from "@angular/core";
 
 export class ProductContainerCarouselFuncionalities{
 
-    
     private initialX: number | null = null;
     private initialY: number | null = null;
     activeIndex = 0;
 
-    constructor() {
-    }
+    constructor() {}
 
     next() {}
     prev() {}
@@ -32,7 +30,7 @@ export class ProductContainerCarouselFuncionalities{
         var deltaY = currentY - this.initialY;
 
         if(Math.abs(deltaX) > Math.abs(deltaY)){
-            $event.preventDefault();
+            // $event.preventDefault();
             if(deltaX < 0){
                 this.next();
             }else{

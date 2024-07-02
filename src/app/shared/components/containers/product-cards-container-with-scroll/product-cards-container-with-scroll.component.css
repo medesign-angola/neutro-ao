@@ -1,3 +1,7 @@
 .dot.active{
     background-color: black;
 }
+
+:host * {
+    scroll-behavior: smooth;
+}

@@ -4,26 +4,60 @@
             <p class="text-primary text-base">
                 Inscreva-se em nossa newsletter para receber novidades, promoções exclusivas e lançamentos da marca Neutro
             </p>
-            <div class="form flex flex-col md:flex-row gap-4 md:gap-2 md-905:gap-4 md:justify-between md:items-center">
-                <div class="input md:w-[334px] bg-[#F5F5F5] flex px-3 gap-x-2 justify-start items-center rounded-full">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1.33203 4.6665L6.77531 8.4768C7.21609 8.78535 7.43648 8.93962 7.67621 8.99938C7.88796 9.05216 8.10943 9.05216 8.32119 8.99938C8.56091 8.93962 8.7813 8.78535 9.22208 8.4768L14.6654 4.6665M4.53203 13.3332H11.4654C12.5855 13.3332 13.1455 13.3332 13.5733 13.1152C13.9497 12.9234 14.2556 12.6175 14.4474 12.2412C14.6654 11.8133 14.6654 11.2533 14.6654 10.1332V5.8665C14.6654 4.7464 14.6654 4.18635 14.4474 3.75852C14.2556 3.3822 13.9497 3.07624 13.5733 2.88449C13.1455 2.6665 12.5855 2.6665 11.4654 2.6665H4.53203C3.41193 2.6665 2.85187 2.6665 2.42405 2.88449C2.04773 3.07624 1.74176 3.3822 1.55002 3.75852C1.33203 4.18635 1.33203 4.7464 1.33203 5.8665V10.1332C1.33203 11.2533 1.33203 11.8133 1.55002 12.2412C1.74176 12.6175 2.04773 12.9234 2.42405 13.1152C2.85187 13.3332 3.41193 13.3332 4.53203 13.3332Z" stroke="#989898" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                    <input
-                    class="placeholder:text-[#989898] focus:outline-none py-3 bg-transparent w-full text-sm font-['Bricolage-Grotesque']"
-                    type="email"
-                    name=""
-                    placeholder="Digite seu e-mail"
-                    id="">
+            <div class="form">
+                <form
+                (submit)="submit()"
+                class=" flex flex-col md:flex-row gap-4 md:gap-2 md-905:gap-4 md:justify-between md:items-center"
+                [formGroup]="this.subscriptionFormGroup">
+                    <div
+                    class="input md:w-[334px] duration-[.3s] bg-[#F5F5F5] flex px-4 gap-x-2 justify-start items-center rounded-full"
+                    [ngClass]="{
+                        'is-invalid': this.subscriptionFormGroup.get('email').invalid && this.subscriptionFormGroup.get('email').touched
+                    }"
+                    >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.33203 4.6665L6.77531 8.4768C7.21609 8.78535 7.43648 8.93962 7.67621 8.99938C7.88796 9.05216 8.10943 9.05216 8.32119 8.99938C8.56091 8.93962 8.7813 8.78535 9.22208 8.4768L14.6654 4.6665M4.53203 13.3332H11.4654C12.5855 13.3332 13.1455 13.3332 13.5733 13.1152C13.9497 12.9234 14.2556 12.6175 14.4474 12.2412C14.6654 11.8133 14.6654 11.2533 14.6654 10.1332V5.8665C14.6654 4.7464 14.6654 4.18635 14.4474 3.75852C14.2556 3.3822 13.9497 3.07624 13.5733 2.88449C13.1455 2.6665 12.5855 2.6665 11.4654 2.6665H4.53203C3.41193 2.6665 2.85187 2.6665 2.42405 2.88449C2.04773 3.07624 1.74176 3.3822 1.55002 3.75852C1.33203 4.18635 1.33203 4.7464 1.33203 5.8665V10.1332C1.33203 11.2533 1.33203 11.8133 1.55002 12.2412C1.74176 12.6175 2.04773 12.9234 2.42405 13.1152C2.85187 13.3332 3.41193 13.3332 4.53203 13.3332Z" stroke="#989898" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input
+                        class="placeholder:text-[#989898] focus:outline-none py-3 bg-transparent w-full text-sm font-['Bricolage-Grotesque']"
+                        type="email"
+                        formControlName="email"
+                        placeholder="Digite seu e-mail"
+                        id=""
+                        >
+                    </div>
+                    <div class="submit flex justify-center items-center">
+                        <button
+                        class="bg-primary w-full font-['Bricolage-Grotesque'] duration-[.3s] disabled:bg-primary/60 font-semibold text-white rounded-full px-6 py-3 text-center"
+                        [disabled]="this.subscriptionFormGroup.invalid"
+                        >
+                            Inscrever-me
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="messages">
+                <div class="error w-full"
+                *ngIf="this.hasSubscribed | async"
+                >
+                    <span
+                    class="text-primary font-medium font-['Bricolage-Grotesque'] w-full text-xs text-left"
+                    >
+                        Subscrição efectuada
+                    </span>
                 </div>
-                <div class="submit flex justify-center items-center">
-                    <button class="bg-primary w-full font-['Bricolage-Grotesque'] font-semibold text-white rounded-full px-6 py-3 text-center">
-                        Inscrever-me
-                    </button>
+                <div class="error w-full"
+                *ngIf="this.hasError | async"
+                >
+                    <span
+                    class="text-primary font-medium font-['Bricolage-Grotesque'] w-full text-xs text-left"
+                    >
+                        Erro ao fazer a subscrição
+                    </span>
                 </div>
             </div>
             <p class="small mt-4 text-primary/60 text-xs">
-                Ao se inscrever, você concorda com nossa <a class="underline" [routerLink]="['/']">Política de Privacidade</a> e consente em receber atualizações de nossa marca.
+                Ao se inscrever, você concorda com nossa <a class="underline" [routerLink]="['/terms-and-services']" [queryParams]="{ content: 'privacy-policy' }" [queryParamsHandling]="'merge'">Política de Privacidade</a> e consente em receber atualizações de nossa marca.
             </p>
         </div>
         <div class="navigation-section flex flex-wrap justify-start items-stretch gap-x-2 xl:gap-x-6">
@@ -51,9 +85,9 @@
                     Vendas
                 </h1>
                 <ul>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Como Comprar</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Reembolso</a></li>
-                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/']">Política de Envio</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']" [queryParams]="{ content: 'how-to-buy' }" [queryParamsHandling]="'merge'">Como Comprar</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']" [queryParams]="{ content: 'reimbursement' }" [queryParamsHandling]="'merge'">Reembolso</a></li>
+                    <li><a class="py-2 block text-sm text-primary/60" [routerLink]="['/terms-and-services']" [queryParams]="{ content: 'shipping-policy' }" [queryParamsHandling]="'merge'">Política de Envio</a></li>
                 </ul>
             </div>
             <div class="social-media md:hidden lg:block">
@@ -61,14 +95,14 @@
                     Siga-nos
                 </h1>
                 <div class="icons flex md:flex-col gap-x-6 gap-y-4 justify-center items-center">
-                    <button class="facebook text-primary/60 text-sm flex gap-3 justify-between items-center">
+                    <a href="https://www.facebook.com/profile.php?id=61550946226952&mibextid=LQQJ4d" target="_blank" class="facebook text-primary/60 text-sm flex gap-3 justify-between items-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="32" height="32" rx="16" fill="#F9F9F9"/>
                             <path d="M19.4758 16.8853L19.8904 14.1552H17.2968V12.3844C17.2968 11.6373 17.6584 10.9086 18.8201 10.9086H20V8.58437C20 8.58437 18.9297 8.3999 17.9069 8.3999C15.7699 8.3999 14.3744 9.70777 14.3744 12.0745V14.1552H12V16.8853H14.3744V23.4855C14.8511 23.5612 15.3388 23.5999 15.8356 23.5999C16.3324 23.5999 16.8201 23.5612 17.2968 23.4855V16.8853H19.4758Z" fill="black"/>
                         </svg>
                         <span class="hidden md:block">Facebook</span>
-                    </button>
-                    <button class="instagram text-primary/60 text-sm flex gap-3 justify-between items-center">
+                    </a>
+                    <a href="https://www.instagram.com/neutro.ao" target="_blank" class="instagram text-primary/60 text-sm flex gap-3 justify-between items-center">
                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect width="32" height="32" rx="16" fill="#F9F9F9"/>
                             <g clip-path="url(#clip0_1413_37324)">
@@ -83,7 +117,7 @@
                             </defs>
                         </svg>
                         <span class="hidden md:block">Instagram</span>
-                    </button>
+                    </a>
                 </div>
             </div>
             

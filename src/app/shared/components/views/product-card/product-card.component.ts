@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
 import { Product } from '@core/data/models/product.model';
+import { ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
 
 @Component({
@@ -13,6 +14,8 @@ export class ProductCardComponent implements OnInit, OnChanges {
   @Input() size: ProductCardSizeEnum = ProductCardSizeEnum.LARGE_ON_BOTH;
   productCardSizeEnum = ProductCardSizeEnum;
 
+  private shoppingBag = inject(ShoppingBagService);
+
   ngOnInit(): void {
     
   }
@@ -21,6 +24,8 @@ export class ProductCardComponent implements OnInit, OnChanges {
     
   }
 
-  addShoppingCart(product: Product){}
+  addShoppingCart(product: Product){
+    this.shoppingBag.addItem(product);
+  }
 
 }

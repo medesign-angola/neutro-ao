@@ -1,8 +1,10 @@
 import { isPlatformBrowser } from '@angular/common';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID, ViewChild, computed, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
+import { Product } from '@core/data/models/product.model';
+import { ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ThemeService } from '@core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -18,6 +20,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: any,
     private changeDetectorRef: ChangeDetectorRef,
     public themeService: ThemeService,
+    public shoppingBagService: ShoppingBagService
   ) { }
 
   themeEnum = ThemeEnum;
@@ -28,6 +31,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   isMenuOpen: boolean = false;
   showDesktopDropdown = false;
   rightDropdownVisible = false;
+
+  checkoutModalVisible = signal(false);
 
   desktopDropdownItems = [
     { section: 'about-us', imagePath: 'assets/images/static/header/image-1.png' },
@@ -92,11 +97,26 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.overflowBodyElement();
   }
 
+  openCheckoutModal(){
+    this.checkoutModalVisible.update(val => val = true);
+    this.overflowBodyElement();
+  }
+
+  closeCheckoutModal(){
+    this.checkoutModalVisible.update(val => val = false);
+    this.overflowBodyElement();
+  }
+
+  toggleCheckoutModal(){
+    this.checkoutModalVisible.update(val => val = !this.checkoutModalVisible());
+    this.overflowBodyElement();
+  }
+
   overflowBodyElement(){
     if(isPlatformBrowser(this.platformId)){
       let bodyElement = document.querySelector('body') as HTMLElement;
 
-      if(this.isMenuOpen){
+      if(this.isMenuOpen || this.checkoutModalVisible()){
         bodyElement.style.height = '90vh';
         bodyElement.style.overflow = 'hidden';
       }else{
@@ -105,6 +125,14 @@ export class HeaderComponent implements OnInit, AfterViewInit {
       }
 
     }
+  }
+
+  increaseQuantity(product: Product){
+    this.shoppingBagService.increaseQuantity(product);
+  }
+
+  decreaseQuantity(product: Product){
+    this.shoppingBagService.decreaseQuantity(product);
   }
 
 }

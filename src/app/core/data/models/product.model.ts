@@ -29,12 +29,18 @@ export interface productCategory{
     slug: string
 }
 
+
+export type ProductSlug = Pick<Product, "slug">;
+
 export interface Product{
     id: number,
     name: string,
     slug: string,
     description: string,
     price: number,
+    inStock: boolean,
+    bestSeller: boolean,
+    highlighted: boolean,
     categories: productCategory[],
     gender: productGenderEnum,
     promotionalPrice: number,

@@ -49,12 +49,14 @@ implements OnInit, OnChanges, AfterViewInit {
   }
 
   override next(){
-    (this.activeIndex === this.productImages.length - 1) ? this.activeIndex = 0 : this.activeIndex++;
+    if(this.activeIndex === this.productImages.length - 1) return;
+    this.activeIndex++;
     this.scrollToActiveIndex(this.activeIndex);
   }
 
   override prev(){
-    (this.activeIndex === 0) ? (this.activeIndex = this.productImages.length - 1) : this.activeIndex--;
+    if(this.activeIndex === 0) return;
+    this.activeIndex--;
     this.scrollToActiveIndex(this.activeIndex);
   }
 

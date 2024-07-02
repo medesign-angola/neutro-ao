@@ -5,9 +5,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class ReplaceByPipe implements PipeTransform {
 
-  transform(value: number | null | undefined, replace: string = ',', to: string = '.'): string | undefined {
-    if(!value) return;
-    return parseFloat(value?.toString()).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  transform(value: number, replace: string = ',', to: string = '.'): string | undefined {
+    return parseFloat(value.toString()).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   }
 
 }

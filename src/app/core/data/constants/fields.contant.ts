@@ -1,0 +1,1 @@
+export const PRODUCT_FIELDS = '_fields[]=id&_fields[]=title&_fields[]=slug&_fields[]=acf&_fields[]=product-categories&_fields[]=product-genres';

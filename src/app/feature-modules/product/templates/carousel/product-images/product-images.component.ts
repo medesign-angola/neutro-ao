@@ -32,7 +32,7 @@ implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.combineImages();
+    this.combineImages(); 
   }
 
   ngOnDestroy(): void {

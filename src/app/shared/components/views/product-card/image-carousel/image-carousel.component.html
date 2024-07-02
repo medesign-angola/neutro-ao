@@ -10,12 +10,13 @@
                 >
                     <img
                     class="w-full duration-[.7s] h-full mx-auto object-contain object-top"
-                    [ngSrc]="image.imagePath.genericPath"
-                    [srcset]="[image.imagePath.allSizes?.thumbnail, image.imagePath.allSizes?.medium, image.imagePath.allSizes?.large]"
-                    [width]="image.imagePath.allSizes?.['large-width']"
-                    [height]="image.imagePath.allSizes?.['large-height']"
+                    [src]="image.imagePath.genericPath"
                     [alt]="'Imagem ' + $index + ' do Produto '"
                     >
+                    <!-- [ngSrc]="image.imagePath.genericPath"
+                    [srcset]="[image.imagePath.allSizes?.thumbnail, image.imagePath.allSizes?.medium, image.imagePath.allSizes?.large]"
+                    [width]="image.imagePath.allSizes?.['large-width']"
+                    [height]="image.imagePath.allSizes?.['large-height']" -->
                 </div>
             }
         </div>
