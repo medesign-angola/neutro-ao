@@ -3,9 +3,8 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
 [ngClass]="{
     'bg-white': themeService.menuTheme() === themeEnum.LIGHT,
     'bg-primary': themeService.menuTheme() === themeEnum.DARK,
-}"
-#headerContentElement>
-    <div class="limited-container !my-6 flex justify-between items-center">
+}" #headerContentElement>
+    <div class="limited-container !my-6 xl:!my-0 flex justify-between items-center">
         <div class="section flex gap-x-[4.563rem] justify-start items-center">
             <div class="logo">
                 <a [routerLink]="['/']">
@@ -172,8 +171,13 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </a>
             </div>
 
-            <div class="shopping-bag-icon">
-                <button (click)="this.openCheckoutModal()">
+            <div class="shopping-bag-icon relative">
+                <button (click)="this.openCheckoutModal()" class="">
+                    <div
+                    *ngIf="this.shoppingBagService.items().length > 0"
+                    class="badge flex duration-[.6s] justify-center items-center text-[10px] min-w-4 h-4 absolute top-2 left-[50%] -translate-x-[50%] font-bold font-['Bricolage-Grotesque'] p-1 rounded-full bg-primary text-white">
+                        {{ this.shoppingBagService.items().length }}
+                    </div>
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.9984 21V18C27.9984 15.7909 26.2076 14 23.9984 14C21.7893 14 19.9984 15.7909 19.9984 18V21M15.5904 22.352L14.9904 28.752C14.8198 30.5717 14.7345 31.4815 15.0365 32.1843C15.3017 32.8016 15.7665 33.3121 16.3564 33.6338C17.0279 34 17.9418 34 19.7695 34H28.2274C30.055 34 30.9689 34 31.6404 33.6338C32.2303 33.3121 32.6951 32.8016 32.9604 32.1843C33.2623 31.4815 33.177 30.5717 33.0064 28.752L32.4064 22.352C32.2624 20.8153 32.1903 20.047 31.8448 19.4662C31.5404 18.9546 31.0908 18.5451 30.553 18.2898C29.9424 18 29.1707 18 27.6274 18L20.3695 18C18.8261 18 18.0544 18 17.4438 18.2898C16.9061 18.5451 16.4564 18.9546 16.1521 19.4662C15.8065 20.047 15.7345 20.8153 15.5904 22.352Z" [attr.stroke]="(this.themeService.menuTheme() === this.themeEnum.LIGHT) ? 'black' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -272,7 +276,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </svg>
             </button>
         </div>
-        <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[370px] xl:max-h-[480px] no-scroller">
+        <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[80vh] bg-red-400 xl:max-h-[480px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
                     <div class="product-card flex gap-3 duration-[.2s] justify-between w-full py-6 xl:px-6 border-[1.5px] border-white hover:border-primary rounded-lg">

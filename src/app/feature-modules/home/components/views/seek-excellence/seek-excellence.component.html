@@ -1,5 +1,5 @@
 <div class="section-content relative flex flex-col gap-y-3">
-    <div class="limited-container w-full xl:!absolute xl:!left-[50%] xl:!translate-x-[-50%] xl:!mt-16 flex flex-col items-center xl:items-start" #limitedContainerElementRef>
+    <div class="limited-container z-[5] w-full xl:!absolute xl:!left-[50%] xl:!translate-x-[-50%] xl:!mt-16 flex flex-col items-center xl:items-start" #limitedContainerElementRef>
         <div class="title max-w-[467px] flex flex-col gap-y-4">
             <div class="tiny">
                 <h1 class="text-primary font-['Bricolage-Grotesque'] text-sm flex gap-x-2 justify-center xl:justify-start items-center">
@@ -24,7 +24,7 @@
 
     <div class="images-container relative bg-[url('assets/images/static/utils/noise.png')] bg-cover bg-no-repeat h-[438px] md:h-[660px] lg:h-[860px] xl:h-[1123px] overflow-hidden">
         <!-- <div class="limited-container relative bg-red-400"> -->
-            @for (image of images; track $index) {
+            @for (image of this.productDetailed[activeBiggerIndexItem].images; track $index) {
                 <div class="images-preview duration-[.4s] absolute top-0 left-0 w-full xl:left-[50%] xl:translate-x-[-50%] xl:max-w-[1000px] h-full"
                 [ngClass]="{
                     'opacity-0': $index !== activeIndex,
@@ -32,11 +32,11 @@
                 }"
                 >
                     <img
-                    class="w-full mt-[-73px] md:mt-[-160px] lg:mt-[-200px] object-cover object-top"
-                    [ngSrc]="image.genericPath"
-                    [width]="image.allSizes?.['large-width']"
-                    [height]="image.allSizes?.['large-height']"
+                    class="w-full object-cover object-top"
+                    [src]="image.genericPath"
                     alt="">
+                    <!-- [width]="image.allSizes?.['large-width']"
+                    [height]="image.allSizes?.['large-height']" -->
                 </div>
             }
         <!-- </div> -->
@@ -44,7 +44,7 @@
         <div class="chooser absolute bottom-4 md:bottom-8 xl:bottom-[50%] xl:translate-y-[50%] w-full">
             <div class="limited-container w-full flex justify-center xl:justify-end items-center">
                 <div class="images-chip p-3 w-fit flex flex-row xl:flex-col gap-4 justify-center items-center bg-white rounded-full">
-                    @for (image of images; track $index) {
+                    @for (image of this.productDetailed[activeBiggerIndexItem].images; track $index) {
                         <div
                         class="image border-[1.5px] border-[#EFEFEF] cursor-pointer relative overflow-hidden w-[56px] h-[56px] rounded-full"
                         (click)="showImage($index)"
@@ -55,26 +55,25 @@
                                 'grayscale': $index !== activeIndex,
                                 '': $index === activeIndex,
                             }"
-                            [ngSrc]="image.genericPath"
-                            [width]="image.allSizes?.['large-width']"
-                            [height]="image.allSizes?.['large-height']"
+                            [src]="image.genericPath"
                             alt="">
+                            <!-- [width]="image.allSizes?.['large-width']"
+                            [height]="image.allSizes?.['large-height']" -->
                         </div>
                     }
                 </div>
             </div>
         </div>
-
     </div>
 
     <div class="mobile-controllers mt-[36px] xl:mt-0 xl:absolute xl:w-full xl:bottom-16">
         <div class="limited-container flex justify-between items-center">
 
             <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">
-                @for (dot of images; track $index) {
-                    <div class="dot w-2 h-2 rounded-full bg-[#EFEFEF]"
-                    [ngClass]="{ 'active': $index === activeIndex }"
-                    (click)="showImage($index)"
+                @for (dot of this.productDetailed; track $index) {
+                    <div class="dot cursor-pointer w-2 h-2 rounded-full bg-[#EFEFEF]"
+                    [ngClass]="{ 'active': $index === activeBiggerIndexItem}"
+                    (click)="changeProduct($index)"
                     ></div>
                 }
             </div>
@@ -82,16 +81,16 @@
                 <div class="prev cursor-pointer">
                     <a (click)="prev()" class="">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === 0) ? '#EFEFEF' : 'black'"/>
-                            <path class="duration-[.2s]" d="M23 26L17 20L23 14" [attr.stroke]="(activeIndex === 0) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeBiggerIndexItem === 0) ? '#EFEFEF' : 'black'"/>
+                            <path class="duration-[.2s]" d="M23 26L17 20L23 14" [attr.stroke]="(activeBiggerIndexItem === 0) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>                            
                     </a>
                 </div>
                 <div class="next cursor-pointer">
                     <a (click)="next()" class="">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.images.length - 1) ? '#EFEFEF' : 'black'"/>
-                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.images.length - 1) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeBiggerIndexItem === this.productDetailed.length - 1) ? '#EFEFEF' : 'black'"/>
+                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeBiggerIndexItem === this.productDetailed.length - 1) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
