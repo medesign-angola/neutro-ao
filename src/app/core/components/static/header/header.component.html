@@ -276,7 +276,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </svg>
             </button>
         </div>
-        <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[80vh] bg-red-400 xl:max-h-[480px] no-scroller">
+        <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[80vh] xl:max-h-[480px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
                     <div class="product-card flex gap-3 duration-[.2s] justify-between w-full py-6 xl:px-6 border-[1.5px] border-white hover:border-primary rounded-lg">
