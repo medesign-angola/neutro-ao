@@ -175,7 +175,12 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 <button (click)="this.openCheckoutModal()" class="">
                     <div
                     *ngIf="this.shoppingBagService.items().length > 0"
-                    class="badge flex duration-[.6s] justify-center items-center text-[10px] min-w-4 h-4 absolute top-2 left-[50%] -translate-x-[50%] font-bold font-['Bricolage-Grotesque'] p-1 rounded-full bg-primary text-white">
+                    class="badge flex duration-[.6s] justify-center items-center text-[10px] min-w-4 h-4 absolute top-2 left-[50%] -translate-x-[50%] font-bold font-['Bricolage-Grotesque'] p-1 rounded-full"
+                    [ngClass]="{
+                        'bg-primary text-white': themeService.menuTheme() === themeEnum.LIGHT,
+                        'bg-white text-primary': themeService.menuTheme() === themeEnum.DARK,
+                    }"
+                    >
                         {{ this.shoppingBagService.items().length }}
                     </div>
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -256,7 +261,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
         </div>
     </div>
 
-    <div class="shopping-bag-modal duration-[.7s] overflow-y-auto absolute top-0 bg-white w-full xl:max-w-[544px] h-screen xl:h-[704px]"
+    <div class="shopping-bag-modal duration-[.7s] overflow-y-auto absolute top-0 bg-white w-full xl:max-w-[544px] h-screen"
     [ngClass]="{
         'right-0': this.checkoutModalVisible(),
         '-right-full xl:-right-[50%]': !this.checkoutModalVisible()
@@ -280,29 +285,33 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
                     <div class="product-card flex gap-3 duration-[.2s] justify-between w-full py-6 xl:px-6 border-[1.5px] border-white hover:border-primary rounded-lg">
-                        <div class="image overflow-hidden w-[90px] h-[90px] min-w-[90px] bg-[#F5F5F5] rounded-lg flex justify-center items-start">
+                        <div
+                        [routerLink]="['/product/' + item.product.slug]"
+                        class="image overflow-hidden cursor-pointer w-[90px] h-[90px] min-w-[90px] bg-[#F5F5F5] rounded-lg flex justify-center items-start">
                             <img
                             class="w-auto h-full object-over object-top mx-auto"
-                            [src]="item.product.colors[0].representationalImages[0].imagePath.genericPath"
+                            [src]="item.product.colors[item.colorIndex].representationalImages[0].imagePath.genericPath"
                             alt="">
                         </div>
                         <div class="details w-full flex gap-1 justify-between items-stretch">
                             <div class="product-info w-full flex flex-col gap-2 xl:gap-[14px] xl:justify-between">
-                                <p class="max-w-[198px] text-base font-['Bricolage-Grotesque'] limited-text two-lines">
+                                <p
+                                [routerLink]="['/product/' + item.product.slug]"
+                                class="max-w-[198px] cursor-pointer text-base font-['Bricolage-Grotesque'] limited-text two-lines">
                                     {{ item.product.name }} 
                                 </p>
                                 <p class="price font-bold text-sm xl:hidden">
-                                    {{ ((item.product.promotionalPrice > 0) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
+                                    {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity | replaceBy }}
                                 </p>
                                 <div class="bottom flex gap-2 justify-start items-center">
                                     <p class="text-black text-sm">
-                                        Cor: <span class="text-black/60">{{ item.product.colors[0].name }}</span>
+                                        Cor: <span class="text-black/60">{{ item.product.colors[item.colorIndex].name }}</span>
                                     </p>
                                     <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" fill="black"/>
                                     </svg>
                                     <p class="text-black text-sm">
-                                        Tamanho: <span class="text-black/60">{{ item.product.sizes[0].name }}</span>
+                                        Tamanho: <span class="text-black/60">{{ item.product.sizes[item.sizeIndex].name }}</span>
                                     </p>
                                 </div>
                                 <div class="quantity mt-2 xl:hidden">
@@ -337,7 +346,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                             </div>
                             <div class="shop-details hidden xl:flex w-full max-w-[112px] flex-col justify-between items-end">
                                 <p class="price font-['Bricolage-Grotesque'] font-bold text-sm text-black">
-                                    {{ ((item.product.promotionalPrice > 0) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
+                                    {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
                                 </p>
                                 <div class="quantity">
                                     <div class="operators flex gap-2 justify-start items-center">

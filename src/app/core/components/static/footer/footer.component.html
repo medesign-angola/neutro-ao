@@ -7,7 +7,7 @@
             <div class="form">
                 <form
                 (submit)="submit()"
-                class=" flex flex-col md:flex-row gap-4 md:gap-2 md-905:gap-4 md:justify-between md:items-center"
+                class=" flex flex-col md:flex-row gap-4 md:gap-2 md-905:gap-4 md:justify-start md:items-center"
                 [formGroup]="this.subscriptionFormGroup">
                     <div
                     class="input md:w-[334px] duration-[.3s] bg-[#F5F5F5] flex px-4 gap-x-2 justify-start items-center rounded-full"
@@ -31,7 +31,11 @@
                         class="bg-primary w-full font-['Bricolage-Grotesque'] duration-[.3s] disabled:bg-primary/60 font-semibold text-white rounded-full px-6 py-3 text-center"
                         [disabled]="this.subscriptionFormGroup.invalid"
                         >
-                            Inscrever-me
+                            @if (this.isSubscribing | async) {
+                                <img class="w-5 h-5" src="assets/svg/static/loader.svg" alt="">
+                            } @else {
+                                Inscrever-me
+                            }
                         </button>
                     </div>
                 </form>

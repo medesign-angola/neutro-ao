@@ -22,6 +22,7 @@
         </div>
     </div>
     <div
+    *ngIf="this.productImages.length > 1"
     class="controllers absolute z-[10] w-[85%] top-[50%] left-[50%] -translate-y-[50%] -translate-x-[50%] justify-between items-center"
     [ngClass]="{
         'hidden md:flex': size === sizesEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
@@ -35,16 +36,16 @@
         <div class="prev cursor-pointer">
             <a (click)="prev()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="16" transform="matrix(-1 0 0 1 32 0)" fill="white"/>
-                    <path d="M19 22L13 16L19 10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect width="32" height="32" rx="16" transform="matrix(-1 0 0 1 32 0)" [attr.fill]="(this.activeIndex === 0) ? '#EFEFEF' : 'white'"/>
+                    <path d="M19 22L13 16L19 10" [attr.stroke]="(this.activeIndex === 0) ? '#7C7C7C' : 'black'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
         </div>
         <div class="next cursor-pointer">
             <a (click)="next()">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="32" height="32" rx="16" fill="white"/>
-                    <path d="M13 22L19 16L13 10" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect width="32" height="32" rx="16" [attr.fill]="(this.activeIndex === this.productImages.length - 1) ? '#EFEFEF' : 'white'"/>
+                    <path d="M13 22L19 16L13 10" [attr.stroke]="(this.activeIndex === this.productImages.length - 1) ? '#7C7C7C' : 'black'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
         </div>

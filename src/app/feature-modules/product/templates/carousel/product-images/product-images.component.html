@@ -76,7 +76,7 @@
                     class="image relative w-screen xl:w-[532px] h-full"
                     >
                         <img
-                        class="w-full relative md:w-[391px] h-full md:mx-auto object-cover md:object-cover"
+                        class="w-full relative md:w-auto h-full md:mx-auto object-cover object-center md:object-cover"
                         [src]="item.imagePath.genericPath"
                         >
                         <!-- [ngSrc]="item.imagePath.genericPath"
@@ -99,7 +99,7 @@
                             ' border-black': $index === this.activeIndex
                         }" -->
                         <img
-                        class="max-w-[34px] mx-auto"
+                        class="w-auto h-full mx-auto"
                         [src]="item.imagePath.genericPath"
                         alt="">
                         <!-- [ngSrc]="item.imagePath.genericPath"

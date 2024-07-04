@@ -149,48 +149,46 @@
                 <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
                     Género
                 </h1>
-                <ul class="">
-                    <li class="py-2">
-                        <a [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'" class="text-primary active">
-                            Homens
-                        </a>
-                    </li>
-                    <li class="py-2">
-                        <a [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'" class="text-primary/60">
-                            Mulheres
-                        </a>
-                    </li>
-                </ul>
+                <div class="checkboxes">
+                    @for (gender of this.availableGenders; track $index) {
+                        <div class="check-option cursor-pointer py-2 text-primary flex gap-3 justify-start items-center"
+                        (click)="this.genderSelection(gender)"
+                        >
+                            <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] duration-[.4s] flex justify-center items-center rounded"
+                            [ngClass]="{
+                                '!bg-primary': (getTheGenderIndex(gender) !== -1),
+                            }"
+                            >
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path *ngIf="(getTheGenderIndex(gender) !== -1)" d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span [ngClass]="{ 'text-primary/60': (getTheGenderIndex(gender) === -1) }">{{ gender | genderTranslation }}</span>
+                        </div>
+                    }
+                </div>
             </div>
             <div class="products-section border-t border-[#F5F5F5]">
                 <h1 class="py-6 text-lg font-semibold font-['Bricolage-Grotesque'] text-primary">
                     Produtos
                 </h1>
                 <div class="checkboxes">
-                    <div class="check-option py-2 text-primary flex gap-3 justify-start items-center">
-                        <div class="checkbox w-[18px] h-[18px] bg-primary flex justify-center items-center rounded">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    @for (category of this.availableProductCategories; track $index) {
+                        <div class="check-option cursor-pointer py-2 text-primary flex gap-3 justify-start items-center"
+                        (click)="this.categorySelection(category)"
+                        >
+                            <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] duration-[.4s] flex justify-center items-center rounded"
+                            [ngClass]="{
+                                '!bg-primary': (getTheCategoryIndex(category) !== -1),
+                            }"
+                            >
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path *ngIf="(getTheCategoryIndex(category) !== -1)" d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span [ngClass]="{ 'text-primary/60': (getTheCategoryIndex(category) === -1) }">{{ category.name }}</span>
                         </div>
-                        <span>Camisetas</span>                            
-                    </div>
-                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
-                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
-                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg> -->
-                        </div>
-                        <span>Calções</span>                            
-                    </div>
-                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
-                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
-                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg> -->
-                        </div>
-                        <span>Underwear</span>                            
-                    </div>
+                    }
                 </div>
             </div>
             <div class="colors-section border-t border-[#F5F5F5]">
@@ -198,22 +196,22 @@
                     Cores
                 </h1>
                 <div class="checkboxes">
-                    <div class="check-option py-2 text-primary flex gap-3 justify-start items-center">
-                        <div class="checkbox w-[18px] h-[18px] bg-primary flex justify-center items-center rounded">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                    @for (color of this.availbaleProductColors; track $index) {
+                        <div class="check-option cursor-pointer py-2 text-primary flex gap-3 justify-start items-center"
+                        (click)="this.colorSelection(color)"
+                        >
+                            <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] duration-[.4s] flex justify-center items-center rounded"
+                            [ngClass]="{
+                                '!bg-primary': (getTheColorIndex(color) !== -1),
+                            }"
+                            >
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path *ngIf="(getTheColorIndex(color) !== -1)" d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <span [ngClass]="{ 'text-primary/60': (getTheColorIndex(color) === -1) }">{{ color.name }}</span>
                         </div>
-                        <span>Preto</span>                            
-                    </div>
-                    <div class="check-option py-2 text-primary/60 flex gap-3 justify-start items-center">
-                        <div class="checkbox w-[18px] h-[18px] bg-[#EFEFEF] flex justify-center items-center rounded">
-                            <!-- <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10 3L4.5 8.5L2 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg> -->
-                        </div>
-                        <span>Branco</span>                            
-                    </div>
+                    }
                 </div>
             </div>
             <div class="sizes-section border-t border-[#F5F5F5]">
@@ -221,41 +219,18 @@
                     Tamanhos
                 </h1>
                 <div class="chips flex flex-wrap gap-2 justify-start items-center">
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-primary text-center px-4 py-2 rounded-full text-sm text-white font-bold font-['Bricolage-Grotesque']">
-                            Todos
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            XS
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            S
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            M
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            L
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            XL
-                        </button>
-                    </div>
-                    <div class="chip w-fit flex justify-center items-center">
-                        <button class="bg-[#EFEFEF] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']">
-                            XXL
-                        </button>
-                    </div>
+                    @for (size of this.availableProductSizes; track $index) {
+                        <div class="chip w-fit flex justify-center items-center">
+                            <button class="text-center px-4 py-2 duration-[.4s] bg-[#EFEFEF] text-primary/60 rounded-full text-sm font-['Bricolage-Grotesque']"
+                            (click)="this.sizeSelection(size)"
+                            [ngClass]="{
+                                '!bg-primary !text-white font-bold': this.getTheSizeIndex(size) !== -1,
+                            }"
+                            >
+                                {{ size.name }}
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
             <div class="price-section border-t border-[#F5F5F5]">
@@ -263,21 +238,23 @@
                     Compre por preços
                 </h1>
                 <div class="priceRange input flex flex-col gap-y-3"> 
-                    <div class="input-container relative bg-red-400 flex">
+                    <div class="input-container relative flex">
                         <input type="range"
                         name="priceRange"
                         class="promotion-range relative w-full top-0"
                         formControlNames="priceRange"
+                        [min]="minimumValue"
+                        [max]="maximumValue"
                         [(ngModel)]="priceRangeValue"
                         id="priceRange"
                         >
-                        <div class="input-track absolute top-0 bg-black h-full"
-                        [style.width.%]="priceRangeValue()"
-                        ></div>
+                        <!-- <div class="input-track z-[1] absolute top-0 bg-black h-full"
+                        [style.width.%]="(priceRangeValue() * 100 / maximumValue)"
+                        ></div> -->
                     </div>
                     <div class="number-preview flex justify-between items-center mt-6">
-                        <span class="text-black">{{ priceRangeValue() }}</span>
-                        <span class="text-black">100</span>
+                        <span class="text-black">{{ priceRangeValue() | replaceBy }}</span>
+                        <span class="text-black">{{ maximumValue | replaceBy }}</span>
                     </div>
                 </div>
             </div>

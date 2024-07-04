@@ -3,6 +3,9 @@ import { Product } from "@core/data/models/product.model";
 
 interface Checkout{
     quantity: number,
+    colorIndex: number,
+    promotionalPrice: boolean,
+    sizeIndex: number,
     product: Product
 }
 
@@ -17,13 +20,32 @@ export class ShoppingBagService implements OnInit{
     private products: Checkout[] = [];
 
     ngOnInit(): void {
-        // this.getSubTotal();
+        
     }
 
-    addItem(product: Product): void{
-        let theItem = this.products.find(item => item.product.id === product.id);
-        if(theItem) return;
-        this.products.push({ quantity: 1, product: product });
+    addItem(product: Product, options: { promotionalPrice: boolean, selectedColorIndex: number, selectedSize: number, quantity: number } = { promotionalPrice: false, selectedColorIndex: 0, selectedSize: 0, quantity: 1 } ): void{
+        let theItemIndex = this.products.findIndex(item => item.product.id === product.id);
+        if(theItemIndex > -1){
+
+            this.products[theItemIndex] = {
+                quantity: options.quantity,
+                colorIndex: options.selectedColorIndex,
+                promotionalPrice: options.promotionalPrice,
+                sizeIndex: options.selectedSize,
+                product: product
+            };
+            
+        } else {
+
+            this.products.push({
+                quantity: options.quantity,
+                colorIndex: options.selectedColorIndex,
+                promotionalPrice: options.promotionalPrice,
+                sizeIndex: options.selectedSize,
+                product: product
+            });
+
+        }
         this.items.set(this.products);
 
         this.getSubTotal();

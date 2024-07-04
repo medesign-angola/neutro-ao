@@ -41,6 +41,7 @@ export interface Product{
     inStock: boolean,
     bestSeller: boolean,
     highlighted: boolean,
+    isInShoppingBag: boolean,
     categories: productCategory[],
     gender: productGenderEnum,
     promotionalPrice: number,

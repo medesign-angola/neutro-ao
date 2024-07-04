@@ -34,17 +34,6 @@ export class ProductsComponent implements OnInit, OnChanges, AfterViewInit {
     this.filterProducts(this.activeCategoryIndex);
   }
 
-  translatorFromSlug(item: productGenderEnum): string{
-    switch(item){
-      case productGenderEnum.MAN:
-        return 'Homem';
-      case productGenderEnum.WOMAN:
-        return 'Mulher';
-      default:
-        return 'Outro';
-    }
-  }
-
   filterProducts(genderIndex?: number){
     this.displayableProducts = [];
     this.displayableProducts = (typeof(genderIndex) == 'undefined' || genderIndex === -1) ? this.productsArray : this.getProductsWithGender(genderIndex);

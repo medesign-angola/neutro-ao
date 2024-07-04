@@ -6,17 +6,19 @@ import { ProductsComponent } from './components/containers/products.component';
 import { SharedModule } from '@shared/shared.module';
 import { ProductsContainerComponent } from './components/views/products-container/products-container.component';
 import { FormsModule } from '@angular/forms';
+import { GenderTranslationPipe } from './pipes/gender-translation.pipe';
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
-    ProductsContainerComponent
+    ProductsContainerComponent,
   ],
   imports: [
     SharedModule,
+    GenderTranslationPipe,
     ProductsRoutingModule,
     FormsModule
-  ]
+  ],
 })
 export class ProductsModule { }

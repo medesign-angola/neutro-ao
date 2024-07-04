@@ -16,6 +16,7 @@ import { NewDimensionComponent } from './components/views/new-dimension/new-dime
 import { ProductsComponent } from './components/views/products/products.component';
 import { SeekExcellenceComponent } from './components/views/seek-excellence/seek-excellence.component';
 import { ShareMomentsComponent } from './components/views/share-moments/share-moments.component';
+import { GenderTranslationPipe } from '../products/pipes/gender-translation.pipe';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { ShareMomentsComponent } from './components/views/share-moments/share-mo
     HomeRoutingModule,
     AppearOnMobileDirective,
     AppearOnDesktopDirective,
-    NgOptimizedImage
+    NgOptimizedImage,
+    GenderTranslationPipe
   ]
 })
 export class HomeModule { }

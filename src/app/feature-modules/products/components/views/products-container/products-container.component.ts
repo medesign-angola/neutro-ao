@@ -47,14 +47,14 @@ implements OnInit, OnChanges, AfterViewInit {
 
   // filters
     // Gender
-  selectedGender: number = -1;
+  selectedGenders: productGenderEnum[] = [];
   availableGenders: productGenderEnum[] = [
     productGenderEnum.MAN,
     productGenderEnum.WOMAN
   ]
 
     // Product Categories
-  selectedCategoriesId: number[] = [];
+  selectedCategories: productCategory[] = [];
   availableProductCategories: productCategory[] = [
     {
       name: 'Camiseta',
@@ -71,7 +71,7 @@ implements OnInit, OnChanges, AfterViewInit {
   ];
 
     // Product Colors
-  selectedColorsId: number[] = [];
+  selectedColors: productColor[] = [];
   availbaleProductColors: productColor[] = [
     {
       name: 'Preto',
@@ -84,7 +84,7 @@ implements OnInit, OnChanges, AfterViewInit {
   ];
 
     // Product Sizes
-  selectedSizesId: number[] = [];
+  selectedSizes: productSize[] = [];
   availableProductSizes: productSize[] = [
     { name: 'XS' },
     { name: 'S' },
@@ -95,6 +95,8 @@ implements OnInit, OnChanges, AfterViewInit {
   ];
   
     // Product Price Range
+  minimumValue: number = 10000;
+  maximumValue: number = 1000000;
   priceRangeValue = signal(0);
 
   constructor(
@@ -183,6 +185,87 @@ implements OnInit, OnChanges, AfterViewInit {
       bodyElement.style.height = 'auto';
       bodyElement.style.overflow = 'auto';
     }
+  }
+
+  // ############################################
+
+  getTheGenderIndex(gender: productGenderEnum): number{
+    let hasGender = this.selectedGenders.findIndex((item, index) => item === gender);
+    return hasGender;
+  }
+
+  genderSelection(gender: productGenderEnum){
+    let theIndex = this.getTheGenderIndex(gender);
+    if(theIndex !== -1){
+      this.removeSelectedGender(theIndex);
+    } else {
+      this.selectedGenders.push(gender);
+    }
+  }
+
+  removeSelectedGender(genderIndex: number){
+    this.selectedGenders.splice(genderIndex, 1);
+  }
+
+  
+  // ############################################
+  
+  getTheCategoryIndex(category: productCategory): number{
+    let hasCategory = this.selectedCategories.findIndex((item, index) => item.slug === category.slug);
+    return hasCategory;
+  }
+
+  categorySelection(category: productCategory){
+    let theIndex = this.getTheCategoryIndex(category);
+    if(theIndex !== -1){
+      this.removeSelectedCategory(theIndex);
+    } else {
+      this.selectedCategories.push(category);
+    }
+  }
+
+  removeSelectedCategory(categoryIndex: number){
+    this.selectedCategories.splice(categoryIndex, 1);
+  }
+
+  // ############################################
+  
+  getTheColorIndex(color: productColor): number{
+    let hasColor = this.selectedColors.findIndex((item, index) => item.name === color.name);
+    return hasColor;
+  }
+
+  colorSelection(color: productColor){
+    let theIndex = this.getTheColorIndex(color);
+    if(theIndex !== -1){
+      this.removeSelectedColor(theIndex);
+    } else {
+      this.selectedColors.push(color);
+    }
+  }
+
+  removeSelectedColor(colorIndex: number){
+    this.selectedColors.splice(colorIndex, 1);
+  }
+
+  // ############################################
+  
+  getTheSizeIndex(size: productSize): number{
+    let hasSize = this.selectedSizes.findIndex((item, index) => item.name === size.name);
+    return hasSize;
+  }
+
+  sizeSelection(size: productSize){
+    let theIndex = this.getTheSizeIndex(size);
+    if(theIndex !== -1){
+      this.removeSelectedSize(theIndex);
+    } else {
+      this.selectedSizes.push(size);
+    }
+  }
+
+  removeSelectedSize(sizeIndex: number){
+    this.selectedSizes.splice(sizeIndex, 1);
   }
 
 }

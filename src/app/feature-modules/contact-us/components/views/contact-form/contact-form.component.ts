@@ -16,8 +16,6 @@ export enum ContactUsResponseEnum{
   styleUrl: './contact-form.component.css'
 })
 export class ContactFormComponent implements OnInit {
-  termsAccepted = signal(false);
-
   private apiService = inject(API);
 
   contactUsFormGroup: any;
@@ -42,28 +40,32 @@ export class ContactFormComponent implements OnInit {
     let contactFormData = new FormData();
     contactFormData.append('name', this.contactUsFormGroup.get('name').value)
     contactFormData.append('email', this.contactUsFormGroup.get('email').value)
-    contactFormData.append('subject', '')
+    contactFormData.append('subject', 'Mensagem de um visitante do Site')
     contactFormData.append('message', this.contactUsFormGroup.get('message').value)
 
+    this.isSendingTheEmail.next(true);
     this.apiService.contactUs(contactFormData).subscribe({
       next: (response) => {
         this.isSendingTheEmail.next(false);
         if(response.code === ContactUsResponseEnum.OK){
           this.contactUsFormGroup.reset();
           this.showEmailSentMessage.next(true);
-          // setTimeout(() => {
-          //   this.showEmailSentMessage.next(false);
-          // }, 3000);
+          setTimeout(() => {
+            this.showEmailSentMessage.next(false);
+          }, 3000);
         }
 
       },
       error: (error) => {
-        console.log(error),
         this.showErrorMessage.next(true);
         setTimeout(() => {
           this.showErrorMessage.next(false);
         }, 3000);
+        this.isSendingTheEmail.next(false);
       },
+      complete: () => {
+        this.isSendingTheEmail.next(false);
+      }
     });
   }
 

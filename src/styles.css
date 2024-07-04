@@ -76,13 +76,13 @@
 
 @font-face {
     font-family: 'Bricolage-Grotesque';
-    src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_Condensed-Bold.ttf');
+    src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_72pt-Bold.ttf');
     font-weight: 700;
 }
 
 @font-face {
     font-family: 'Bricolage-Grotesque';
-    src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_Condensed-ExtraBold.ttf');
+    src: url('assets/fonts/bricolage_grotesque/BricolageGrotesque_72pt-ExtraBold.ttf');
     font-weight: 800;
 }
 

@@ -15,6 +15,9 @@ export class ProductCardComponent implements OnInit, OnChanges {
   productCardSizeEnum = ProductCardSizeEnum;
 
   private shoppingBag = inject(ShoppingBagService);
+  activeColor: number = 0;
+  selectedSize: number = 0;
+  quantity: number = 1;
 
   ngOnInit(): void {
     
@@ -25,7 +28,8 @@ export class ProductCardComponent implements OnInit, OnChanges {
   }
 
   addShoppingCart(product: Product){
-    this.shoppingBag.addItem(product);
+    this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
+    this.product.isInShoppingBag = true;
   }
 
 }

@@ -62,6 +62,7 @@ export class Transformer{
                 price: item.acf.preco,
                 inStock: item.acf.disponivel_em_stock,
                 highlighted: item.acf.destaque,
+                isInShoppingBag: false,
                 bestSeller: item.acf.incluir_nos_mais_vendidos,
                 onelineObservation: item.acf.observacao_de_linha_unica,
                 promotionalPrice: 0,

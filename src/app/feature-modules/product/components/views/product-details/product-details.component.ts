@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Product, colorRepresentionalImage, productColor, productSize } from '@core/data/models/product.model';
+import { ShoppingBagService } from '@core/services/shopping-bag.service';
 
 @Component({
   selector: 'app-product-details',
@@ -11,8 +12,12 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   activeColor: number = 0;
   imagesArrayOfActiveColor: productColor[] = [];
 
-  selectedSizes: productSize[] = [];
-  quantitiesPerSelection: { size: productSize, quantity: number }[] = [];
+  private shoppingBag = inject(ShoppingBagService);
+
+  // selectedSizes: productSize[] = [];
+  selectedSize: number = 0;
+  quantity: number = 1;
+  // quantitiesPerSelection: { size: productSize, quantity: number }[] = [];
 
   @ViewChild('tabContainerElementRef') tabContainerElementRef!: ElementRef<HTMLElement>;
 
@@ -41,30 +46,41 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
     this.imagesArrayOfActiveColor = [ this.theProduct.colors[this.activeColor] ];
   }
 
-  selectSizeIfNotExists(size: productSize){
-    let sizeIndex = this.getTheIndex(size, true);
-    if(sizeIndex !== -1){
-      this.selectedSizes.splice(sizeIndex, 1);
-      let theQuantitySpecification = this.quantitiesPerSelection.findIndex(item => item.size.name === size.name);
-      this.quantitiesPerSelection.splice(theQuantitySpecification, 1);
-      return;
-    }
-    this.selectedSizes.push(size);
-    this.quantitiesPerSelection.push({ size: size, quantity: 1 });
+  selectSize(index: number){
+    this.selectedSize = index;
   }
 
-  getTheIndex(size: productSize, returnNumber: boolean = false): number{
-    let index = this.selectedSizes.findIndex(sizeItem => sizeItem.name === size.name);
-    return index;
+  addOrEditProductToShoppingBag(product: Product){
+    this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
+    this.theProduct.isInShoppingBag = true;
   }
 
-  increaseQuantity(itemIndex: number){
-    this.quantitiesPerSelection[itemIndex].quantity++;
+  // selectSizeIfNotExists(size: productSize){
+  //   let sizeIndex = this.getTheIndex(size, true);
+  //   if(sizeIndex !== -1){
+  //     this.selectedSizes.splice(sizeIndex, 1);
+  //     let theQuantitySpecification = this.quantitiesPerSelection.findIndex(item => item.size.name === size.name);
+  //     this.quantitiesPerSelection.splice(theQuantitySpecification, 1);
+  //     return;
+  //   }
+  //   this.selectedSizes.push(size);
+  //   this.quantitiesPerSelection.push({ size: size, quantity: 1 });
+  // }
+
+  // getTheIndex(size: productSize, returnNumber: boolean = false): number{
+  //   let index = this.selectedSizes.findIndex(sizeItem => sizeItem.name === size.name);
+  //   return index;
+  // }
+
+  increaseQuantity(){
+    // this.quantitiesPerSelection[itemIndex].quantity++;
+    this.quantity++;
   }
 
-  decreaseQuantity(itemIndex: number){
-    if(this.quantitiesPerSelection[itemIndex].quantity === 1) return;
-    this.quantitiesPerSelection[itemIndex].quantity--;
+  decreaseQuantity(){
+    // if(this.quantitiesPerSelection[itemIndex].quantity === 1) return;
+    // this.quantitiesPerSelection[itemIndex].quantity--;
+    this.quantity--;
   }
 
   selectTab(index: number){

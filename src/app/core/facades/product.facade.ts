@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { API } from "@core/api/api.service";
 import { Product } from "@core/data/models/product.model";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, map, Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -15,11 +15,26 @@ export class ProductFacade{
     }
 
     all(): Observable<Product[]>{
-        return this.api.getProducts();
+        if(this.products.getValue().length === 0)
+            return this.api.getProducts()
+            .pipe(
+                map((incomingProducts: Product[]) => {
+                    this.products.next(incomingProducts);
+                    return incomingProducts;
+                })
+            );
+        
+        return this.products.asObservable();
     }
 
-    productBySlug(productSlug: string): Observable<Product[]>{
-        return this.api.productBySlug(productSlug);
+    productBySlug(productSlug: string): Observable<Product[] | undefined>{
+        return this.all()
+        .pipe(
+            map((incomingProducts: Product[]) => {
+                let theProduct = incomingProducts.filter(item => item.slug === productSlug);
+                return theProduct;
+            })
+        )
     }
 
 }
