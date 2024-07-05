@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { API } from "@core/api/api.service";
-import { Product } from "@core/data/models/product.model";
+import { Product, productCategory, productGenderEnum } from "@core/data/models/product.model";
 import { BehaviorSubject, map, Observable } from "rxjs";
 
 @Injectable({
@@ -35,6 +35,14 @@ export class ProductFacade{
                 return theProduct;
             })
         )
+    }
+
+    categories(): Observable<productCategory[]>{
+        return this.api.getCategories();
+    }
+
+    genders(): Observable<productGenderEnum[]>{
+        return this.api.getGenders();
     }
 
 }

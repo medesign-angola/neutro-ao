@@ -2,6 +2,8 @@
     <div class="products pb-20" #productsSection>
         <app-products-container
         [productsArray]="allProducts"
+        [availableProductCategories]="this.productCategories"
+        [availableGenders]="this.productGenders"
         />
     </div>
 </div>

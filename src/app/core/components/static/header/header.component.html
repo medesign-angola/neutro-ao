@@ -50,8 +50,8 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
             <div class="menu-items hidden md-905:block">
                 <nav class="" #desktopNavbar>
                     <ul class="flex gap-x-8 justify-start items-center">
-                        <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'" class="text-base font-normal font-['Bricolage-Grotesque']" [ngClass]="{ 'text-primary': (this.themeService.menuTheme() === this.themeEnum.LIGHT), 'text-white': (this.themeService.menuTheme() === this.themeEnum.DARK) }">Homens</a></li>
-                        <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'" class="text-base font-normal font-['Bricolage-Grotesque']" [ngClass]="{ 'text-primary': (this.themeService.menuTheme() === this.themeEnum.LIGHT), 'text-white': (this.themeService.menuTheme() === this.themeEnum.DARK) }">Mulheres</a></li>
+                        <li><a [routerLink]="['/products']" [queryParams]="{ genders: 'man' }" [queryParamsHandling]="'merge'" class="text-base font-normal font-['Bricolage-Grotesque']" [ngClass]="{ 'text-primary': (this.themeService.menuTheme() === this.themeEnum.LIGHT), 'text-white': (this.themeService.menuTheme() === this.themeEnum.DARK) }">Homens</a></li>
+                        <li><a [routerLink]="['/products']" [queryParams]="{ genders: 'woman' }" [queryParamsHandling]="'merge'" class="text-base font-normal font-['Bricolage-Grotesque']" [ngClass]="{ 'text-primary': (this.themeService.menuTheme() === this.themeEnum.LIGHT), 'text-white': (this.themeService.menuTheme() === this.themeEnum.DARK) }">Mulheres</a></li>
                         <li
                         class="neutro-item py-10"
                         (mouseover)="this.openDesktopDropdown()"
@@ -218,8 +218,8 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
         <div class="limited-container pt-12">
             <nav>
                 <ul class="flex flex-col gap-y-6 justify-start items-start">
-                    <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'man' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Homens</a></li>
-                    <li><a [routerLink]="['/products']" [queryParams]="{ gender: 'woman' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Mulheres</a></li>
+                    <li><a [routerLink]="['/products']" [queryParams]="{ genders: 'man' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Homens</a></li>
+                    <li><a [routerLink]="['/products']" [queryParams]="{ genders: 'woman' }" [queryParamsHandling]="'merge'" (click)="this.closeMenu()" class=" text-3xl font-bold font-['Bricolage-Grotesque'] leading-[120%] tracking-[-0.64px]">Mulheres</a></li>
                     <li>
                         <a
                         (click)="this.toggleRightDropdown()"

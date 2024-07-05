@@ -2,7 +2,7 @@ import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, PLATFORM_ID, TransferState, inject, makeStateKey } from "@angular/core";
 import { PRODUCT_FIELDS } from "@core/data/constants/fields.contant";
-import { Product, ProductSlug } from "@core/data/models/product.model";
+import { Product, productCategory, productGenderEnum, ProductSlug } from "@core/data/models/product.model";
 import { Transformer } from "@core/data/transformer/transformer.class";
 import { Observable, map, of, tap } from "rxjs";
 import { environment } from "src/environments/environment.development";
@@ -72,6 +72,19 @@ export class API{
         // } else {
         //     return of([]);
         // }
+    }
+
+    getCategories(): Observable<productCategory[]>{
+        return this.http.get<productCategory[]>(`${ environment.backoffice }/wp-json/wp/v2/product-categories`);
+    }
+
+    getGenders(): Observable<productGenderEnum[]>{
+        return this.http.get<productGenderEnum[]>(`${ environment.backoffice }/wp-json/wp/v2/product-genres`)
+                        .pipe(
+                            map((incomingData: any[]) => {
+                                return Transformer.genders(incomingData);
+                            })
+                        );
     }
 
     subscribe(subscriber: any){

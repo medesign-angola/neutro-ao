@@ -133,12 +133,16 @@ export class SeekExcellenceComponent {
   }
 
   next(){
-    if(this.activeBiggerIndexItem === this.productDetailed[this.activeBiggerIndexItem].images.length - 1){
+    if(this.activeBiggerIndexItem === this.productDetailed.length - 1){
       return;
     }else{
       this.activeBiggerIndexItem++;
     }
     this.showImage(0);
+  }
+
+  activeProduct(){
+    return this.productDetailed[this.activeBiggerIndexItem]
   }
 
 }

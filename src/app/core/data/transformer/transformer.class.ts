@@ -11,47 +11,55 @@ export class Transformer{
             let productGender: productGenderEnum = (genders[0].slug === 'homem') ? productGenderEnum.MAN : productGenderEnum.WOMAN;
 
             let categories: productCategory[] = [];
-            item['product-categories'].forEach((category: any) => {
-                categories.push({
-                    name: category.name,
-                    slug: category.slug
-                });
-            });
-
-            let details: productDetail[] = [];
-            item.acf['detalhes_do_produto'].forEach((detail: any) => {
-                details.push({
-                    name: detail.nome_do_detalhe,
-                    description: detail.descricao_do_detalhe
-                })
-            });
-            
-            let sizes: productSize[] = [];
-            item.acf['tamanhos_do_produto'].forEach((size: any) => {
-                sizes.push({
-                    name: size.nome_do_tamanho
-                });
-            });
-
-            let colors: productColor[] = [];
-            item.acf['cores_do_produto'].forEach((color: any) => {
-
-                let colorRepresentationalImages: colorRepresentionalImage[] = [];
-                color['imagens_do_produto'].forEach((imageItem: any) => {
-                    const imagePathObject: ImagePath = {
-                        genericPath: imageItem['imagem'].url,
-                        allSizes: imageItem['imagem'].sizes
-                    }
-                    colorRepresentationalImages.push({
-                        imagePath: imagePathObject,
+            if(item['product-categories']){
+                item['product-categories'].forEach((category: any) => {
+                    categories.push({
+                        name: category.name,
+                        slug: category.slug
                     });
                 });
+            }
 
-                colors.push({
-                    name: color.nome_da_cor,
-                    representationalImages: colorRepresentationalImages
+            let details: productDetail[] = [];
+            if(item.acf['detalhes_do_produto']){
+                item.acf['detalhes_do_produto'].forEach((detail: any) => {
+                    details.push({
+                        name: detail.nome_do_detalhe,
+                        description: detail.descricao_do_detalhe
+                    })
                 });
-            });
+            }
+            
+            let sizes: productSize[] = [];
+            if(item.acf['tamanhos_do_produto']){
+                item.acf['tamanhos_do_produto'].forEach((size: any) => {
+                    sizes.push({
+                        name: size.nome_do_tamanho
+                    });
+                });
+            }
+
+            let colors: productColor[] = [];
+            if(item.acf['cores_do_produto']){
+                item.acf['cores_do_produto'].forEach((color: any) => {
+    
+                    let colorRepresentationalImages: colorRepresentionalImage[] = [];
+                    color['imagens_do_produto'].forEach((imageItem: any) => {
+                        const imagePathObject: ImagePath = {
+                            genericPath: imageItem['imagem'].url,
+                            allSizes: imageItem['imagem'].sizes
+                        }
+                        colorRepresentationalImages.push({
+                            imagePath: imagePathObject,
+                        });
+                    });
+    
+                    colors.push({
+                        name: color.nome_da_cor,
+                        representationalImages: colorRepresentationalImages
+                    });
+                });
+            }
 
 
             transformed.push({
@@ -74,6 +82,39 @@ export class Transformer{
             });
         });
         return transformed;
+    }
+
+    static genders(incoming: any[]): productGenderEnum[]{
+        let genderEnum = productGenderEnum;
+        let transformedData: productGenderEnum[] = [];
+        incoming.forEach(item => {
+            switch(item.slug){
+                case 'homem' || 'homens':
+                    transformedData.push(genderEnum.MAN);
+                    break;
+                case 'mulher' || 'mulheres':
+                    transformedData.push(genderEnum.WOMAN);
+                    break;
+                default:
+                    break;
+            }
+        })
+        return transformedData;
+    }
+
+    static slugfy(text: string): string{
+        let slug = text.toLowerCase();
+        
+        // Remove acentos e caracteres especiais
+        slug = slug.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        
+        // Substitui espaços e outros caracteres por hífens
+        slug = slug.replace(/[^a-z0-9]+/g, '-');
+    
+        // Remove hífens do início e do fim
+        slug = slug.replace(/^-+|-+$/g, '');
+        
+        return slug;
     }
 
 }

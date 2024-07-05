@@ -261,12 +261,12 @@
         </div>
         <div class="filter-modal-footer py-6 bg-white sticky bottom-0 flex justify-between items-center">
             <div class="clear-chip">
-                <button class="text-primary px-6 py-3 font-medium font-['Bricolage-Grotesque']">
+                <button (click)="cancel()" class="text-primary px-6 py-3 font-medium font-['Bricolage-Grotesque']">
                     Limpar todos
                 </button>
             </div>
             <div class="apply-chip ">
-                <button class="text-white bg-primary px-6 py-3 font-medium font-['Bricolage-Grotesque'] rounded-full">
+                <button (click)="apply()" class="text-white bg-primary px-6 py-3 font-medium font-['Bricolage-Grotesque'] rounded-full">
                     Aplicar
                 </button>
             </div>

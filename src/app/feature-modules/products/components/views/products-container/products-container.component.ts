@@ -3,6 +3,8 @@ import { Product, productCategory, productColor, productGenderEnum, productSize 
 import { OrderByEnum } from '../../../enums/order-by.enum';
 import { isPlatformBrowser } from '@angular/common';
 import { ModalSupporter } from '@core/data/classes/modal.class';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Transformer } from '@core/data/transformer/transformer.class';
 
 interface OrderBy{
   order: string,
@@ -48,14 +50,14 @@ implements OnInit, OnChanges, AfterViewInit {
   // filters
     // Gender
   selectedGenders: productGenderEnum[] = [];
-  availableGenders: productGenderEnum[] = [
+  @Input() availableGenders: productGenderEnum[] = [
     productGenderEnum.MAN,
     productGenderEnum.WOMAN
   ]
 
     // Product Categories
   selectedCategories: productCategory[] = [];
-  availableProductCategories: productCategory[] = [
+  @Input() availableProductCategories: productCategory[] = [
     {
       name: 'Camiseta',
       slug: 'camisetas'
@@ -96,11 +98,12 @@ implements OnInit, OnChanges, AfterViewInit {
   
     // Product Price Range
   minimumValue: number = 10000;
-  maximumValue: number = 1000000;
-  priceRangeValue = signal(0);
+  maximumValue: number = 100000;
+  priceRangeValue = signal(this.minimumValue);
 
   constructor(
     private changeDetectorRef: ChangeDetectorRef,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: any
   ){
     super();
@@ -121,13 +124,22 @@ implements OnInit, OnChanges, AfterViewInit {
 
   orderBy(orderIndex: number){
     this.activeOrderByIndex = orderIndex;
-
     switch(this.orderOptions[orderIndex].ref){
       case OrderByEnum.MOST_RECENT:
-        this.displayableProducts = this.productsArray;
+        this.displayableProducts = [...this.productsArray];
         break;
       case OrderByEnum.ALPHABET:
-        this.displayableProducts = this.productsArray;
+        this.displayableProducts.sort((a, b) => {
+          if(a.name < b.name){
+            return -1;
+            
+          } else if (a.name > b.name) {
+            return 1;
+
+          } else {
+            return 0;
+          }
+        });
         break;
       default:
         break;
@@ -266,6 +278,47 @@ implements OnInit, OnChanges, AfterViewInit {
 
   removeSelectedSize(sizeIndex: number){
     this.selectedSizes.splice(sizeIndex, 1);
+  }
+
+  cancel(){
+    this.selectedGenders = [];
+    this.selectedCategories = [];
+    this.selectedColors = [];
+    this.selectedSizes = [];
+    this.priceRangeValue.update(val => val = this.minimumValue);
+  }
+
+  apply(){
+    let queryParams: any = {};
+
+    if(this.selectedGenders.length > 0){
+      queryParams.genders = this.selectedGenders.join(',')
+    }
+    if(this.selectedCategories.length > 0){
+      queryParams.categories = this.selectedCategories.map(category => category.slug).join(',');
+    }
+    if(this.selectedColors.length > 0){
+      queryParams.colors = this.selectedColors.map(color => Transformer.slugfy(color.name)).join(',');
+    }
+    if(this.selectedSizes.length > 0){
+      queryParams.sizes = this.selectedSizes.map(size => Transformer.slugfy(size.name)).join(',');
+    }
+    if(this.priceRangeValue() > this.minimumValue){
+      queryParams.max_price = this.priceRangeValue().toString();
+    }
+
+    if(!(Object.keys(queryParams).length > 0)){
+      this.router.navigate(['/products']);
+      
+    } else {
+      this.router.navigate(['/products'], {
+        queryParams: queryParams,
+        queryParamsHandling: 'merge',
+      });
+    }
+    
+    this.closeFilterModal();
+
   }
 
 }
