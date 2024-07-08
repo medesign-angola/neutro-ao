@@ -1,5 +1,6 @@
 export const environment = {
-    backoffice: 'http://neutro-ao.host',
+    backoffice: 'http://neutro-ao.neutro.co.ao',
+    // backoffice: 'http://neutro-ao.host',
     contactApiUrl: 'https://mailme.neutro.co.ao',
     newsletter: {
         clientKey: '6e091121600fb17942bef52852f5d0ee4314fa96',
