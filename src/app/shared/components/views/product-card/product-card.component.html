@@ -11,6 +11,50 @@
         [size]="size"
         />
     </div>
+    <div class="checkout-aditional-details duration-[.4s] overflow-hidden flex flex-col gap-4 justify-start"
+    [ngClass]="{
+        'h-[125px]': this.openCheckout(),
+        'h-0': !this.openCheckout(),
+    }"
+    >
+        <div class="product-colors">
+            <div class="boxes flex gap-4 justify-start items-center">
+                @for (item of product.colors; track $index) {
+                    <div class="box cursor-pointer overflow-hidden w-[72px] h-[72px] rounded-lg border-[1.5px] bg-[#F5F5F5]"
+                    (click)="changeActiveColor($index, product)"
+                    [ngClass]="{
+                        ' border-black': $index === this.activeColor
+                    }"
+                    >
+                        <img
+                        class="w-auto h-full mx-auto"
+                        [src]="item.representationalImages[0].imagePath.genericPath"
+                        alt="">
+                        <!-- [ngSrc]="item.representationalImages[0].imagePath.genericPath"
+                        [width]="item.representationalImages[0].imagePath.allSizes?.['large-width']"
+                        [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']" -->
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="product-sizes">
+            <div class="chips flex flex-wrap gap-2 justify-start items-center">
+                @for (size of product.sizes; track $index) {
+                    <div class="chip w-fit flex justify-center items-center">
+                        <button
+                        (click)="selectSize($index, product)"
+                        class="bg-[#EFEFEF] duration-[.3s] text-center px-4 py-2 rounded-full text-sm text-primary/60 font-regular font-['Bricolage-Grotesque']"
+                        [ngClass]="{
+                            'selected': $index == this.selectedSize
+                        }"
+                        >
+                            {{ size.name }}
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
     <div class="card-body">
         <div class="product-name mb-1">
             <h3 class="limited-text one-line text-base text-primary font-['Bricolage-Grotesque']">
@@ -34,15 +78,30 @@
         <div class="shopping-bag">
             <a
             class="cursor-pointer duration-[.4s] p-2 rounded-full block"
-            (click)="addShoppingCart(product)"
+            (click)="openCheckoutSelection()"
             [ngClass]="{
                 'bg-black': product.isInShoppingBag,
                 'bg-white': !product.isInShoppingBag,
             }"
             >
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.332 7.50008V5.00008C13.332 3.15913 11.8396 1.66675 9.99868 1.66675C8.15773 1.66675 6.66535 3.15913 6.66535 5.00008V7.50008M2.99202 8.62672L2.49202 13.9601C2.34985 15.4765 2.27877 16.2347 2.53039 16.8203C2.75143 17.3348 3.13878 17.7601 3.63036 18.0282C4.18995 18.3334 4.95149 18.3334 6.47455 18.3334H13.5228C15.0459 18.3334 15.8074 18.3334 16.367 18.0282C16.8586 17.7601 17.2459 17.3348 17.467 16.8203C17.7186 16.2347 17.6475 15.4765 17.5053 13.9601L17.0053 8.62672C16.8853 7.3462 16.8253 6.70595 16.5373 6.22188C16.2837 5.79557 15.909 5.45434 15.4608 5.24162C14.952 5.00008 14.3089 5.00008 13.0228 5.00008L6.97455 5.00008C5.68842 5.00008 5.04536 5.00008 4.53653 5.24162C4.0884 5.45434 3.71369 5.79557 3.46006 6.22188C3.17209 6.70594 3.11206 7.3462 2.99202 8.62672Z" [attr.stroke]="(product.isInShoppingBag) ? 'white' : 'black'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+                @if(product.isInShoppingBag){
+                    <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_3132_5401)">
+                        <path d="M13.5248 19.318C15.0478 19.318 15.8094 19.318 16.3689 19.0128C16.8605 18.7448 17.2479 18.3194 17.4689 17.8049C17.7205 17.2193 17.6495 16.4611 17.5073 14.9447L17.0073 9.61134C16.8872 8.33082 16.8272 7.69056 16.5392 7.2065C16.2856 6.78019 15.9109 6.43896 15.4628 6.22624C14.954 5.9847 14.3109 5.9847 13.0248 5.9847L6.97651 5.9847C5.69037 5.9847 5.04731 5.9847 4.53848 6.22624C4.09035 6.43896 3.71564 6.78019 3.46202 7.2065C3.17404 7.69056 3.11402 8.33082 2.99397 9.61134L2.49397 14.9447C2.35181 16.4611 2.28072 17.2193 2.53234 17.8049C2.75338 18.3194 3.14073 18.7448 3.63232 19.0128C4.1919 19.318 4.95344 19.318 6.47651 19.318H13.5248Z" fill="white"/>
+                        <path d="M13.334 8.4847V5.9847C13.334 4.14375 11.8416 2.65137 10.0006 2.65137C8.15968 2.65137 6.6673 4.14375 6.6673 5.9847V8.4847M2.99397 9.61134L2.49397 14.9447C2.35181 16.4611 2.28072 17.2193 2.53234 17.8049C2.75338 18.3194 3.14073 18.7448 3.63232 19.0128C4.1919 19.318 4.95344 19.318 6.47651 19.318H13.5248C15.0478 19.318 15.8094 19.318 16.3689 19.0128C16.8605 18.7448 17.2479 18.3194 17.4689 17.8049C17.7205 17.2193 17.6495 16.4611 17.5073 14.9447L17.0073 9.61134C16.8872 8.33082 16.8272 7.69056 16.5392 7.2065C16.2856 6.78019 15.9109 6.43896 15.4628 6.22624C14.954 5.9847 14.3109 5.9847 13.0248 5.9847L6.97651 5.9847C5.69037 5.9847 5.04731 5.9847 4.53848 6.22624C4.09035 6.43896 3.71564 6.78019 3.46202 7.2065C3.17404 7.69056 3.11402 8.33082 2.99397 9.61134Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_3132_5401">
+                        <rect width="20" height="20" fill="white" transform="translate(0 0.984619)"/>
+                        </clipPath>
+                        </defs>
+                    </svg>
+
+                } @else {
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.332 7.50008V5.00008C13.332 3.15913 11.8396 1.66675 9.99868 1.66675C8.15773 1.66675 6.66535 3.15913 6.66535 5.00008V7.50008M2.99202 8.62672L2.49202 13.9601C2.34985 15.4765 2.27877 16.2347 2.53039 16.8203C2.75143 17.3348 3.13878 17.7601 3.63036 18.0282C4.18995 18.3334 4.95149 18.3334 6.47455 18.3334H13.5228C15.0459 18.3334 15.8074 18.3334 16.367 18.0282C16.8586 17.7601 17.2459 17.3348 17.467 16.8203C17.7186 16.2347 17.6475 15.4765 17.5053 13.9601L17.0053 8.62672C16.8853 7.3462 16.8253 6.70595 16.5373 6.22188C16.2837 5.79557 15.909 5.45434 15.4608 5.24162C14.952 5.00008 14.3089 5.00008 13.0228 5.00008L6.97455 5.00008C5.68842 5.00008 5.04536 5.00008 4.53653 5.24162C4.0884 5.45434 3.71369 5.79557 3.46006 6.22188C3.17209 6.70594 3.11206 7.3462 2.99202 8.62672Z" [attr.stroke]="(product.isInShoppingBag) ? 'black' : 'black'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                }
             </a>
         </div>
     </div>

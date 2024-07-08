@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, inject } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, inject, signal } from '@angular/core';
 import { Product } from '@core/data/models/product.model';
 import { ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ProductCardSizeEnum } from '@shared/enum/product-card-size.enum';
@@ -19,6 +19,8 @@ export class ProductCardComponent implements OnInit, OnChanges {
   selectedSize: number = 0;
   quantity: number = 1;
 
+  openCheckout = signal(false);
+
   ngOnInit(): void {
     
   }
@@ -30,6 +32,47 @@ export class ProductCardComponent implements OnInit, OnChanges {
   addShoppingCart(product: Product){
     this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
     this.product.isInShoppingBag = true;
+  }
+
+  removeProductFromShoppingCart(product: Product){
+    this.shoppingBag.removeItem(product);
+    product.isInShoppingBag = false;
+    
+    this.activeColor = 0;
+    this.selectedSize = 0;
+  }
+
+  
+  changeActiveColor(index: number, product: Product){
+    this.activeColor = index;
+    this.addShoppingCart(product);
+  }
+
+  selectSize(index: number, product: Product){
+    this.selectedSize = index;
+    this.addShoppingCart(product);
+  }
+
+  openCheckoutSelection(){
+    if(this.openCheckout() && this.product.isInShoppingBag){
+      this.removeProductFromShoppingCart(this.product);
+      this.closeCheckoutSelection();
+
+    } else if(this.openCheckout() && !this.product.isInShoppingBag){
+      this.closeCheckoutSelection();
+      
+    } else {
+      if(this.product.colors.length === 1 && this.product.sizes.length === 1){
+        this.addShoppingCart(this.product);
+        return;
+      }
+      this.openCheckout.update(val => val = true);
+    }
+
+  }
+
+  closeCheckoutSelection(){
+    this.openCheckout.update(val => val = false);
   }
 
 }
