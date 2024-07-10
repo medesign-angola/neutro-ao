@@ -4,7 +4,7 @@ import { MobileBannerCarouselFunctionalities } from '@core/data/classes/mobile-b
 import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 
 const IMAGES_ELEMENT_INDEX = 0;
-const CAROUSEL_SLIDER_INTERVAL = 4;
+const CAROUSEL_SLIDER_INTERVAL = 2;
 
 @Component({
   selector: 'app-mobile-banner-carousel',
@@ -52,19 +52,19 @@ implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   override next(){
     (this.activeIndex === this.bannerItems.length - 1) ? this.activeIndex = 0 : this.activeIndex++;
     this.scrollToActiveIndex(this.activeIndex);
-    // this.restartAutomatizedSlidingAfter();
+    this.restartAutomatizedSlidingAfter();
   }
 
   override prev(){
     (this.activeIndex === 0) ? (this.activeIndex = this.bannerItems.length - 1) : this.activeIndex--;
     this.scrollToActiveIndex(this.activeIndex);
-    // this.restartAutomatizedSlidingAfter();
+    this.restartAutomatizedSlidingAfter();
   }
 
   slideTo(index: number){
     this.activeIndex = index;
     this.scrollToActiveIndex(this.activeIndex);
-    // this.restartAutomatizedSlidingAfter();
+    this.restartAutomatizedSlidingAfter();
   }
   
   scrollToActiveIndex(activeIndex: number){
@@ -77,11 +77,11 @@ implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   startAutomatizedSliding(intervalTimerInSeconds: number = CAROUSEL_SLIDER_INTERVAL){
     if(!isPlatformBrowser(this.platformId)) return;
 
-    this.ngZone.runOutsideAngular(() => {
+    // this.ngZone.runOutsideAngular(() => {
       this.carouselInterval = setInterval(() => {
         this.next();
       }, intervalTimerInSeconds * 1000);
-    });
+    // });
 
   }
 
