@@ -1,7 +1,8 @@
 import { ImagePath } from "./image-path.model"
 
 export interface productSize{
-    name: string
+    name: string,
+    availableForColors: string[]
 }
 
 export interface colorRepresentionalImage{

@@ -17,10 +17,10 @@ export class PresaleBeYourSelfComponent extends ModalSupporter implements OnInit
   @ViewChild('imagesContainerElement') imagesContainerElement!: ElementRef<HTMLElement>;
 
   sizes: productSize[] = [
-    { name: "S" },
-    { name: "M" },
-    { name: "L" },
-    { name: "XL" }
+    { name: "S", availableForColors: [] },
+    { name: "M", availableForColors: [] },
+    { name: "L", availableForColors: [] },
+    { name: "XL", availableForColors: [] }
   ];
 
   selectedSize: number = -1;

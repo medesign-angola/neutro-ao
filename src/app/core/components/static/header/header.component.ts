@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
 import { Product } from '@core/data/models/product.model';
-import { ShoppingBagService } from '@core/services/shopping-bag.service';
+import { CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ThemeService } from '@core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -127,12 +127,12 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     }
   }
 
-  increaseQuantity(product: Product){
-    this.shoppingBagService.increaseQuantity(product);
+  increaseQuantity(product: Product, options: CheckoutOptions){
+    this.shoppingBagService.increaseQuantity(product, options);
   }
 
-  decreaseQuantity(product: Product){
-    this.shoppingBagService.decreaseQuantity(product);
+  decreaseQuantity(product: Product, options: CheckoutOptions){
+    this.shoppingBagService.decreaseQuantity(product, options);
   }
 
 }

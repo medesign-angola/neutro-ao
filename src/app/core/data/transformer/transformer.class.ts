@@ -35,8 +35,17 @@ export class Transformer{
             let sizes: productSize[] = [];
             if(item.acf['tamanhos_do_produto']){
                 item.acf['tamanhos_do_produto'].forEach((size: any) => {
+                    let availableColors: string[] = [];
+
+                    if(size.disponibilidade_por_cor){
+                        size.disponibilidade_por_cor.forEach((color: any) => {
+                            availableColors.push(color.nome_da_cor);
+                        });
+                    }
+                    
                     sizes.push({
-                        name: size.nome_do_tamanho
+                        name: size.nome_do_tamanho,
+                        availableForColors: availableColors
                     });
                 });
             }

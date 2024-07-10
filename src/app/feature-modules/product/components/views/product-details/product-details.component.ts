@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Product, colorRepresentionalImage, productColor, productSize } from '@core/data/models/product.model';
-import { ShoppingBagService } from '@core/services/shopping-bag.service';
+import { CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
 
 @Component({
   selector: 'app-product-details',
@@ -15,7 +15,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   private shoppingBag = inject(ShoppingBagService);
 
   // selectedSizes: productSize[] = [];
-  selectedSize: number = 0;
+  selectedSize: number = -1;
   quantity: number = 1;
   // quantitiesPerSelection: { size: productSize, quantity: number }[] = [];
 
@@ -38,6 +38,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
 
   changeActiveColor(index: number){
     this.activeColor = index;
+    this.selectedSize = -1;
     this.imagesArrayOfActiveColor = [];
     this.fullfillImagesArrayOfActiveColor();
   }
@@ -47,39 +48,24 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   selectSize(index: number){
+    if(!this.isAvailableForActiveColor(this.theProduct.sizes[index])) return;
     this.selectedSize = index;
   }
 
-  addOrEditProductToShoppingBag(product: Product){
-    this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
-    this.theProduct.isInShoppingBag = true;
+  isAvailableForActiveColor(size: productSize): boolean{
+    return size.availableForColors.includes(this.theProduct.colors[this.activeColor].name);
   }
 
-  // selectSizeIfNotExists(size: productSize){
-  //   let sizeIndex = this.getTheIndex(size, true);
-  //   if(sizeIndex !== -1){
-  //     this.selectedSizes.splice(sizeIndex, 1);
-  //     let theQuantitySpecification = this.quantitiesPerSelection.findIndex(item => item.size.name === size.name);
-  //     this.quantitiesPerSelection.splice(theQuantitySpecification, 1);
-  //     return;
-  //   }
-  //   this.selectedSizes.push(size);
-  //   this.quantitiesPerSelection.push({ size: size, quantity: 1 });
-  // }
-
-  // getTheIndex(size: productSize, returnNumber: boolean = false): number{
-  //   let index = this.selectedSizes.findIndex(sizeItem => sizeItem.name === size.name);
-  //   return index;
-  // }
+  addOrEditProductToShoppingBag(product: Product){
+    if(!(this.selectedSize > -1)) return;
+    this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
+  }
 
   increaseQuantity(){
-    // this.quantitiesPerSelection[itemIndex].quantity++;
     this.quantity++;
   }
 
   decreaseQuantity(){
-    // if(this.quantitiesPerSelection[itemIndex].quantity === 1) return;
-    // this.quantitiesPerSelection[itemIndex].quantity--;
     this.quantity--;
   }
 
@@ -91,6 +77,14 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
 
     this.activeTab = index;
     this.openTab(index);
+  }
+
+  productIsOnShoppingBag(): boolean{
+    return this.shoppingBagProductIndex(this.theProduct, { promotionalPrice: (this.theProduct.promotionalPrice > 0) ? true  : false, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity}) > -1;
+  }
+
+  shoppingBagProductIndex(product: Product, options: CheckoutOptions ): number{
+    return this.shoppingBag.shoppingBagProductIndex(product, options);
   }
 
   openTab(index: number){

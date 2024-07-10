@@ -1,12 +1,19 @@
 import { Injectable, OnInit, Signal, WritableSignal, computed, signal } from "@angular/core";
 import { Product } from "@core/data/models/product.model";
 
-interface Checkout{
+export interface Checkout{
     quantity: number,
     colorIndex: number,
     promotionalPrice: boolean,
     sizeIndex: number,
     product: Product
+}
+
+export interface CheckoutOptions{
+    promotionalPrice: boolean,
+    selectedColorIndex: number,
+    selectedSize: number,
+    quantity: number
 }
 
 @Injectable({
@@ -23,36 +30,59 @@ export class ShoppingBagService implements OnInit{
         
     }
 
-    addItem(product: Product, options: { promotionalPrice: boolean, selectedColorIndex: number, selectedSize: number, quantity: number } = { promotionalPrice: false, selectedColorIndex: 0, selectedSize: 0, quantity: 1 } ): void{
-        let theItemIndex = this.products.findIndex(item => item.product.id === product.id);
-        if(theItemIndex > -1){
-
-            this.products[theItemIndex] = {
-                quantity: options.quantity,
-                colorIndex: options.selectedColorIndex,
-                promotionalPrice: options.promotionalPrice,
-                sizeIndex: options.selectedSize,
-                product: product
-            };
-            
+    addItem(product: Product, options: CheckoutOptions = { promotionalPrice: false, selectedColorIndex: 0, selectedSize: 0, quantity: 1 } ): void{
+        const theItemIndex = this.shoppingBagProductIndex(product, options);
+    
+        if (theItemIndex > -1) {
+            // Remove o produto se já existir com as mesmas características
+            product.isInShoppingBag = false;
+            this.removeItem(product, options);
         } else {
-
-            this.products.push({
-                quantity: options.quantity,
-                colorIndex: options.selectedColorIndex,
-                promotionalPrice: options.promotionalPrice,
-                sizeIndex: options.selectedSize,
-                product: product
-            });
-
+            // Verifica se existe algum produto com uma das características diferentes
+            const similarItemIndex = this.products.findIndex(p =>
+                p.product.id === product.id &&
+                (p.colorIndex === options.selectedColorIndex || p.sizeIndex === options.selectedSize)
+            );
+    
+            if (similarItemIndex > -1) {
+                // Adiciona uma nova linha para o produto com características diferentes
+                product.isInShoppingBag = true;
+                this.products.push({
+                    quantity: options.quantity,
+                    colorIndex: options.selectedColorIndex,
+                    promotionalPrice: options.promotionalPrice,
+                    sizeIndex: options.selectedSize,
+                    product: product
+                });
+            } else {
+                // Adiciona o produto pela primeira vez
+                product.isInShoppingBag = true;
+                this.products.push({
+                    quantity: options.quantity,
+                    colorIndex: options.selectedColorIndex,
+                    promotionalPrice: options.promotionalPrice,
+                    sizeIndex: options.selectedSize,
+                    product: product
+                });
+            }
         }
         this.items.set(this.products);
 
         this.getSubTotal();
     }
 
-    removeItem(product: Product): void{
-        let theItemIndex = this.products.findIndex(item => item.product.id === product.id);
+    shoppingBagProductIndex(product: Product, options: CheckoutOptions ): number{
+        const theItemIndex = this.products.findIndex(p =>
+            p.product.id === product.id &&
+            p.colorIndex === options.selectedColorIndex &&
+            p.sizeIndex === options.selectedSize
+        );
+        return theItemIndex;
+    }
+
+    removeItem(product: Product, options: CheckoutOptions): void{
+
+        let theItemIndex = this.shoppingBagProductIndex(product, options);
         if(theItemIndex === -1) return;
 
         this.products.splice(theItemIndex, 1);
@@ -61,8 +91,8 @@ export class ShoppingBagService implements OnInit{
         this.getSubTotal();
     }
 
-    increaseQuantity(product: Product){
-        let theItemIndex = this.products.findIndex(item => item.product.id === product.id);
+    increaseQuantity(product: Product, options: CheckoutOptions){
+        let theItemIndex = this.shoppingBagProductIndex(product, options);
         if(theItemIndex === -1) return;
 
         this.products[theItemIndex].quantity++;
@@ -70,10 +100,10 @@ export class ShoppingBagService implements OnInit{
         this.getSubTotal();
     }
 
-    decreaseQuantity(product: Product){
-        let theItemIndex = this.products.findIndex(item => item.product.id === product.id);
-        
+    decreaseQuantity(product: Product, options: CheckoutOptions){
+        let theItemIndex = this.shoppingBagProductIndex(product, options);
         if(theItemIndex === -1) return;
+
         if(this.products[theItemIndex].quantity === 1) return;
 
         this.products[theItemIndex].quantity--;

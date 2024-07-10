@@ -88,12 +88,12 @@ implements OnInit, OnChanges, AfterViewInit {
     // Product Sizes
   selectedSizes: productSize[] = [];
   availableProductSizes: productSize[] = [
-    { name: 'XS' },
-    { name: 'S' },
-    { name: 'M' },
-    { name: 'L' },
-    { name: 'XL' },
-    { name: 'XXL' },
+    { name: 'XS', availableForColors: [] },
+    { name: 'S', availableForColors: [] },
+    { name: 'M', availableForColors: [] },
+    { name: 'L', availableForColors: [] },
+    { name: 'XL', availableForColors: [] },
+    { name: 'XXL', availableForColors: [] },
   ];
   
     // Product Price Range

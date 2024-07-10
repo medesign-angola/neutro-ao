@@ -11,7 +11,7 @@
         [size]="size"
         />
     </div>
-    <div class="checkout-aditional-details duration-[.4s] overflow-hidden flex flex-col gap-4 justify-start"
+    <!-- <div class="checkout-aditional-details duration-[.4s] overflow-hidden flex flex-col gap-4 justify-start"
     [ngClass]="{
         'h-[125px]': this.openCheckout(),
         'h-0': !this.openCheckout(),
@@ -29,10 +29,10 @@
                         <img
                         class="w-auto h-full mx-auto"
                         [src]="item.representationalImages[0].imagePath.genericPath"
-                        alt="">
-                        <!-- [ngSrc]="item.representationalImages[0].imagePath.genericPath"
+                        [ngSrc]="item.representationalImages[0].imagePath.genericPath"
                         [width]="item.representationalImages[0].imagePath.allSizes?.['large-width']"
-                        [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']" -->
+                        [height]="item.representationalImages[0].imagePath.allSizes?.['large-height']"
+                        alt="">
                     </div>
                 }
             </div>
@@ -54,7 +54,7 @@
                 }
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="card-body">
         <div class="product-name mb-1">
             <h3 class="limited-text one-line text-base text-primary font-['Bricolage-Grotesque']">
@@ -75,7 +75,7 @@
                 {{ product.price | replaceBy }}
             </p>
         </div>
-        <div class="shopping-bag">
+        <!-- <div class="shopping-bag">
             <a
             class="cursor-pointer duration-[.4s] p-2 rounded-full block"
             (click)="openCheckoutSelection()"
@@ -103,6 +103,6 @@
                     </svg>
                 }
             </a>
-        </div>
+        </div> -->
     </div>
 </div>

@@ -34,13 +34,13 @@ export class ProductCardComponent implements OnInit, OnChanges {
     this.product.isInShoppingBag = true;
   }
 
-  removeProductFromShoppingCart(product: Product){
-    this.shoppingBag.removeItem(product);
-    product.isInShoppingBag = false;
+  // removeProductFromShoppingCart(product: Product){
+  //   this.shoppingBag.removeItem(product);
+  //   product.isInShoppingBag = false;
     
-    this.activeColor = 0;
-    this.selectedSize = 0;
-  }
+  //   this.activeColor = 0;
+  //   this.selectedSize = 0;
+  // }
 
   
   changeActiveColor(index: number, product: Product){
@@ -55,7 +55,7 @@ export class ProductCardComponent implements OnInit, OnChanges {
 
   openCheckoutSelection(){
     if(this.openCheckout() && this.product.isInShoppingBag){
-      this.removeProductFromShoppingCart(this.product);
+      // this.removeProductFromShoppingCart(this.product);
       this.closeCheckoutSelection();
 
     } else if(this.openCheckout() && !this.product.isInShoppingBag){

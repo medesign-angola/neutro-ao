@@ -102,7 +102,7 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
     
     if(!isPlatformBrowser(this.platformId)) return;
 
-    this.ngZone.runOutsideAngular(() => {
+    // this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
         
         this.carouselInterval = setInterval(() => {
@@ -110,7 +110,7 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
           this.goToNextItem(activeItemIndex, items);
         }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
       
-      }, delay * 1000);
+      // }, delay * 1000);
     });
   }
 
