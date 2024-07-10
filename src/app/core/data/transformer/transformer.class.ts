@@ -1,5 +1,7 @@
+import { CarouselItemsModel } from "../models/carousel-items.model";
 import { ImagePath } from "../models/image-path.model";
 import { Product, colorRepresentionalImage, productCategory, productColor, productDetail, productGenderEnum, productSize } from "../models/product.model";
+import { Testimonial } from "../models/testimonial.model";
 
 export class Transformer{
 
@@ -99,6 +101,38 @@ export class Transformer{
                     break;
             }
         })
+        return transformedData;
+    }
+
+    static testimonials(incoming: any[]): Testimonial[]{
+        let transformedData: Testimonial[] = [];
+
+        incoming.forEach(element => {
+            transformedData.push({
+                client: element.nome_do_cliente,
+                message: element.mensagem_do_cliente,
+                photo: {
+                    genericPath: element.imagem.url,
+                    allSizes: element.imagem.sizes
+                }
+            });
+        });
+
+        return transformedData;
+    }
+
+    static covers(incoming: any[]): CarouselItemsModel[]{
+        let transformedData: CarouselItemsModel[] = [];
+        incoming.forEach(element => {
+            transformedData.push({
+                alternativeDescription: element.descricao_alternativa,
+                isActive: false,
+                imagePath: {
+                    genericPath: element.imagem_de_capa.url,
+                    allSizes: element.imagem_de_capa.sizes,
+                },
+            });
+        });
         return transformedData;
     }
 

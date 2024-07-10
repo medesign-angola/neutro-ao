@@ -2,7 +2,9 @@ import { isPlatformBrowser, isPlatformServer } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Inject, Injectable, PLATFORM_ID, TransferState, inject, makeStateKey } from "@angular/core";
 import { PRODUCT_FIELDS } from "@core/data/constants/fields.contant";
+import { CarouselItemsModel } from "@core/data/models/carousel-items.model";
 import { Product, productCategory, productGenderEnum, ProductSlug } from "@core/data/models/product.model";
+import { Testimonial } from "@core/data/models/testimonial.model";
 import { Transformer } from "@core/data/transformer/transformer.class";
 import { Observable, map, of, tap } from "rxjs";
 import { environment } from "src/environments/environment.development";
@@ -85,6 +87,24 @@ export class API{
                                 return Transformer.genders(incomingData);
                             })
                         );
+    }
+
+    getTestimonials(): Observable<Testimonial[]>{
+        return this.http.get<Testimonial[]>(`${ environment.backoffice }/wp-json/wp/v2/testemunhos`)
+                        .pipe(
+                            map((incomingData: any[]) => {
+                                return Transformer.testimonials(incomingData);
+                            })
+                        )
+    }
+
+    getCovers(): Observable<CarouselItemsModel[]>{
+        return this.http.get<CarouselItemsModel[]>(`${ environment.backoffice }/wp-json/wp/v2/capas`)
+                        .pipe(
+                            map((incomingData: any[]) => {
+                                return Transformer.covers(incomingData);
+                            })
+                        )
     }
 
     subscribe(subscriber: any){

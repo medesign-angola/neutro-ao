@@ -29,10 +29,10 @@ implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.selectActiveTestimonialData();
+    // console.log(this.testimonials);
   }
 
-  selectActiveTestimonialData(): Testimonial{
+  get selectActiveTestimonialData(): Testimonial{
     return this.testimonials[this.activeIndex];
   }
 
