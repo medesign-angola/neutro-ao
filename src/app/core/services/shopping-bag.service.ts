@@ -115,7 +115,7 @@ export class ShoppingBagService implements OnInit{
         this.subtotal = computed(() => {
             let values: number[] = [];
             this.items().forEach(item => {
-                values.push(item.product.price * item.quantity)
+                values.push(((item.promotionalPrice && item.product.promotionalPrice > 0) ? item.product.promotionalPrice : item.product.price) * item.quantity)
             });
              return values.reduce((val1, val2) => {
                 return val1 + val2;

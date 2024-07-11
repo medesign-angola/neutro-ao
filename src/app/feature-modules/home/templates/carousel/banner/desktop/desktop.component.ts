@@ -104,8 +104,8 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
 
     // this.ngZone.runOutsideAngular(() => {
       setTimeout(() => {
-        
         this.carouselInterval = setInterval(() => {
+          if(!(items.length > 0)) return;
           let activeItemIndex = items.findIndex(item => item.isActive);
           this.goToNextItem(activeItemIndex, items);
         }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);

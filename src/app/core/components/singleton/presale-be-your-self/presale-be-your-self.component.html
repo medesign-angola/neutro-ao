@@ -6,7 +6,7 @@
         'appear': this.showModalBackground()
     }"
     ></div>
-    <div class="modal-content overflow-hidden fixed top-[50%] w-[480px] max-w-[480px] z-[102] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white"
+    <div class="modal-content overflow-hidden fixed top-[50%] w-[90%] sm:w-[480px] sm:max-w-[480px] z-[102] left-[50%] -translate-x-[50%] -translate-y-[50%] bg-white"
     [ngClass]="{
         'hidden': ((!this.showModalBackground()) && this.firstTimeOpeningModal()),
         'disappear': (!this.showModalBackground() && !this.firstTimeOpeningModal()),
@@ -35,7 +35,7 @@
             </button>
         </div>
 
-        <div class="modal-body p-6 overflow-y-auto h-[600px] max-h-[500px]">
+        <div class="modal-body p-4 sm:p-6 overflow-y-auto h-[600px] max-h-[500px]">
             <div class="product-details pt-7 flex flex-col gap-y-4">
                 <p class="text-sm font-['Bricolage-Grotesque'] text-primary flex justify-center items-center">
                     Sua nova coleção chegou!
@@ -71,10 +71,10 @@
                     </div>
                 </div>
                 <div class="images-container w-full h-full overflow-hidden" #imagesContainerElement>
-                    <div class="images w-max flex">
+                    <div class="images w-max h-full flex">
                         @for (item of this.productImages; track $index) {
-                            <div class="image w-[480px] h-full">
-                                <img src="{{ item }}" class="w-full h-full object-contain object-center" alt="">
+                            <div class="image w-[326px] sm:w-[480px] h-full">
+                                <img src="{{ item }}" class="w-full h-full object-cover object-center" alt="">
                             </div>
                         }
                     </div>
@@ -86,9 +86,9 @@
                     <p class="font-['Bricolage-Grotesque'] text-2xl font-bold text-primary">{{ 32000 | replaceBy }}</p>
                 </div>
 
-                <div class="remaining flex justify-between items-start">
+                <div class="remaining flex flex-col gap-y-4 sm:flex-row sm:justify-between sm:items-start">
                     <div class="product-sizes">
-                        <p class="mb-4 text-base text-primary">
+                        <p class="mb-2 sm:mb-4 text-base text-primary">
                             Seleccione o tamanho
                         </p>
                         <div class="chips flex flex-wrap gap-2 justify-start items-center">
@@ -109,7 +109,7 @@
                     </div>
                     <div class="product-quantitiy flex flex-col gap-y-5">
                         <div class="quantities-selector-container">
-                            <p class="mb-4 text-base text-primary">
+                            <p class="mb-2 sm:mb-4 text-base text-primary">
                                 Quantidade
                             </p>
                             <div class="operators flex gap-3 justify-start items-center">
@@ -142,6 +142,119 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="features-container">
+                    <div class="features-with-overlay relative overflow-hidden"
+                    [ngClass]="{
+                        'h-auto': this.showDetails,
+                        'h-[calc(116px-22px)]': !this.showDetails
+                    }"
+                    >
+                        <div class="features flex justify-start gap-4 items-start flex-wrap">
+                            @for (feature of productFeatures; track $index) {
+                                <div class="chip bg-white rounded-full py-2 px-3 text-xs sm:text-sm text-primary/40 border border-primary/40">
+                                    {{ feature }}
+                                </div>
+                            }
+                        </div>
+                        <div class="overlay bg-[linear-gradient(180deg,transparent,#fff_90%)] w-full h-[40px] absolute bottom-0"
+                        *ngIf="!this.showDetails"
+                        ></div>
+                    </div>
+                    <div class="cta mt-2">
+                        <button
+                        class="underline text-sm font-semibold font-['Bricolage-Grotesque'] text-black leading-[21px] flex gap-2 justify-start items-center"
+                        (click)="this.toggleShowDetails()"
+                        >
+                            Detalhes
+                            <svg
+                            class="duratin-[.4s]"
+                            [ngClass]="{
+                                '-rotate-180': this.showDetails,
+                                'rotate-0': !this.showDetails
+                            }" width="24" height="22" viewBox="0 0 24 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M18 8.25L12 13.75L6 8.25" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form mt-10 pt-4">
+                <form
+                class="flex flex-col gap-y-6"
+                [formGroup]="presaleRequestFormGroup"
+                (submit)="submit()"
+                >
+                    <div class="input flex flex-col gap-y-2">
+                        <label class="text-primary" for="name">
+                            Nome
+                        </label>
+                        <div class="w-full">
+                            <input
+                            class="px-3 py-4 w-full bg-[#F9F9F9] border-[2px] duration-[.2s] border-transparent focus:border-primary rounded-lg placeholder:text-primary/40"
+                            type="text"
+                            id="name"
+                            placeholder="Nome Completo"
+                            formControlName="name"
+                            [ngClass]="{
+                                'is-invalid': this.presaleRequestFormGroup.get('name').invalid && this.presaleRequestFormGroup.get('name').touched
+                            }"
+                            >
+                        </div>
+                    </div>
+                    <div class="input flex flex-col gap-y-2">
+                        <label class="text-primary" for="number">
+                            Número de Telefone
+                        </label>
+                        <div class="w-full">
+                            <input
+                            class="px-3 py-4 w-full bg-[#F9F9F9] border-[2px] duration-[.2s] border-transparent focus:border-primary rounded-lg placeholder:text-primary/40"
+                            type="text"
+                            id="number"
+                            placeholder="111222333"
+                            formControlName="number"
+                            [ngClass]="{
+                                'is-invalid': this.presaleRequestFormGroup.get('number').invalid && this.presaleRequestFormGroup.get('number').touched
+                            }"
+                            >
+                        </div>
+                    </div>
+                    <div class="submit">
+                        <button
+                        [disabled]="this.presaleRequestFormGroup.invalid"
+                        class="px-6 py-3 rounded-full w-full bg-primary disabled:bg-primary/60 duration-[.3s] font-semibold text-white flex gap-2 justify-center items-center"
+                        type="submit">
+                            @if (isSendingTheEmail | async) {
+                                <img class="w-5 h-5" src="assets/svg/static/loader.svg" alt="">
+                            } @else {
+                                Reservar camisola
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1.33301 4.66675L6.77629 8.47704C7.21707 8.78559 7.43746 8.93986 7.67718 8.99962C7.88894 9.0524 8.11041 9.0524 8.32217 8.99962C8.56189 8.93986 8.78228 8.78559 9.22306 8.47704L14.6663 4.66675M4.53301 13.3334H11.4663C12.5864 13.3334 13.1465 13.3334 13.5743 13.1154C13.9506 12.9237 14.2566 12.6177 14.4484 12.2414C14.6663 11.8136 14.6663 11.2535 14.6663 10.1334V5.86675C14.6663 4.74664 14.6663 4.18659 14.4484 3.75877C14.2566 3.38244 13.9506 3.07648 13.5743 2.88473C13.1465 2.66675 12.5864 2.66675 11.4663 2.66675H4.53301C3.4129 2.66675 2.85285 2.66675 2.42503 2.88473C2.0487 3.07648 1.74274 3.38244 1.55099 3.75877C1.33301 4.18659 1.33301 4.74664 1.33301 5.86675V10.1334C1.33301 11.2535 1.33301 11.8136 1.55099 12.2414C1.74274 12.6177 2.0487 12.9237 2.42503 13.1154C2.85285 13.3334 3.4129 13.3334 4.53301 13.3334Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            }
+                        </button>
+                    </div>
+                    <div class="messages">
+                        <div class="success w-ful text-center"
+                        *ngIf="this.showEmailSentMessage | async"
+                        >
+                            <span
+                            class="text-primary font-medium font-['Bricolage-Grotesque'] w-full text-base text-center"
+                            >
+                                Mensagem enviada com êxito
+                            </span>
+                        </div>
+                        <div class="error w-full text-center"
+                        *ngIf="this.showErrorMessage | async"
+                        >
+                            <span
+                            class="text-primary font-medium font-['Bricolage-Grotesque'] w-full text-base text-center"
+                            >
+                                Erro ao fazer ao fazer a reserva
+                            </span>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

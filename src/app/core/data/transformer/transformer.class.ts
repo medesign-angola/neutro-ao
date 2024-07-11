@@ -84,7 +84,7 @@ export class Transformer{
                 isInShoppingBag: false,
                 bestSeller: item.acf.incluir_nos_mais_vendidos,
                 onelineObservation: item.acf.observacao_de_linha_unica,
-                promotionalPrice: 0,
+                promotionalPrice: item.acf.preco_promocional,
                 gender: productGender,
                 categories: categories,
                 details: details,

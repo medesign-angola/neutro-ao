@@ -1,6 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID, ViewChild, computed, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
 import { Product } from '@core/data/models/product.model';
@@ -20,7 +20,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     @Inject(PLATFORM_ID) private platformId: any,
     private changeDetectorRef: ChangeDetectorRef,
     public themeService: ThemeService,
-    public shoppingBagService: ShoppingBagService
+    public shoppingBagService: ShoppingBagService,
+    private router: Router
   ) { }
 
   themeEnum = ThemeEnum;

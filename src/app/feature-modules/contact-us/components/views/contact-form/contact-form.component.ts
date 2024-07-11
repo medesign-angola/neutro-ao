@@ -1,4 +1,5 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { isPlatformBrowser, Location } from '@angular/common';
+import { Component, Inject, OnInit, PLATFORM_ID, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { API } from '@core/api/api.service';
 import { BehaviorSubject } from 'rxjs';
@@ -17,6 +18,10 @@ export enum ContactUsResponseEnum{
 })
 export class ContactFormComponent implements OnInit {
   private apiService = inject(API);
+  private location = inject(Location);
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: any
+  ){ }
 
   contactUsFormGroup: any;
 
@@ -24,6 +29,7 @@ export class ContactFormComponent implements OnInit {
   hasSentTheEmail: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   showErrorMessage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   showEmailSentMessage: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  submitted: boolean = false;
 
   ngOnInit(): void {
     this.contactUsFormGroup = new FormGroup({
@@ -34,8 +40,21 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
+  goback(){
+    this.location.back();
+  }
+
+  gotoTop(){
+    if(isPlatformBrowser(this.platformId)){
+      let html = document.querySelector("html") as HTMLElement;
+      html.scrollTo(0, 0);
+    }
+  }
+
   submit(){
     if(this.contactUsFormGroup.invalid) return;
+
+    this.submitted = true;
 
     let contactFormData = new FormData();
     contactFormData.append('name', this.contactUsFormGroup.get('name').value)
@@ -50,9 +69,10 @@ export class ContactFormComponent implements OnInit {
         if(response.code === ContactUsResponseEnum.OK){
           this.contactUsFormGroup.reset();
           this.showEmailSentMessage.next(true);
-          setTimeout(() => {
-            this.showEmailSentMessage.next(false);
-          }, 3000);
+          this.gotoTop();
+          // setTimeout(() => {
+          //   this.showEmailSentMessage.next(false);
+          // }, 3000);
         }
 
       },

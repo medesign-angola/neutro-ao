@@ -1,10 +1,13 @@
 <div class="section-content py-12 md:py-24 xl:py-36">
     <div class="limited-container flex flex-col gap-y-20 items-center">
-        <div class="title max-w-[48rem] mx-auto">
+        <div class="title max-w-[48rem] mx-auto"
+        *ngIf="!(submitted && (this.showEmailSentMessage | async))">
             <h1 class="text-primary mb-6 text-center font-['Bricolage-Grotesque'] text-[2.5rem] font-semibold leading-[48px] -tracking-[0.2px]">Contacte-nos</h1>
             <p class="text-primary text-lg text-center">Qualquer dúvida? Estamos aqui para ajudar.</p>
         </div>
-        <div class="form w-full md-905:max-w-[22.625rem] xl:max-w-[26rem]">
+        <div class="form w-full md-905:max-w-[22.625rem] xl:max-w-[26rem]"
+         *ngIf="!(submitted && (this.showEmailSentMessage | async))"
+        >
             <form
             class="flex flex-col gap-y-6"
             [formGroup]="contactUsFormGroup"
@@ -87,7 +90,7 @@
                     </button>
                 </div>
                 <div class="messages">
-                    <div class="error w-ful text-center"
+                    <!-- <div class="error w-ful text-center"
                     *ngIf="this.showEmailSentMessage | async"
                     >
                         <span
@@ -95,18 +98,44 @@
                         >
                             Mensagem enviada com êxito
                         </span>
-                    </div>
+                    </div> -->
                     <div class="error w-full text-center"
                     *ngIf="this.showErrorMessage | async"
                     >
                         <span
                         class="text-primary font-medium font-['Bricolage-Grotesque'] w-full text-base text-center"
                         >
-                            Erro ao fazer a subscrição
+                            Erro ao fazer ao enviar o formulário
                         </span>
                     </div>
                 </div>
             </form>
+        </div>
+
+        <div class="success-message max-w-[768px]"
+         *ngIf="(submitted && (this.showEmailSentMessage | async))"
+        >
+            <h1 class="text-[2.5rem] font-semibold text-center text-black font-['Bricolage-Grotesque'] leading-[48px] tracking-[-0.2px]">
+                Mensagem enviada <br class="hidden sm:block"> com sucesso!
+            </h1>
+            <div class="icon my-16 flex justify-center items-center">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M25.0003 40.0001L35.0003 50.0001L55.0003 30.0001M73.3337 40.0001C73.3337 58.4096 58.4098 73.3334 40.0003 73.3334C21.5908 73.3334 6.66699 58.4096 6.66699 40.0001C6.66699 21.5906 21.5908 6.66675 40.0003 6.66675C58.4098 6.66675 73.3337 21.5906 73.3337 40.0001Z" stroke="black" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="goback flex justify-center items-center">
+                <button
+                class=" text-[#575757] text-base font-semibold flex justify-start items-center"
+                (click)="goback()"
+                >
+                    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.5 12H4.5M4.5 12L10.5 6M4.5 12L10.5 18" stroke="#575757" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <p class="px-1 font-['Bricolage-Grotesque']">
+                        Página anterior
+                    </p>
+                </button>
+            </div>
         </div>
     </div>
 </div>

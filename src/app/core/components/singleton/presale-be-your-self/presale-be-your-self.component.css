@@ -3,3 +3,11 @@
     color: white;
     font-weight: 700;
 }
+
+.input div input.is-invalid{
+    border: 2px solid #e12349;
+}
+
+:host *{
+    scroll-behavior: smooth;
+}
