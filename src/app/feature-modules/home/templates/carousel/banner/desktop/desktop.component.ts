@@ -5,7 +5,7 @@ import { ImagePath } from '@core/data/models/image-path.model';
 import { CarouselService } from '@core/services/carousel/carousel.service';
 
 const DELAY_ODD_CAROUSEL: number = 2;
-const CAROUSEL_INTERVAL_IN_SECONDS: number = 5;
+const CAROUSEL_INTERVAL_IN_SECONDS: number = 3;
 
 interface LocalCarouselItems{
   imagePath: ImagePath,
