@@ -5,7 +5,7 @@ import { ImagePath } from '@core/data/models/image-path.model';
 import { CarouselService } from '@core/services/carousel/carousel.service';
 
 const DELAY_ODD_CAROUSEL: number = 2;
-const CAROUSEL_INTERVAL_IN_SECONDS: number = 3;
+const CAROUSEL_INTERVAL_IN_SECONDS: number = 5;
 
 interface LocalCarouselItems{
   imagePath: ImagePath,
@@ -110,8 +110,8 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
           this.goToNextItem(activeItemIndex, items);
         }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
       
-      // }, delay * 1000);
-    });
+      }, delay * 1000);
+    // });
   }
 
   goToNextItem(activeIndex: number, itemsArray: LocalCarouselItems[]){
