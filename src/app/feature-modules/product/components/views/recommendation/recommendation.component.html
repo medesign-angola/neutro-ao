@@ -10,6 +10,10 @@
         <app-product-cards-container-with-scroll
         [productsArray]="this.products"
         [paddingX]="scrollerPaddingX"
+        [cardEdgeButton]="{
+            visible: true,
+            routeTo: ['/products']
+        }"
         />
     </div>
 </div>

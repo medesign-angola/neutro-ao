@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, inject, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Product, colorRepresentionalImage, productColor, productSize } from '@core/data/models/product.model';
 import { CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
+import { MetaTagsService } from '@shared/services/meta/meta-tags.service';
 
 @Component({
   selector: 'app-product-details',
@@ -24,16 +25,31 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   activeTab: number = -1;
   activeTabBodyHeight: number = 0;
 
+  private metaTags = inject(MetaTagsService);
+
   ngOnInit(): void {
     
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.activeColor = 0;
+    this.selectedSize = -1;
     this.fullfillImagesArrayOfActiveColor();
+
+    // this.addMeta();
+
   }
 
   ngAfterViewInit(): void {
     this.tabContainerElementRef.nativeElement;
+  }
+
+  addMeta(){
+    this.metaTags.addMetaTags({
+      title: this.theProduct.name,
+      description: this.theProduct.description,
+      image: this.theProduct.colors[this.activeColor].representationalImages[0].imagePath.genericPath,
+    });
   }
 
   changeActiveColor(index: number){
@@ -41,6 +57,20 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
     this.selectedSize = -1;
     this.imagesArrayOfActiveColor = [];
     this.fullfillImagesArrayOfActiveColor();
+    this.addMeta();
+  }
+
+  order(){
+    if(!(this.activeColor > -1) || !(this.selectedSize > -1)) return;
+    this.shoppingBag.order([
+      {
+        product: this.theProduct,
+        sizeIndex: this.selectedSize,
+        colorIndex: this.activeColor,
+        quantity: this.quantity,
+        promotionalPrice: (this.theProduct.promotionalPrice > 0) ? true : false
+      }
+    ], ((this.theProduct.promotionalPrice > 0) ? this.theProduct.promotionalPrice : this.theProduct.price) * this.quantity);
   }
 
   fullfillImagesArrayOfActiveColor(){

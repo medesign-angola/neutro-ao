@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild, inject } from '@angular/core';
+import { CardEdgeButton } from '@core/data/models/card-edge-button.model';
 import { Product, productGenderEnum } from '@core/data/models/product.model';
 
 @Component({

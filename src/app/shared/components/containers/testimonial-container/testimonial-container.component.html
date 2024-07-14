@@ -1,5 +1,5 @@
 <div class="component-container">
-    <div class="limited-container flex flex-col xl:flex-row">
+    <div class="limited-container !mx-0 !max-w-full xl:!mx-auto xl:!max-w-[90%] 2xl:!max-w-[var(--max-w)] 4xl:!max-w-[75%] 5xl:!max-w-[var(--max-w-1536)] flex flex-col xl:flex-row">
         <div class="description w-full max-w-[358px] xl:max-w-[524px] mx-auto mb-12 xl:py-12">
             <p class="client-name limited-text one-line mb-4 text-white text-center xl:text-left text-lg font-semibold">
                 {{ (this.testimonials[this.activeIndex]) ? this.testimonials[this.activeIndex].client : '' }}
@@ -68,7 +68,7 @@
             </div>
         
             <div class="cta my-12 xl:hidden w-full flex justify-center">
-                <button class=" bg-white text-black font-['Bricolage-Grotesque'] font-bold flex gap-2 justify-center items-center p-3 rounded-full">
+                <a href="https://www.instagram.com/neutro.ao" target="_blank" class=" bg-white text-black font-['Bricolage-Grotesque'] font-bold flex gap-2 justify-center items-center p-3 rounded-full">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16" cy="16" r="16" fill="black"/>
                         <g clip-path="url(#clip0_1413_38171)">
@@ -88,7 +88,7 @@
                         </defs>
                     </svg>
                     Partilhe connosco
-                </button>
+                </a>
             </div>
     
         </div>

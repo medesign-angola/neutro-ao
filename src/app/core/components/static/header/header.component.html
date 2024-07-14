@@ -172,7 +172,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
             </div>
 
             <div class="shopping-bag-icon relative">
-                <button (click)="this.openCheckoutModal()" class="">
+                <a (click)="this.openCheckoutModal()" href="javascript:void(0)" class="cursor-pointer">
                     <div
                     *ngIf="this.shoppingBagService.items().length > 0"
                     class="badge flex duration-[.6s] justify-center items-center text-[10px] min-w-4 h-4 absolute top-2 left-[50%] -translate-x-[50%] font-bold font-['Bricolage-Grotesque'] p-1 rounded-full"
@@ -186,7 +186,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                     <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M27.9984 21V18C27.9984 15.7909 26.2076 14 23.9984 14C21.7893 14 19.9984 15.7909 19.9984 18V21M15.5904 22.352L14.9904 28.752C14.8198 30.5717 14.7345 31.4815 15.0365 32.1843C15.3017 32.8016 15.7665 33.3121 16.3564 33.6338C17.0279 34 17.9418 34 19.7695 34H28.2274C30.055 34 30.9689 34 31.6404 33.6338C32.2303 33.3121 32.6951 32.8016 32.9604 32.1843C33.2623 31.4815 33.177 30.5717 33.0064 28.752L32.4064 22.352C32.2624 20.8153 32.1903 20.047 31.8448 19.4662C31.5404 18.9546 31.0908 18.5451 30.553 18.2898C29.9424 18 29.1707 18 27.6274 18L20.3695 18C18.8261 18 18.0544 18 17.4438 18.2898C16.9061 18.5451 16.4564 18.9546 16.1521 19.4662C15.8065 20.047 15.7345 20.8153 15.5904 22.352Z" [attr.stroke]="(this.themeService.menuTheme() === this.themeEnum.LIGHT) ? 'black' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                </button>
+                </a>
             </div>
             <div class="menu-hamburguer md-905:hidden">
                 @if (!isMenuOpen) {
@@ -284,7 +284,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
         <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[calc(100vh-247px)] xl:max-h-[480px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
-                    <div class="product-card flex gap-3 duration-[.2s] justify-between w-full py-6 xl:px-6 border-[1.5px] border-white hover:border-primary rounded-lg"
+                    <div class="product-card flex gap-3 duration-[.2s] justify-between w-full pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
                     >
                         <div
                         [routerLink]="['/product/' + item.product.slug]"
@@ -305,17 +305,31 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                     {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity | replaceBy }}
                                 </p>
                                 <div class="bottom flex gap-2 justify-start items-center">
-                                    <p class="text-black text-sm">
-                                        Cor: <span class="text-black/60">{{ item.product.colors[item.colorIndex].name }}</span>
-                                    </p>
+                                    <div class="color-div relative">
+                                        <p class="text-black text-sm">
+                                            Cor: <span class="text-black/60 underline cursor-pointer" (click)="openAvailableColors(item)">{{ item.product.colors[item.colorIndex].name }}</span>
+                                        </p>
+                                        <div class="dropdown">
+                                            <ul class="">
+                                                <li>
+                                                    <button>Branco</button>
+                                                </li>
+                                                <li>
+                                                    <button>Preto</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <circle cx="3" cy="3" r="3" fill="black"/>
                                     </svg>
-                                    <p class="text-black text-sm">
-                                        Tamanho: <span class="text-black/60">{{ item.product.sizes[item.sizeIndex].name }}</span>
-                                    </p>
+                                    <div class="color-size relative">
+                                        <p class="text-black text-sm">
+                                            Tamanho: <span class="text-black/60 underline cursor-pointer">{{ item.product.sizes[item.sizeIndex].name }}</span>
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="quantity mt-2 xl:hidden">
+                                <div class="quantity mt-2 flex justify-start gap-4 items-center xl:hidden">
                                     <div class="operators flex gap-2 justify-start items-center">
                                         <div class="decrease">
                                             <a
@@ -343,6 +357,12 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                             </a>
                                         </div>
                                     </div>
+                                    <button
+                                    (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                    class="underline text-sm text-black"
+                                    >
+                                        Eliminar
+                                    </button>
                                 </div>
                             </div>
                             <div class="shop-details hidden xl:flex w-full max-w-[112px] flex-col justify-between items-end">
@@ -381,6 +401,14 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                             </div>
                         </div>
                     </div>
+                    <div class="delete justify-end items-center hidden xl:flex">
+                        <button
+                        (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                        class="underline text-sm text-black"
+                        >
+                            Eliminar
+                        </button>
+                    </div>
                 }
             } @else {
                 <p class="text-center py-20 font-['Bricolage-Grotesque'] font-semibold">
@@ -398,7 +426,10 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </p>
             </div>
             <div class="submit mt-6 xl:mt-12">
-                <button class="px-6 py-4 rounded-full w-full bg-primary font-['Bricolage-Grotesque'] text-white font-semibold flex gap-2 justify-center items-center">
+                <button
+                [disabled]="!(this.shoppingBagService.items().length > 0)"
+                (click)="order()"
+                class="px-6 py-4 rounded-full w-full bg-primary disabled:bg-primary/60 duration-[.4s] font-['Bricolage-Grotesque'] text-white font-semibold flex gap-2 justify-center items-center">
                     Comprar pelo whatsapp
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C10.2364 22 8.57709 21.5427 7.13692 20.7397L6.83171 20.5624L3.79975 21.4542C3.06936 21.6691 2.38822 21.0329 2.51987 20.3093L2.54581 20.2002L3.43756 17.1683C2.52505 15.6594 2 13.8896 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 13.5769 4.4552 15.0444 5.24098 16.2818C5.43935 16.5943 5.52374 16.9781 5.45652 17.3589L5.41832 17.5217L4.97667 19.0233L6.47827 18.5817C6.91075 18.4545 7.36114 18.5323 7.71817 18.759C8.95564 19.5448 10.4231 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM9.10162 7.18408C9.31746 7.09158 9.57889 7.1085 9.78556 7.25926C10.29 7.62722 10.6905 8.12076 11.0344 8.60344L11.3612 9.07746C11.4132 9.15417 11.4639 9.22933 11.5138 9.30228C11.6963 9.56921 11.6753 9.9239 11.4685 10.166L11.3927 10.2422L10.4693 10.928C10.3778 10.996 10.3473 11.1195 10.4022 11.2195C10.6112 11.5998 10.9834 12.1657 11.4093 12.5916C11.8357 13.018 12.4284 13.4143 12.8348 13.6467C12.9226 13.6969 13.0294 13.6811 13.101 13.6157L13.1394 13.5706L13.7402 12.6555C13.9705 12.349 14.4007 12.282 14.7134 12.4984L15.2563 12.8768C15.7957 13.2618 16.315 13.6757 16.7255 14.2014C16.8872 14.4085 16.9112 14.6792 16.8148 14.9042C16.4188 15.8283 15.4165 16.6153 14.374 16.5769L14.2155 16.5678L14.0235 16.5488C13.9889 16.5446 13.953 16.5399 13.9158 16.5346L13.6781 16.4952C12.7544 16.3208 11.2726 15.797 9.73827 14.2627C8.20397 12.7284 7.68017 11.2466 7.50573 10.3229L7.46632 10.0852L7.44126 9.87742L7.42756 9.70191C7.42606 9.67547 7.42491 9.65047 7.42404 9.62695C7.38562 8.58294 8.17688 7.5804 9.10162 7.18408Z" fill="white"/>

@@ -1,5 +1,6 @@
-import { Injectable, OnInit, Signal, WritableSignal, computed, signal } from "@angular/core";
+import { Injectable, OnInit, Signal, WritableSignal, computed, inject, signal } from "@angular/core";
 import { Product } from "@core/data/models/product.model";
+import { OrderService } from "./order.service";
 
 export interface Checkout{
     quantity: number,
@@ -25,6 +26,7 @@ export class ShoppingBagService implements OnInit{
     subtotal: Signal<number> = signal(0);
 
     private products: Checkout[] = [];
+    private orderService = inject(OrderService);
 
     ngOnInit(): void {
         
@@ -121,6 +123,10 @@ export class ShoppingBagService implements OnInit{
                 return val1 + val2;
             }, 0)
         });
+    }
+
+    order(items: Checkout[] = this.items(), subtotal: number = this.subtotal()){
+        this.orderService.whatsapp(items, subtotal);
     }
 
 }

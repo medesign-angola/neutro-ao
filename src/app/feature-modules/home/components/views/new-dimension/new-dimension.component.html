@@ -25,6 +25,12 @@
         <app-product-cards-container-with-scroll
         [productsArray]="productsArray"
         [paddingX]="scrollerPaddingX"
+        [cardEdgeButton]="{
+            visible: true,
+            routeTo: ['/products'],
+            queryParams: { scope: 'highlighted' },
+            queryParamsHandling: 'merge'
+        }"
         />
     </div>
 </div>

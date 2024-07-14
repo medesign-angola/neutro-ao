@@ -58,6 +58,7 @@ export class ProductsComponent extends Unsubcriber implements OnInit {
         let colors = queryParams.get('colors') ?? null;
         let sizes = queryParams.get('sizes') ?? null;
         let maxPrice = queryParams.get('max_price') ?? null;
+        let scope = queryParams.get('scope') ?? null;
 
         let filtered: Product[] = products;
 
@@ -84,6 +85,16 @@ export class ProductsComponent extends Unsubcriber implements OnInit {
         if (maxPrice) {
             const maxPriceValue = parseFloat(maxPrice);
             filtered = filtered.filter(product => product.price <= maxPriceValue);
+        }
+
+        if(scope) {
+            switch(scope){
+                case 'highlighted':
+                    filtered = filtered.filter(product => product.highlighted);
+                    break;
+                case 'best-seller':
+                    filtered = filtered.filter(product => product.bestSeller);
+            }
         }
 
         return filtered;

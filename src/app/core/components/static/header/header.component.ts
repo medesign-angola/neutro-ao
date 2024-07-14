@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
 import { Product } from '@core/data/models/product.model';
-import { CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
+import { Checkout, CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ThemeService } from '@core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
 
@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,
     public themeService: ThemeService,
     public shoppingBagService: ShoppingBagService,
-    private router: Router
   ) { }
 
   themeEnum = ThemeEnum;
@@ -43,6 +42,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   ];
 
   itemHovered: string = '';
+
+  openAvailableColorsPanel: boolean = false;
 
   @ViewChild('headerContentElement') headerContentElement!: ElementRef<HTMLElement>;
   @Output() contentMarginTop: EventEmitter<number> =  new EventEmitter<number>();
@@ -113,6 +114,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     this.overflowBodyElement();
   }
 
+  openAvailableColors(product: Checkout){
+    this.openAvailableColorsPanel = true;
+  }
+
   overflowBodyElement(){
     if(isPlatformBrowser(this.platformId)){
       let bodyElement = document.querySelector('body') as HTMLElement;
@@ -134,6 +139,15 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   decreaseQuantity(product: Product, options: CheckoutOptions){
     this.shoppingBagService.decreaseQuantity(product, options);
+  }
+
+  removeItem(product: Product, options: CheckoutOptions){
+    this.shoppingBagService.removeItem(product, options);
+  }
+
+  order(){
+    if(!(this.shoppingBagService.items().length > 0)) return;
+    this.shoppingBagService.order();
   }
 
 }

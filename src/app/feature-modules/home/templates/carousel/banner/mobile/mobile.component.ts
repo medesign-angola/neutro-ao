@@ -36,7 +36,7 @@ implements OnInit, OnChanges, AfterViewInit, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     if(this.bannerItems.length > 0 && this.automatic){
-      // this.startAutomatizedSliding();
+      this.startAutomatizedSliding();
     }
   }
 

@@ -1,12 +1,26 @@
 <div class="container-section">
     <div class="scroller w-full overflow-hidden" #productContainerElement>
-        <div class="products-conteiner w-max flex gap-x-6 xl:gap-x-8 justify-start items-stretch"
+        <div class="products-container w-max flex gap-x-6 xl:gap-x-8 justify-start items-stretch"
         [style.paddingLeft.px]="paddingX"
         [style.paddingRight.px]="paddingX"
         >
             @for (product of productsArray; track $index) {
                 <div class="product w-[264px] xl:w-[304px]">
                     <app-product-card [product]="product" />
+                </div>
+            }
+            @if (this.cardEdgeButton.visible) {
+                <div class="see-all max-h-[283px] flex justify-center items-center md:hidden">
+                    <a
+                    [routerLink]="this.cardEdgeButton.routeTo"
+                    [queryParams]="this.cardEdgeButton.queryParams"
+                    [queryParamsHandling]="this.cardEdgeButton.queryParamsHandling"
+                    class="text-base text-primary font-semibold font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center">
+                        Ver todos os produtos
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                 </div>
             }
         </div>
