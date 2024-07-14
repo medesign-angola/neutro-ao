@@ -4,12 +4,12 @@
         [style.paddingLeft.px]="paddingX"
         [style.paddingRight.px]="paddingX"
         >
-            @for (product of productsArray; track $index) {
+            @for (product of displayableProductsArray; track $index) {
                 <div class="product w-[264px] xl:w-[304px]">
                     <app-product-card [product]="product" />
                 </div>
             }
-            @if (this.cardEdgeButton.visible) {
+            @if (this.cardEdgeButton.visible && (this.productsArray.length > this.displayableProductsArray.length)) {
                 <div class="see-all max-h-[283px] flex justify-center items-center md:hidden">
                     <a
                     [routerLink]="this.cardEdgeButton.routeTo"
@@ -26,11 +26,11 @@
         </div>
     </div>
 
-    <div class="controllers mt-12">
+    <div class="controllers mt-12" *ngIf="this.productsArray.length > this.displayableProductsArray.length">
         <div class="limited-container flex justify-between items-center">
 
             <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">
-                @for (dot of productsArray; track $index) {
+                @for (dot of displayableProductsArray; track $index) {
                     <div class="dot w-2 h-2 rounded-full bg-[#EFEFEF]"
                     [ngClass]="{ 'active': $index === activeIndex }"
                     (click)="this.slideTo($index)"
@@ -49,8 +49,8 @@
                 <div class="next cursor-pointer">
                     <a (click)="next()" class="">
                         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.productsArray.length - 1) ? '#EFEFEF' : 'black'"/>
-                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.productsArray.length - 1) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <rect class="duration-[.2s]" width="40" height="40" rx="20" [attr.fill]="(activeIndex === this.displayableProductsArray.length - 1) ? '#EFEFEF' : 'black'"/>
+                            <path class="duration-[.2s]" d="M17 26L23 20L17 14" [attr.stroke]="(activeIndex === this.displayableProductsArray.length - 1) ? '#7C7C7C' : 'white'" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>

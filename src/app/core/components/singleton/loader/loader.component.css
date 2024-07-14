@@ -1,0 +1,140 @@
+
+.loader-panel-container{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    animation: containerDisappear 1s forwards ease-in-out;
+    animation-delay: 6.6s;
+}
+@keyframes containerDisappear {
+    to{
+        display: none;
+    }
+}
+  
+.rects{
+    height: 100%;
+    left: 0;
+}
+.rect-1{
+    background-color: black;
+    animation: decreaseHeightRect1 2s forwards ease-in-out;
+    animation-delay: 5.5s;
+}
+@keyframes decreaseHeightRect1{
+    20%{
+      height: 31.7%;
+    }
+    75%{
+      height: 31.7%;
+    }
+    100%{
+      height: 0%;
+    }
+}
+.rect-2{
+    background-color: black;
+    animation: decreaseHeightRect2 2s forwards ease-in-out;
+    animation-delay: 5.5s;
+}
+@keyframes decreaseHeightRect2{
+    20%{
+      height: 49.1%;
+    }
+    75%{
+      height: 49.1%;
+    }
+    100%{
+      height: 0%;
+    }
+}
+.rect-3{
+    background-color: black;
+    animation: decreaseHeightRect3 2s forwards ease-in-out;
+    animation-delay: 5.5s;
+}
+@keyframes decreaseHeightRect3{
+    20%{
+      height: 63.2%;
+    }
+    75%{
+      height: 63.2%;
+    }
+    100%{
+      height: 0%;
+    }
+}
+.rect-4{
+    background-color: black;
+    animation: decreaseHeightRect4 2s forwards ease-in-out;
+    animation-delay: 5.5s;
+}
+@keyframes decreaseHeightRect4{
+    20%{
+      height: 77.3%;
+    }
+    75%{
+      height: 77.3%;
+    }
+    100%{
+      height: 0%;
+    }
+}
+  
+div.logo-div-container{
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    height: fit-content;
+}
+  
+svg.logo-container{
+    overflow: hidden;
+    animation: slideToTop .6s forwards ease-in-out;
+    animation-delay: 5s;
+}
+@keyframes slideToTop{
+    to{
+      transform: translateY(-100px);
+      opacity: 0;
+    }
+}
+  
+svg.logo-container > g.its-about-personality-text{
+    transform: translateY(20px);
+    animation: slideFromBottomToTop .3s forwards ease-in-out;
+    animation-delay: 3.1s;
+}
+@keyframes slideFromBottomToTop{
+    to{
+      transform: translateY(0px);
+    }
+}
+  
+svg.logo-container g.o-brand{
+    transform: translateX(-38%);
+    animation: slideFromCenterToRight .9s forwards ease-in-out;
+    animation-delay: 2s;
+}
+@keyframes slideFromCenterToRight{
+    to{
+      transform: translateX(0%);
+    }
+}
+  
+svg.logo-container > g.neutr{
+    transform: translateX(-100%);
+    opacity: 0;
+    animation: slideFromLeftToCenter .9s forwards ease-in-out;
+    animation-delay: 2s;
+}
+@keyframes slideFromLeftToCenter{
+    to{
+      opacity: 1;
+      transform: translateX(0%);
+    }
+}

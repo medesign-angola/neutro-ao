@@ -188,8 +188,8 @@ export class HomeComponent extends Unsubcriber implements OnInit {
             .pipe(takeUntil(this.unsubcribe$))
             .subscribe({
                 next: (incomingProducts) => {
-                    this.betterSaleProducts = incomingProducts.filter(product => product.bestSeller === true);
-                    this.highlightedProducts = incomingProducts.filter(product => product.highlighted === true);
+                    this.betterSaleProducts = incomingProducts.filter(product => product.bestSeller);
+                    this.highlightedProducts = incomingProducts.filter(product => product.highlighted);
                     this.allProducts = incomingProducts
                     
                     this.fullfillBetterSaleProductCategories();

@@ -7,6 +7,7 @@ import { CoreModule } from '@core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { PresaleBeYourSelfComponent } from '@core/components/singleton/presale-be-your-self/presale-be-your-self.component';
+import { LoaderComponent } from '@core/components/singleton/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PresaleBeYourSelfComponent } from '@core/components/singleton/presale-b
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    PresaleBeYourSelfComponent
+    PresaleBeYourSelfComponent,
+    LoaderComponent
   ],
   providers: [
     provideHttpClient(withFetch()),

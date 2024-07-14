@@ -20,6 +20,6 @@ export class OrderService{
         });
         
         const encodedMessage = encodeURIComponent(preparedMessage + total);
-        window.open(`https://api.whatsapp.com/send?phone=244927730370&text=${ encodedMessage }`);
+        window.open(`https://api.whatsapp.com/send?phone=244921300930&text=${ encodedMessage }`);
     }
 }
