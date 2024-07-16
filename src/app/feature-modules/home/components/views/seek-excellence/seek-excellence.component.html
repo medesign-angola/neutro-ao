@@ -32,7 +32,7 @@
                 }"
                 >
                     <img
-                    class="w-full object-cover object-top"
+                    class="w-full h-full object-cover object-top"
                     [src]="image.genericPath"
                     alt="">
                     <!-- [width]="image.allSizes?.['large-width']"
@@ -50,7 +50,7 @@
                         (click)="showImage($index)"
                         >
                             <img
-                            class="w-full duration-[.4s] object-cover object-top"
+                            class="w-full h-full duration-[.4s] object-cover object-top"
                             [ngClass]="{
                                 'grayscale': $index !== activeIndex,
                                 '': $index === activeIndex,
