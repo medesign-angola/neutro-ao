@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   checkoutModalVisible = signal(false);
 
   desktopDropdownItems = [
-    { section: 'about-us', imagePath: 'assets/images/static/header/image-1.png' },
+    { section: 'about-us', imagePath: 'assets/images/static/header/image-1-mi.png' },
     { section: 'faq', imagePath: 'assets/images/static/header/image-2.png' },
     { section: 'contact', imagePath: 'assets/images/static/header/image-3.png' },
     { section: 'terms', imagePath: 'assets/images/static/header/image-4.png' },
