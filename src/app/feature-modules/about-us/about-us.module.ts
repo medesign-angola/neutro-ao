@@ -6,6 +6,7 @@ import { AboutUsComponent } from './components/containers/about-us.component';
 import { HeroComponent } from './components/views/hero/hero.component';
 import { ContentComponent } from './components/views/content/content.component';
 import { CommitmentComponent } from './components/views/commitment/commitment.component';
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
@@ -16,8 +17,9 @@ import { CommitmentComponent } from './components/views/commitment/commitment.co
     CommitmentComponent
   ],
   imports: [
-    CommonModule,
-    AboutUsRoutingModule
+    SharedModule,
+    AboutUsRoutingModule,
+
   ]
 })
 export class AboutUsModule { }

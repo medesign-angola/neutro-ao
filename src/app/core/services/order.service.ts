@@ -16,10 +16,11 @@ export class OrderService{
         let preparedMessage = `Olá, gostaria de fazer meu pedido:\n`;
         let total = `\n*Subtotal:* ${ this.replaceByFunction.transform(subtotal) }AOA\n*Total:* ${ this.replaceByFunction.transform(subtotal) } AOA`;
         products.forEach(item => {
-            preparedMessage += `\n${ item.quantity } x ${ item.product.name } (${ location.href })\n▪ *Cor:* ${ item.product.colors[item.colorIndex].name }\n▪ *Tamanho:* ${ item.product.sizes[item.sizeIndex].name }\n▪ *Preço:* ${ this.replaceByFunction.transform(item.product.price) } AOA\n▪ *Preço promocional:* ${ this.replaceByFunction.transform(item.product.promotionalPrice) } AOA\n`;
+            preparedMessage += `\n${ item.quantity } x ${ item.product.name } (${ location.origin }/product/${ item.product.slug })\n▪ *Cor:* ${ item.product.colors[item.colorIndex].name }\n▪ *Tamanho:* ${ item.product.sizes[item.sizeIndex].name }\n▪ *Preço:* ${ this.replaceByFunction.transform(item.product.price) } AOA\n▪ *Preço promocional:* ${ this.replaceByFunction.transform(item.product.promotionalPrice) } AOA\n`;
         });
         
         const encodedMessage = encodeURIComponent(preparedMessage + total);
+        // window.open(`https://api.whatsapp.com/send?phone=244927730370&text=${ encodedMessage }`);
         window.open(`https://api.whatsapp.com/send?phone=244921300930&text=${ encodedMessage }`);
     }
 }

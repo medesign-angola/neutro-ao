@@ -8,6 +8,7 @@ import { ReplaceByPipe } from './pipes/replace-by.pipe';
 import { TestimonialContainerComponent } from './components/containers/testimonial-container/testimonial-container.component';
 import { ProductImageSlideControllerAppearOnTabletDirective } from './directives/product-image-slide-controller-appear-on-tablet.directive';
 import { RouterModule } from '@angular/router';
+import { VideoComponent } from './components/views/video/video.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
     ImageCarouselComponent,
     ReplaceByPipe,
     TestimonialContainerComponent,
-    ProductImageSlideControllerAppearOnTabletDirective
+    ProductImageSlideControllerAppearOnTabletDirective,
+    VideoComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { RouterModule } from '@angular/router';
     ProductCardsContainerNoScrollComponent,
     ReplaceByPipe,
     TestimonialContainerComponent,
-    RouterModule
+    RouterModule,
+    VideoComponent
   ]
 })
 export class SharedModule { }

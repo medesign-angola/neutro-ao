@@ -1,0 +1,20 @@
+<div class="modal-bg w-full h-full fixed top-0 left-0 z-[101] bg-black/80"
+(click)="this.hideMedia()"
+[ngClass]="{
+    'hidden': (!this.showModalBackground() && this.firstTimeOpeningModal()),
+    'disappear': (!this.showModalBackground() && !this.firstTimeOpeningModal()),
+    'appear': this.showModalBackground()
+}"
+></div>
+<div
+[ngClass]="{
+    'block': this.showModalBackground(),
+    'hidden': !this.showModalBackground(),
+}"
+class="modal-content appear-softly z-[102] rounded-lg overflow-hidden fixed top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] w-[90%] md:w-[70%] h-auto">
+    <video
+    [controls]="true"
+    [autoplay]="true"
+    [src]="this.video"
+    class="w-full h-full object-fit object-cover"></video>
+</div>

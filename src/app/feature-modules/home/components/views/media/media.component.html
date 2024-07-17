@@ -57,19 +57,21 @@
         </div>
         <div class="main-content flex flex-col items-center justify-center">
             <div class="watch-chip mb-10 xl:mb-[256px]">
-                <button class="p-3 rounded-full bg-white flex gap-x-2 justify-center items-center text-base font-['Bricolage-Grotesque'] font-semibold">
+                <button
+                (click)="this.openMedia()"
+                class="p-3 rounded-full bg-white flex gap-x-2 justify-center items-center text-base font-['Bricolage-Grotesque'] font-semibold"
+                >
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="16" fill="black"/>
                         <path d="M11.332 11.3264C11.332 10.679 11.332 10.3553 11.467 10.1768C11.5846 10.0214 11.7644 9.92515 11.959 9.91353C12.1823 9.9002 12.4517 10.0798 12.9904 10.4389L20.0008 15.1125C20.4459 15.4092 20.6684 15.5576 20.746 15.7446C20.8138 15.9081 20.8138 16.0919 20.746 16.2554C20.6684 16.4424 20.4459 16.5908 20.0008 16.8875L12.9904 21.5611C12.4517 21.9202 12.1823 22.0998 11.959 22.0865C11.7644 22.0749 11.5846 21.9787 11.467 21.8232C11.332 21.6447 11.332 21.321 11.332 20.6736V11.3264Z" fill="white"/>
                     </svg>
-                    Assistir vídeo completo 
+                    Assistir vídeo completo
                 </button>
             </div>
             <div class="description flex flex-col xl:w-full xl:flex-row xl:justify-between items-center">
                 <p class="max-w-[358px] md:max-w-[348px] mb-4 xl:mb-0 text-white text-base font-medium text-center">
                     Explore as possibilidades da sua verdadeira essência e descubra todo o seu potencial ao abraçar a autenticidade e ser fiel a si mesmo.
                 </p>
-
                 <p class="max-w-[203px] text-[#656565] text-sm font-medium text-center">
                     Desbloqueia um mundo de possibilidades e realizações.
                 </p>
@@ -77,3 +79,9 @@
         </div>
     </div>
 </div>
+
+<app-video
+[showModalFromParent]="this.showMedia"
+(hideModalOnParent)="this.hideModalStatusEventHandler($event)"
+[video]="'https://neutro-ao.neutro.co.ao/wp-content/uploads/2024/07/video-lg-1.mp4'"
+/>
