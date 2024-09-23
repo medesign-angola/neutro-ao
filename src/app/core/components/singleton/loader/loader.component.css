@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: start;
     animation: containerDisappear 1s forwards ease-in-out;
-    animation-delay: 6.6s;
+    animation-delay: 7.6s;
 }
 @keyframes containerDisappear {
   to{
