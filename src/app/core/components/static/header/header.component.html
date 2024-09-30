@@ -284,130 +284,135 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
         <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[calc(100vh-247px)] xl:max-h-[480px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
-                    <div class="product-card flex gap-3 duration-[.2s] justify-between w-full pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
+                    <div class="product-card bg-green-400 flex flex-col gap-2 pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
                     >
-                        <div
-                        [routerLink]="['/product/' + item.product.slug]"
-                        class="image overflow-hidden cursor-pointer w-[90px] h-[90px] min-w-[90px] bg-[#F5F5F5] rounded-lg flex justify-center items-start">
-                            <img
-                            class="w-auto h-full object-over object-top mx-auto"
-                            [src]="item.product.colors[item.colorIndex].representationalImages[0].imagePath.genericPath"
-                            alt="">
-                        </div>
-                        <div class="details w-full flex gap-1 justify-between items-stretch">
-                            <div class="product-info w-full flex flex-col gap-2 xl:gap-[14px] xl:justify-between">
-                                <!-- [routerLink]="['/product/' + item.product.slug]" -->
-                                <p
-                                class="max-w-[198px] product-name cursor-pointer text-base font-['Bricolage-Grotesque'] limited-text two-lines">
-                                    {{ item.product.name }} 
-                                </p>
-                                <p class="price font-bold text-sm xl:hidden">
-                                    {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity | replaceBy }}
-                                </p>
-                                <div class="bottom flex gap-2 justify-start items-center">
-                                    <div class="color-div relative">
-                                        <p class="text-black text-sm">
-                                            Cor: <span class="text-black/60 underline cursor-pointer" (click)="openAvailableColors(item)">{{ item.product.colors[item.colorIndex].name }}</span>
-                                        </p>
-                                        <div class="dropdown">
-                                            <ul class="">
-                                                <li>
-                                                    <button>Branco</button>
-                                                </li>
-                                                <li>
-                                                    <button>Preto</button>
-                                                </li>
-                                            </ul>
+                        <div class="topper flex gap-3 duration-[.2s] justify-between w-full">
+                            <div
+                            [routerLink]="['/product/' + item.product.slug]"
+                            class="image overflow-hidden cursor-pointer w-[90px] h-[90px] min-w-[90px] bg-[#F5F5F5] rounded-lg flex justify-center items-start">
+                                <img
+                                class="w-auto h-full object-over object-top mx-auto"
+                                [src]="item.product.colors[item.colorIndex].representationalImages[0].imagePath.genericPath"
+                                alt="">
+                            </div>
+                            <div class="details w-full flex gap-1 justify-between items-stretch">
+                                <div class="product-info w-full flex flex-col gap-2 xl:gap-[14px] xl:justify-between">
+                                    <!-- [routerLink]="['/product/' + item.product.slug]" -->
+                                    <p
+                                    class="max-w-[198px] product-name cursor-pointer text-base font-['Bricolage-Grotesque'] limited-text two-lines">
+                                        {{ item.product.name }} 
+                                    </p>
+                                    <p class="price font-bold text-sm xl:hidden">
+                                        {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity | replaceBy }}
+                                    </p>
+                                    <div class="bottom flex gap-2 justify-start items-center">
+                                        <div class="color-div relative">
+                                            <p class="text-black text-sm">
+                                                Cor: <span class="text-black/60 underline cursor-pointer" (click)="openAvailableColors(item)">{{ item.product.colors[item.colorIndex].name }}</span>
+                                            </p>
+                                            
+                                            <div class="dropdown text-sm w-full mt-1 absolute z-[2] bg-red-400 p-1">
+                                                <ul class="">
+                                                    <li>
+                                                        <button>Branco</button>
+                                                    </li>
+                                                    <li>
+                                                        <button>Preto</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <circle cx="3" cy="3" r="3" fill="black"/>
+                                        </svg>
+                                        <div class="color-size relative">
+                                            <p class="text-black text-sm">
+                                                Tamanho: <span class="text-black/60 underline cursor-pointer">{{ item.product.sizes[item.sizeIndex].name }}</span>
+                                            </p>
                                         </div>
                                     </div>
-                                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="3" cy="3" r="3" fill="black"/>
-                                    </svg>
-                                    <div class="color-size relative">
-                                        <p class="text-black text-sm">
-                                            Tamanho: <span class="text-black/60 underline cursor-pointer">{{ item.product.sizes[item.sizeIndex].name }}</span>
-                                        </p>
+                                    <div class="quantity mt-2 flex justify-start gap-4 items-center xl:hidden">
+                                        <div class="operators flex gap-2 justify-start items-center">
+                                            <div class="decrease">
+                                                <a
+                                                (click)="decreaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                                class="cursor-pointer"
+                                                href="javascript:void(0)">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                                        <path d="M11.3335 16H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="quantity-value p-3 w-fit min-w-8 h-8 rounded-full text-base bg-primary text-white flex justify-center items-center">
+                                                <p class=" font-['Bricolage-Grotesque']">{{ item.quantity }}</p>
+                                            </div>
+                                            <div class="increase">
+                                                <a
+                                                (click)="increaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                                class="cursor-pointer"
+                                                href="javascript:void(0)">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                                        <path d="M16.0002 11.3333V20.6666M11.3335 15.9999H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <button
+                                        (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                        class="underline text-sm text-black"
+                                        >
+                                            Eliminar
+                                        </button>
                                     </div>
                                 </div>
-                                <div class="quantity mt-2 flex justify-start gap-4 items-center xl:hidden">
-                                    <div class="operators flex gap-2 justify-start items-center">
-                                        <div class="decrease">
-                                            <a
-                                            (click)="decreaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                                            class="cursor-pointer"
-                                            href="javascript:void(0)">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
-                                                    <path d="M11.3335 16H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                        <div class="quantity-value p-3 w-fit min-w-8 h-8 rounded-full text-base bg-primary text-white flex justify-center items-center">
-                                            <p class=" font-['Bricolage-Grotesque']">{{ item.quantity }}</p>
-                                        </div>
-                                        <div class="increase">
-                                            <a
-                                            (click)="increaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                                            class="cursor-pointer"
-                                            href="javascript:void(0)">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
-                                                    <path d="M16.0002 11.3333V20.6666M11.3335 15.9999H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </a>
+                                <div class="shop-details hidden xl:flex w-full max-w-[112px] flex-col justify-between items-end">
+                                    <p class="price font-['Bricolage-Grotesque'] font-bold text-sm text-black">
+                                        {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
+                                    </p>
+                                    <div class="quantity">
+                                        <div class="operators flex gap-2 justify-start items-center">
+                                            <div class="decrease">
+                                                <a
+                                                (click)="decreaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                                class="cursor-pointer"
+                                                href="javascript:void(0)">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                                        <path d="M11.3335 16H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                            <div class="quantity-value p-3 w-fit min-w-8 h-8 rounded-full text-base bg-primary text-white flex justify-center items-center">
+                                                <p class=" font-['Bricolage-Grotesque']">{{ item.quantity }}</p>
+                                            </div>
+                                            <div class="increase">
+                                                <a
+                                                (click)="increaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                                class="cursor-pointer"
+                                                href="javascript:void(0)">
+                                                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
+                                                        <path d="M16.0002 11.3333V20.6666M11.3335 15.9999H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <button
-                                    (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                                    class="underline text-sm text-black"
-                                    >
-                                        Eliminar
-                                    </button>
                                 </div>
                             </div>
-                            <div class="shop-details hidden xl:flex w-full max-w-[112px] flex-col justify-between items-end">
-                                <p class="price font-['Bricolage-Grotesque'] font-bold text-sm text-black">
-                                    {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
-                                </p>
-                                <div class="quantity">
-                                    <div class="operators flex gap-2 justify-start items-center">
-                                        <div class="decrease">
-                                            <a
-                                            (click)="decreaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                                            class="cursor-pointer"
-                                            href="javascript:void(0)">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
-                                                    <path d="M11.3335 16H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                        <div class="quantity-value p-3 w-fit min-w-8 h-8 rounded-full text-base bg-primary text-white flex justify-center items-center">
-                                            <p class=" font-['Bricolage-Grotesque']">{{ item.quantity }}</p>
-                                        </div>
-                                        <div class="increase">
-                                            <a
-                                            (click)="increaseQuantity(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                                            class="cursor-pointer"
-                                            href="javascript:void(0)">
-                                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <rect x="0.75" y="0.75" width="30.5" height="30.5" rx="15.25" stroke="#EFEFEF" stroke-width="1.5"/>
-                                                    <path d="M16.0002 11.3333V20.6666M11.3335 15.9999H20.6668" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="delete justify-end items-center hidden xl:flex">
+                                <button
+                                (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
+                                class="underline text-sm text-black"
+                                >
+                                    Eliminar
+                                </button>
                             </div>
                         </div>
-                    </div>
-                    <div class="delete justify-end items-center hidden xl:flex">
-                        <button
-                        (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
-                        class="underline text-sm text-black"
-                        >
-                            Eliminar
-                        </button>
                     </div>
                 }
             } @else {

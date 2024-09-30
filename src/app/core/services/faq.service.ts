@@ -28,28 +28,20 @@ export class FaqService{
 
     private faqs: Faq[] = [
         {
-          question: 'O que torna a marca Neutro única ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
+          question: 'Qual é o prazo de entrega dos pedidos?',
+          answer: 'O prazo de entrega varia conforme a localização. Normalmente, os pedidos são processados em até 2 dias úteis e entregues entre 5 a 10 dias úteis após o envio. Consulte os prazos específicos no momento da compra.'
         },
         {
-          question: 'O quais são os materias utilizados nas roupas ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
+          question: 'Como faço para trocar ou devolver um produto?',
+          answer: 'Aceitamos devoluções em até 30 dias após a entrega, desde que o item esteja sem uso e com a etiqueta original.'
         },
         {
-          question: 'Como posso saber qual tamanho escolher ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
+          question: 'Como saber qual é o tamanho ideal para mim?',
+          answer: 'Disponibilizamos uma tabela de medidas detalhada em cada página de produto para ajudar você a escolher o tamanho correto. Caso tenha dúvidas, entre em contato com nossa equipe de atendimento ao cliente para suporte personalizado.'
         },
         {
-          question: 'Tem opções de cores além de tons neutros ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
-        },
-        {
-          question: 'Qual é a política de devolução dos produtos ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
-        },
-        {
-          question: 'Onde posso comprar produtos da Neutro ?',
-          answer: 'A marca Neutro destaca-se pela sua abordagem minimalista e versátil para a moda. Nossas peças são cuidadome projetadas para oferecer conforto, estilo e facilidade de combinação.'
+          question: 'Quais formas de pagamento são aceitas?',
+          answer: 'Transferência e pagamento em dinheiro no acto da entrega.'
         },
     ];
 
