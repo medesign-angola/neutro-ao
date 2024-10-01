@@ -113,6 +113,30 @@ export class ShoppingBagService implements OnInit{
         this.getSubTotal();
     }
 
+    changeColor(product: Product,  options: CheckoutOptions, newColorIndex: number){
+        let theItemIndex = this.shoppingBagProductIndex(product, options);
+        
+        if(theItemIndex === -1) return;
+        if(this.products[theItemIndex].colorIndex === newColorIndex) return;
+
+        let theItemIndexWithNewSize = this.shoppingBagProductIndex(product, { ...options, selectedColorIndex: newColorIndex })
+        if(theItemIndexWithNewSize !== -1) return;
+
+        this.products[theItemIndex].colorIndex = newColorIndex;
+    }
+
+    changeSize(product: Product,  options: CheckoutOptions, newSizeIndex: number){
+        let theItemIndex = this.shoppingBagProductIndex(product, options);
+        
+        if(theItemIndex === -1) return;
+        if(this.products[theItemIndex].sizeIndex === newSizeIndex) return;
+
+        let theItemIndexWithNewSize = this.shoppingBagProductIndex(product, { ...options, selectedSize: newSizeIndex })
+        if(theItemIndexWithNewSize !== -1) return;
+
+        this.products[theItemIndex].sizeIndex = newSizeIndex;
+    }
+
     private getSubTotal(){
         this.subtotal = computed(() => {
             let values: number[] = [];

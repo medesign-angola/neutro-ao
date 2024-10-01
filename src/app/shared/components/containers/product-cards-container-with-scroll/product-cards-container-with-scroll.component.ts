@@ -33,6 +33,7 @@ implements OnInit, OnChanges, AfterViewInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    this.displayableProductsArray = [];
     this.limitProductsLength(LIMIT_OF_PRODUCTS_ON_SCROLL);
   }
 

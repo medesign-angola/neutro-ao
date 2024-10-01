@@ -3,7 +3,7 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThemeEnum } from '@core/data/enums/theme.enum';
 import { HeaderItemsModel } from '@core/data/models/header-items.model';
-import { Product } from '@core/data/models/product.model';
+import { Product, productSize } from '@core/data/models/product.model';
 import { Checkout, CheckoutOptions, ShoppingBagService } from '@core/services/shopping-bag.service';
 import { ThemeService } from '@core/services/theme/theme.service';
 import { BehaviorSubject } from 'rxjs';
@@ -139,6 +139,18 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   decreaseQuantity(product: Product, options: CheckoutOptions){
     this.shoppingBagService.decreaseQuantity(product, options);
+  }
+
+  changeColor(product: Product, options: CheckoutOptions, newColorIndex: number){
+    this.shoppingBagService.changeColor(product, options, newColorIndex);
+  }
+
+  changeSize(product: Product, options: CheckoutOptions, newSizeIndex: number){
+    this.shoppingBagService.changeSize(product, options, newSizeIndex);
+  }
+
+  verifySizeAvailabilityByColor(colorName: string, size: productSize): boolean{
+    return (size.availableForColors.includes(colorName)) ? true : false;
   }
 
   removeItem(product: Product, options: CheckoutOptions){

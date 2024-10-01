@@ -281,10 +281,10 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </svg>
             </button>
         </div>
-        <div class="modal-body px-4 xl:px-10 overflow-y-auto max-h-[calc(100vh-247px)] xl:max-h-[480px] no-scroller">
+        <div class="modal-body px-4 xl:px-10 h-full overflow-y-auto max-h-[calc(100vh-247px)] xl:max-h-[425px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
-                    <div class="product-card bg-green-400 flex flex-col gap-2 pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
+                    <div class="product-card flex flex-col gap-2 pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
                     >
                         <div class="topper flex gap-3 duration-[.2s] justify-between w-full">
                             <div
@@ -308,16 +308,18 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                     <div class="bottom flex gap-2 justify-start items-center">
                                         <div class="color-div relative">
                                             <p class="text-black text-sm">
-                                                Cor: <span class="text-black/60 underline cursor-pointer" (click)="openAvailableColors(item)">{{ item.product.colors[item.colorIndex].name }}</span>
+                                                Cor: <label [for]="'product-color' + $index" class="text-black/60 underline cursor-pointer" (click)="openAvailableColors(item)">{{ item.product.colors[item.colorIndex].name }}</label>
                                             </p>
+                                            <input [id]="'product-color' + $index" type="checkbox" class="hidden">
                                             
-                                            <div class="dropdown text-sm w-full mt-1 absolute z-[2] bg-red-400 p-1">
+                                            <div class="color-dropdown text-sm w-full mt-1 absolute z-[2] p-1">
                                                 <ul class="">
                                                     <li>
-                                                        <button>Branco</button>
-                                                    </li>
-                                                    <li>
-                                                        <button>Preto</button>
+                                                        @for (availableColor of item.product.colors; track $index) {
+                                                            <button class="w-full" (click)="this.changeColor(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity}, $index)">
+                                                                {{ availableColor.name }}
+                                                            </button>
+                                                        }
                                                     </li>
                                                 </ul>
                                             </div>
@@ -327,8 +329,23 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                         </svg>
                                         <div class="color-size relative">
                                             <p class="text-black text-sm">
-                                                Tamanho: <span class="text-black/60 underline cursor-pointer">{{ item.product.sizes[item.sizeIndex].name }}</span>
+                                                Tamanho: <label [for]="'product-size' + $index" class="text-black/60 underline cursor-pointer">{{ item.product.sizes[item.sizeIndex].name }}</label>
                                             </p>
+                                            <input [id]="'product-size' + $index" type="checkbox" class="hidden">
+
+                                            <div class="size-dropdown text-sm w-full mt-1 absolute z-[2] p-1">
+                                                <ul class="">
+                                                    <li>
+                                                        @for (availableSize of item.product.sizes; track $index) {
+                                                            @if(verifySizeAvailabilityByColor(item.product.colors[item.colorIndex].name, availableSize)){
+                                                                <button class="w-full" (click)="this.changeSize(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity}, $index)">
+                                                                    {{ availableSize.name }}
+                                                                </button>
+                                                            }
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="quantity mt-2 flex justify-start gap-4 items-center xl:hidden">
@@ -421,7 +438,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </p>
             }
         </div>
-        <div class="modal-bottom absolute  w-full bg-white bottom-0 py-6 px-4 xl:px-16 border-t-[1.5px] border-[#F5F5F5]">
+        <div class="modal-bottom absolute w-full bg-white bottom-0 py-6 px-4 xl:px-16 border-t-[1.5px] border-[#F5F5F5]">
             <div class="subtotal flex justify-between items-center">
                 <p class="text-base text-primary font-['Bricolage-Grotesque'] font-medium leading-[22.4px]">
                     Subtotal

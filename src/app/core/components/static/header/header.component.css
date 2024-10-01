@@ -5,3 +5,19 @@
     left: 0px;
     opacity: 1;
 }
+
+.bottom .color-div input[type="checkbox"] ~ .color-dropdown{
+    display: none;
+}
+
+.bottom .color-div input[type="checkbox"]:checked ~ .color-dropdown{
+    display: block;
+}
+
+.bottom .color-size input[type="checkbox"] ~ .size-dropdown{
+    display: none;
+}
+
+.bottom .color-size input[type="checkbox"]:checked ~ .size-dropdown{
+    display: block;
+}
