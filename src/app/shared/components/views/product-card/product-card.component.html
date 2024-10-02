@@ -56,7 +56,14 @@
         </div>
     </div> -->
     <div class="card-body">
-        <div class="product-name mb-1">
+        @if (!product.inStock) {
+            <div class="product-availability">
+                <p class="text-[#E94646] text-base">
+                    Produto esgotado
+                </p>
+            </div>
+        }
+        <div class="product-name my-1">
             <h3 class="limited-text one-line text-base text-primary font-['Bricolage-Grotesque']">
                 <a [routerLink]="['/product/' + product.slug]" class="">
                     {{ product.name }}

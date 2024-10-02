@@ -1,7 +1,14 @@
 <div class="section-content">
     <div class="limited-container">
         <div class="mobile-product-details xl:hidden">
-            <h1 class="text-primary mb-2 font-['Bricolage-Grotesque'] text-2xl font-medium">
+            @if (!theProduct.inStock) {
+                <div class="product-availability">
+                    <p class="text-[#E94646] text-base">
+                        Produto esgotado
+                    </p>
+                </div>
+            }
+            <h1 class="text-primary my-2 font-['Bricolage-Grotesque'] text-2xl font-medium">
                 {{ theProduct.name }}
             </h1>
             <p class="text-base text-primary/60 limited-textx one-line">
@@ -27,7 +34,14 @@
         <div class="product-details w-[95%] mx-auto xl:w-full xl:mx-0 flex flex-col gap-y-8 xl:max-w-[367px] xl:px-3">
             <div class="product-basic-info flex flex-col gap-y-10">
                 <div class="desktop-product-details hidden xl:block">
-                    <h1 class="text-primary mb-2 font-['Bricolage-Grotesque'] text-[2rem] leading-[41px] font-medium">
+                    @if (!theProduct.inStock) {
+                        <div class="product-availability">
+                            <p class="text-[#E94646] text-base">
+                                Produto esgotado
+                            </p>
+                        </div>
+                    }
+                    <h1 class="text-primary my-2 font-['Bricolage-Grotesque'] text-[2rem] leading-[41px] font-medium">
                         {{ theProduct.name }}
                     </h1>
                     <p class="text-base text-primary/60 limited-textx three-lines">
@@ -124,7 +138,7 @@
 
             <div class="cta flex flex-col xl:flex-row gap-y-6 justify-between items-center">
                 <button
-                [disabled]="!(this.activeColor >= 0) || !(this.selectedSize > -1)"
+                [disabled]="!(this.activeColor >= 0) || !(this.selectedSize > -1) || (!this.theProduct.inStock)"
                 (click)="order()"
                 class="px-6 py-4 rounded-full w-full xl:w-fit bg-primary disabled:bg-primary/60 duration-[.4s] font-['Bricolage-Grotesque'] text-white font-semibold flex gap-2 justify-center items-center">
                     Comprar pelo whatsapp
@@ -134,6 +148,7 @@
                 </button>
                 <button
                 class="add-to-cart p-4 rounded-full duration-[.3s] w-full xl:w-fit flex gap-2 justify-center items-center"
+                [disabled]="(!this.theProduct.inStock)"
                 (click)="addOrEditProductToShoppingBag(this.theProduct)"
                 [ngClass]="{
                     'bg-[#F9F9F9]': !this.productIsOnShoppingBag(),

@@ -61,7 +61,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   order(){
-    if(!(this.activeColor > -1) || !(this.selectedSize > -1)) return;
+    if(!(this.activeColor > -1) || !(this.selectedSize > -1) || (!this.theProduct.inStock)) return;
     this.shoppingBag.order([
       {
         product: this.theProduct,
@@ -87,7 +87,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
   }
 
   addOrEditProductToShoppingBag(product: Product){
-    if(!(this.selectedSize > -1)) return;
+    if(!(this.selectedSize > -1) || (!this.theProduct.inStock)) return;
     this.shoppingBag.addItem(product, { promotionalPrice: product.promotionalPrice > 0, selectedColorIndex: this.activeColor, selectedSize: this.selectedSize, quantity: this.quantity });
   }
 
