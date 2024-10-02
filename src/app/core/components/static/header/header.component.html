@@ -312,7 +312,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                             </p>
                                             <input [id]="'product-color' + $index" type="checkbox" class="hidden">
                                             
-                                            <div class="color-dropdown text-sm w-full mt-1 absolute z-[2] p-1">
+                                            <div class="color-dropdown bg-white text-sm w-full mt-1 absolute z-[2] p-1">
                                                 <ul class="">
                                                     <li>
                                                         @for (availableColor of item.product.colors; track $index) {
@@ -333,7 +333,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                             </p>
                                             <input [id]="'product-size' + $index" type="checkbox" class="hidden">
 
-                                            <div class="size-dropdown text-sm w-full mt-1 absolute z-[2] p-1">
+                                            <div class="size-dropdown bg-white text-sm w-full mt-1 absolute z-[2] p-1">
                                                 <ul class="">
                                                     <li>
                                                         @for (availableSize of item.product.sizes; track $index) {
