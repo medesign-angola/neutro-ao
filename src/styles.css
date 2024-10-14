@@ -104,12 +104,6 @@
     margin: 0px auto;
 }
 
-/* xl-1230 */
-@media screen and (min-width: 1230px) {
-    .limited-container{
-        max-width: 90%;
-    }
-}
 /* xl */
 @media screen and (min-width: 1280px) {
     .limited-container{

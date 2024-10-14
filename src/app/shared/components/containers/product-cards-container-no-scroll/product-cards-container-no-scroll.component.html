@@ -5,7 +5,7 @@
         [style.paddingRight.px]="paddingX"
         >
             @for (product of productsArray; track $index) {
-                <div class="product w-[156px] xs-375:w-[171px] md:w-[264px] xl-1230:w-[304px]">
+                <div class="product w-[156px] xs-375:w-[171px] md:w-[264px] xl:w-[304px]">
                     <app-product-card
                     [product]="product"
                     [controllerArrowsOnMobile]="false"
