@@ -1,5 +1,5 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, HostListener, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, NgZone, OnChanges, OnDestroy, OnInit, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { CarouselItemsModel } from '@core/data/models/carousel-items.model';
 import { ImagePath } from '@core/data/models/image-path.model';
 import { CarouselService } from '@core/services/carousel/carousel.service';
@@ -24,6 +24,7 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
   constructor(
     @Inject(PLATFORM_ID) private platformId: any,
     private ngZone: NgZone,
+    private changeDetectorRef: ChangeDetectorRef,
     private carouselService: CarouselService,
   ) {}
 
@@ -101,17 +102,17 @@ export class DesktopBannerCarouselComponent implements OnInit, OnChanges, OnDest
   startChangingAfter(items: LocalCarouselItems[], delay: number){
     
     if(!isPlatformBrowser(this.platformId)) return;
-
-    // this.ngZone.runOutsideAngular(() => {
-      setTimeout(() => {
-        this.carouselInterval = setInterval(() => {
-          if(!(items.length > 0)) return;
-          let activeItemIndex = items.findIndex(item => item.isActive);
-          this.goToNextItem(activeItemIndex, items);
-        }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
-      
+    
+    setTimeout(() => {
+        this.ngZone.runOutsideAngular(() => {
+          this.carouselInterval = setInterval(() => {
+            if(!(items.length > 0)) return;
+            let activeItemIndex = items.findIndex(item => item.isActive);
+              this.goToNextItem(activeItemIndex, items);
+              this.changeDetectorRef.detectChanges(); // para o angular notar que as imagens estão a alterar.
+          }, CAROUSEL_INTERVAL_IN_SECONDS * 1000);
+        });
       }, delay * 1000);
-    // });
   }
 
   goToNextItem(activeIndex: number, itemsArray: LocalCarouselItems[]){

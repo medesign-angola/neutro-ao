@@ -43,7 +43,7 @@
                             >
                                 Política de Envio
                             </div>
-                            <div
+                            <!-- <div
                             [ngClass]="{ 'active': this.activeTab === this.tabEnum.PRIVACY_POLICY }"
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.PRIVACY_POLICY}"
@@ -69,7 +69,7 @@
                             class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Definições de Cookies
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -79,9 +79,18 @@
                     @case (this.tabEnum.HOW_TO_BUY) {
                         <div class="buy">
                             <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
-                                Termo de Compra Neutro
+                                Como comprar
                             </h1>
-                            <p class="font-semibold text-base">
+                            <p class="text-base">
+                                No momento, as compras das nossas peças de roupas estão sendo realizadas exclusivamente pelo WhatsApp! Assim, garantimos um atendimento personalizado e rápido, tirando todas as suas dúvidas e ajudando você a encontrar exatamente o que procura.
+                            </p>
+                            <p class="text-base">
+                                Para fazer seu pedido, basta entrar em contato conosco pelo número [+244 940909003] e nossa equipe estará pronta para te atender.
+                            </p>
+                            <p class="text-base">
+                                Estamos aqui para proporcionar uma experiência de compra simples, prática e com a atenção que você merece!
+                            </p>
+                            <!-- <p class="font-semibold text-base">
                                 Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
                             </p>
                             <p class="text-base">
@@ -108,15 +117,38 @@
                             </div>
                             <p class="text-base">
                                 Ao prosseguir com uma compra em nosso site, você indica que leu, entendeu e concorda com estes termos e políticas de compra. Se tiver alguma dúvida ou preocupação, não hesite em entrar em contato conosco. Agradecemos por escolher fazer negócios conosco na Compra Neutra.
-                            </p>
+                            </p> -->
                         </div>
                     } @case (this.tabEnum.REIMBURSEMENT) {
                         <div class="reimbursement">
                             <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
                                 Reembolso
                             </h1>
-                            <p class="font-semibold text-base">
-                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            <p class="text-base">
+                                Na Neutro, sua satisfação é nossa prioridade. Se por algum motivo você não estiver totalmente satisfeito com sua compra, oferecemos a possibilidade de reembolso de forma simples e transparente.
+                            </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Condições para reembolso:</h1>
+                            <p class="text-base">
+                                O pedido de reembolso deve ser feito em até 30 dias após o recebimento do produto.
+                            </p>
+                            <p class="text-base">
+                                O item deve estar sem sinais de uso, com todas as etiquetas originais e na embalagem adequada.
+                            </p>
+                            <p class="text-base">
+                                Produtos personalizados ou em promoção não são elegíveis para reembolso, exceto em casos de defeito de fabricação.
+                            </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Como Solicitar o Reembolso:</h1>
+                            <p class="text-base">
+                                Envie um e-mail para [geral&#64;neutro.co.ao] ou WhatsApp com o motivo do reembolso.
+                            </p>
+                            <p class="text-base">
+                                Nossa equipe irá analisar sua solicitação e, se aprovada, enviaremos as instruções de devolução.
+                            </p>
+                            <p class="text-base">
+                                Após o recebimento e inspeção do produto devolvido, o reembolso será processado no mesmo método de pagamento original, dentro de 2 a 5 dias úteis.
+                            </p>
+                            <p class="text-base">
+                                Em caso de dúvidas, nossa equipe de atendimento ao cliente está à disposição para ajudar!
                             </p>
                         </div>
                     } @case (this.tabEnum.SHIPPING_POLICY) {
@@ -124,11 +156,36 @@
                             <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
                                 Política de envio
                             </h1>
-                            <p class="font-semibold text-base">
-                                Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
+                            <p class="text-base">
+                                Na Neutro, cuidamos de cada detalhe para que sua experiência de compra seja incrível, do pedido à entrega. Confira abaixo as informações sobre nossa política de envio:
                             </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Prazo de Processamento:</h1>
+                            <p class="text-base">
+                                Todos os pedidos são processados em até 2 dias úteis após a confirmação de pagamento.
+                            </p>
+                            <p class="text-base">
+                                Pedidos realizados aos finais de semana ou feriados serão processados no próximo dia útil.
+                            </p>
+                            <h1 class="mt-6 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl">Opções de Envio:</h1>
+                            <ul class=" list-disc pl-4">
+                                <li>
+                                    <p class="text-base">
+                                        <span class="font-medium">Envio Padrão:</span> O prazo de entrega varia de 5 a 10 dias úteis, dependendo da região.
+                                    </p>
+                                </li>
+                                <li>
+                                    <p class="text-base">
+                                        <span class="font-medium">Envio Expresso:</span> Disponível em algumas regiões, com prazo de 2 a 5 dias úteis.
+                                    </p>
+                                </li>
+                            </ul>
+                            <p class="text-base">
+                                Caso tenha dúvidas ou precise de mais informações, entre em contato com nosso suporte.
+                            </p>
+                            
                         </div>
-                    } @case (this.tabEnum.PRIVACY_POLICY) {
+                    }
+                    <!-- @case (this.tabEnum.PRIVACY_POLICY) {
                         <div class="privacy-policy">
                             <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
                                 Política de privacidade
@@ -155,7 +212,8 @@
                                 Ao realizar uma compra em nosso site, você concorda em ser responsável por todas as taxas, impostos e encargos associados à sua transação. Certifique-se de revisar o valor total da sua compra antes de finalizá-la.
                             </p>
                         </div>
-                    } @default {
+                    } -->
+                    @default {
                         <div class="not-found">
                             <h1 class="mt-8 mb-4 font-['Bricolage-Grotesque'] font-semibold text-2xl md:text-[2.5rem] md:leading-[48px] md:-tracking-[0.2px]">
                                 Opção não encontrada!

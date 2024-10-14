@@ -77,11 +77,11 @@ implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   startAutomatizedSliding(intervalTimerInSeconds: number = CAROUSEL_SLIDER_INTERVAL){
     if(!isPlatformBrowser(this.platformId)) return;
 
-    // this.ngZone.runOutsideAngular(() => {
+    this.ngZone.runOutsideAngular(() => {
       this.carouselInterval = setInterval(() => {
         this.next();
       }, intervalTimerInSeconds * 1000);
-    // });
+    });
 
   }
 
