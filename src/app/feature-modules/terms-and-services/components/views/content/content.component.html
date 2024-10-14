@@ -9,19 +9,19 @@
             </p>
         </div>
 
-        <div class="content mt-6 flex flex-col gap-y-6 xl:flex-row xl:justify-between xl:items-start">
-            <div class="aside w-full xl:sticky xl:top-[130px] xl:w-[20rem] xl:h-fit">
+        <div class="content mt-6 flex flex-col gap-y-6 xl-1230:flex-row xl-1230:justify-between xl-1230:items-start">
+            <div class="aside w-full xl-1230:sticky xl-1230:top-[130px] xl-1230:w-[20rem] xl-1230:h-fit">
                 <h4 class="mb-6 md:text-2xl font-['Bricolage-Grotesque'] font-semibold">Conteúdos</h4>
                 <div class="tab-sections relative bg-white">
                     <div class="end-overlay absolute hidden z-[2] right-0 w-16 h-full bg-[linear-gradient(90deg,rgba(255,255,255,0.00)_-40.97%,#FFF_88.57%)]"></div>
                     <div class="chips-container relative w-full overflow-x-auto">
-                        <div class="chips w-max flex flex-row xl:flex-col gap-2">
+                        <div class="chips w-max flex flex-row xl-1230:flex-col gap-2">
                             <div
                             [ngClass]="{ 'active': this.activeTab === this.tabEnum.HOW_TO_BUY}"
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.HOW_TO_BUY}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Como comprar
                             </div>
@@ -30,7 +30,7 @@
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.REIMBURSEMENT}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Reembolso
                             </div>
@@ -39,7 +39,7 @@
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.SHIPPING_POLICY}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Política de Envio
                             </div>
@@ -48,7 +48,7 @@
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.PRIVACY_POLICY}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Política de privacidade
                             </div>
@@ -57,7 +57,7 @@
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.TERMS_OF_SERVICES}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Termos de serviços
                             </div>
@@ -66,7 +66,7 @@
                             [routerLink]="['/terms-and-services']"
                             [queryParams]="{ content: this.tabEnum.COOKIE_SETTINGS}"
                             [queryParamsHandling]="'merge'"
-                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl:w-fit text-black/60 text-base px-6 py-3 rounded-full"
+                            class="chip cursor-pointer font-['Bricolage-Grotesque'] xl-1230:w-fit text-black/60 text-base px-6 py-3 rounded-full"
                             >
                                 Definições de Cookies
                             </div> -->

@@ -103,6 +103,13 @@
     max-width: 95%;
     margin: 0px auto;
 }
+
+/* xl-1230 */
+@media screen and (min-width: 1230px) {
+    .limited-container{
+        max-width: 90%;
+    }
+}
 /* xl */
 @media screen and (min-width: 1280px) {
     .limited-container{
@@ -149,21 +156,27 @@
     text-overflow: ellipsis;
 }
 .limited-text.one-line{
+    line-clamp: 1;
     -webkit-line-clamp: 1;
 }
 .limited-text.two-lines{
+    line-clamp: 2;
     -webkit-line-clamp: 2;
 }
 .limited-text.three-lines{
+    line-clamp: 3;
     -webkit-line-clamp: 3;
 }
 .limited-text.four-lines{
+    line-clamp: 4;
     -webkit-line-clamp: 4;
 }
 .limited-text.five-lines{
+    line-clamp: 5;
     -webkit-line-clamp: 5;
 }
 .limited-text.nine-lines{
+    line-clamp: 9;
     -webkit-line-clamp: 9;
 }
 

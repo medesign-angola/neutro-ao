@@ -2,7 +2,7 @@
     <div class="image-carousel w-full h-full relative rounded-lg overflow-hidden" #imagesContainerElement>
         <div class="images-scroller flex items-stretch w-max h-full">
             @for (image of productImages; track $index) {
-                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full xl:w-[304px]"
+                <div class="image overflow-hidden bg-[#F5F5F5] pt-[0px] h-full xl-1230:w-[304px]"
                 [ngClass]="{
                     'w-[171px] md:w-[264px]': size === sizesEnum.SMALL_ON_MOBILE_LARGE_STARTING_ON_TABLET,
                     'w-[264px]': size === sizesEnum.LARGE_ON_BOTH || size === sizesEnum.MEDIUM_ON_MOBILE_LARGE_STARTING_ON_TABLET,

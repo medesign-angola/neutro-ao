@@ -1,17 +1,17 @@
 <div class="section-content text-white bg-primary py-20">
-    <div class="limited-container relative flex flex-col xl:flex-row xl:justify-between xl:items-start gap-y-10">
-        <div class="section-header xl:sticky xl:top-[150px] md:max-w-[480px] xl:w-full md:mx-auto xl:mx-0 flex flex-col gap-y-6 justify-center xl:justify-start">
+    <div class="limited-container relative flex flex-col xl-1230:flex-row xl-1230:justify-between xl-1230:items-start gap-y-10">
+        <div class="section-header xl-1230:sticky xl-1230:top-[150px] md:max-w-[480px] xl-1230:w-full md:mx-auto xl-1230:mx-0 flex flex-col gap-y-6 justify-center xl-1230:justify-start">
             <div class="title">
-                <h1 class="text-white xl:max-w-[371px] uppercase text-[2rem] text-center xl:text-left font-['Bricolage-Grotesque'] font-semibold leading-[2.4rem] tracking-[-0.64px]">
+                <h1 class="text-white xl-1230:max-w-[371px] uppercase text-[2rem] text-center xl-1230:text-left font-['Bricolage-Grotesque'] font-semibold leading-[2.4rem] tracking-[-0.64px]">
                     FAQ
                 </h1>
             </div>
             <div class="description">
-                <p class="text-lg text-white/60 leading-[27px] text-center xl:text-left">
+                <p class="text-lg text-white/60 leading-[27px] text-center xl-1230:text-left">
                     Se você tiver outras perguntas que não foram abordadas nesta seção de FAQ, não hesite em nos contatar.
                 </p>
             </div>
-            <div class="cta flex justify-center xl:justify-start mt-6 xl:mt-8">
+            <div class="cta flex justify-center xl-1230:justify-start mt-6 xl-1230:mt-8">
                 <button [routerLink]="['/contact-us']" class="p-3 rounded-full bg-white text-black flex gap-x-2 justify-center items-center w-fit">
                     <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.83203 4.66675L7.27531 8.47704C7.71609 8.78559 7.93648 8.93986 8.17621 8.99962C8.38796 9.0524 8.60943 9.0524 8.82119 8.99962C9.06091 8.93986 9.2813 8.78559 9.72208 8.47704L15.1654 4.66675M5.03203 13.3334H11.9654C13.0855 13.3334 13.6455 13.3334 14.0733 13.1154C14.4497 12.9237 14.7556 12.6177 14.9474 12.2414C15.1654 11.8136 15.1654 11.2535 15.1654 10.1334V5.86675C15.1654 4.74664 15.1654 4.18659 14.9474 3.75877C14.7556 3.38244 14.4497 3.07648 14.0733 2.88473C13.6455 2.66675 13.0855 2.66675 11.9654 2.66675H5.03203C3.91193 2.66675 3.35187 2.66675 2.92405 2.88473C2.54773 3.07648 2.24176 3.38244 2.05002 3.75877C1.83203 4.18659 1.83203 4.74664 1.83203 5.86675V10.1334C1.83203 11.2535 1.83203 11.8136 2.05002 12.2414C2.24176 12.6177 2.54773 12.9237 2.92405 13.1154C3.35187 13.3334 3.91193 13.3334 5.03203 13.3334Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,7 +20,7 @@
                 </button>
             </div>
         </div>
-        <div class="faqs-container md:max-w-[630px] md:mx-auto xl:mx-0">
+        <div class="faqs-container md:max-w-[630px] md:mx-auto xl-1230:mx-0">
             <div class="faqs flex flex-col gap-y-10">
 
                 @for (faq of faqs; track $index) {

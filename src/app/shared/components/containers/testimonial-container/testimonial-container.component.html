@@ -1,14 +1,14 @@
 <div class="component-container">
-    <div class="limited-container !mx-0 !max-w-full xl:!mx-auto xl:!max-w-[90%] 2xl:!max-w-[var(--max-w)] 4xl:!max-w-[75%] 5xl:!max-w-[var(--max-w-1536)] flex flex-col xl:flex-row">
-        <div class="description w-full max-w-[358px] xl:max-w-[524px] mx-auto mb-12 xl:py-12">
-            <p class="client-name limited-text one-line mb-4 text-white text-center xl:text-left text-lg font-semibold">
+    <div class="limited-container !mx-0 !max-w-full xl-1230:!mx-auto xl-1230:!max-w-[90%] 2xl-1230:!max-w-[var(--max-w)] 4xl-1230:!max-w-[75%] 5xl-1230:!max-w-[var(--max-w-1536)] flex flex-col xl-1230:flex-row">
+        <div class="description w-full max-w-[358px] xl-1230:max-w-[524px] mx-auto mb-12 xl-1230:py-12">
+            <p class="client-name limited-text one-line mb-4 text-white text-center xl-1230:text-left text-lg font-semibold">
                 {{ (this.testimonials[this.activeIndex]) ? this.testimonials[this.activeIndex].client : '' }}
             </p>
-            <p class="h-[95px] xl:h-auto limited-text three-lines client-message text-white/60 font-['Bricolage-Grotesque'] font-extralight text-2xl xl:text-[2.5rem] xl:leading-[48px] text-center xl:text-left tracking-[-0.48px]">
+            <p class="h-[95px] xl-1230:h-auto limited-text three-lines client-message text-white/60 font-['Bricolage-Grotesque'] font-extralight text-2xl xl-1230:text-[2.5rem] xl-1230:leading-[48px] text-center xl-1230:text-left tracking-[-0.48px]">
                 “{{ (this.testimonials[this.activeIndex]) ? this.testimonials[this.activeIndex].message: '' }}”
             </p>
     
-            <div class="cta my-12 hidden w-full xl:flex justify-start">
+            <div class="cta my-12 hidden w-full xl-1230:flex justify-start">
                 <button class=" bg-white text-black font-['Bricolage-Grotesque'] font-bold flex gap-2 justify-center items-center p-3 rounded-full">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16" cy="16" r="16" fill="black"/>
@@ -67,7 +67,7 @@
                 }
             </div>
         
-            <div class="cta my-12 xl:hidden w-full flex justify-center">
+            <div class="cta my-12 xl-1230:hidden w-full flex justify-center">
                 <a href="https://www.instagram.com/neutro.ao" target="_blank" class=" bg-white text-black font-['Bricolage-Grotesque'] font-bold flex gap-2 justify-center items-center p-3 rounded-full">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16" cy="16" r="16" fill="black"/>
@@ -94,7 +94,7 @@
         </div>
     </div>
 </div>
-<div class="carousel-controllers xl:mt-12">
+<div class="carousel-controllers xl-1230:mt-12">
     <div class="limited-container flex justify-between items-center">
 
         <div class="dots-indicators px-2 py-3 flex gap-x-2 justify-start items-center">

@@ -1,10 +1,10 @@
 <header
-class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]"
+class="header duration-[.4s] py-0 xl-1230:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0.03)] fixed w-full top-0 left-0 z-[100]"
 [ngClass]="{
     'bg-white': themeService.menuTheme() === themeEnum.LIGHT,
     'bg-primary': themeService.menuTheme() === themeEnum.DARK,
 }" #headerContentElement>
-    <div class="limited-container !my-6 xl:!my-0 flex justify-between items-center">
+    <div class="limited-container !my-6 xl-1230:!my-0 flex justify-between items-center">
         <div class="section flex gap-x-[4.563rem] justify-start items-center">
             <div class="logo">
                 <a [routerLink]="['/']">
@@ -62,7 +62,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                             </a>
 
                             
-                            <div class="desktop-dropdown absolute w-full bg-white top-full left-0 duration-[.6s] hidden xl:block overflow-hidden"
+                            <div class="desktop-dropdown absolute w-full bg-white top-full left-0 duration-[.6s] hidden xl-1230:block overflow-hidden"
                             [ngClass]="{
                                 'h-0': !this.showDesktopDropdown,
                                 'h-[70vh] py-10': this.showDesktopDropdown
@@ -261,13 +261,13 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
         </div>
     </div>
 
-    <div class="shopping-bag-modal duration-[.7s] overflow-y-auto absolute top-0 bg-white w-full xl:max-w-[544px] h-screen"
+    <div class="shopping-bag-modal duration-[.7s] overflow-y-auto absolute top-0 bg-white w-full xl-1230:max-w-[544px] h-screen"
     [ngClass]="{
         'right-0': this.checkoutModalVisible(),
-        '-right-full xl:-right-[50%]': !this.checkoutModalVisible()
+        '-right-full xl-1230:-right-[50%]': !this.checkoutModalVisible()
     }"
     >
-        <div class="modal-header px-4 xl:px-16 py-6 sticky top-0 bg-white flex justify-between items-center border-b-[1.5px] border-[#F5F5F5]">
+        <div class="modal-header px-4 xl-1230:px-16 py-6 sticky top-0 bg-white flex justify-between items-center border-b-[1.5px] border-[#F5F5F5]">
             <h1 class=" font-['Bricolage-Grotesque'] font-semibold text-2xl text-black flex justify-between items-center gap-2">
                 Meu cesto
                 <span class="p-3 w-fit min-w-10 h-10 text-[20px] font-['Bricolage-Grotesque'] font-medium border-[1.5px] rounded-full flex justify-center items-center border-[#EFEFEF]">
@@ -281,10 +281,10 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </svg>
             </button>
         </div>
-        <div class="modal-body px-4 xl:px-10 h-full overflow-y-auto max-h-[calc(100vh-247px)] xl:max-h-[425px] no-scroller">
+        <div class="modal-body px-4 xl-1230:px-10 h-full overflow-y-auto max-h-[calc(100vh-247px)] xl-1230:max-h-[425px] no-scroller">
             @if (this.shoppingBagService.items().length > 0) {
                 @for (item of this.shoppingBagService.items(); track $index) {
-                    <div class="product-card flex flex-col gap-2 pt-6 pb-3 xl:px-6 border-[1.5px] border-white rounded-lg"
+                    <div class="product-card flex flex-col gap-2 pt-6 pb-3 xl-1230:px-6 border-[1.5px] border-white rounded-lg"
                     >
                         <div class="topper flex gap-3 duration-[.2s] justify-between w-full">
                             <div
@@ -296,13 +296,13 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                 alt="">
                             </div>
                             <div class="details w-full flex gap-1 justify-between items-stretch">
-                                <div class="product-info w-full flex flex-col gap-2 xl:gap-[14px] xl:justify-between">
+                                <div class="product-info w-full flex flex-col gap-2 xl-1230:gap-[14px] xl-1230:justify-between">
                                     <!-- [routerLink]="['/product/' + item.product.slug]" -->
                                     <p
                                     class="max-w-[198px] product-name cursor-pointer text-base font-['Bricolage-Grotesque'] limited-text two-lines">
                                         {{ item.product.name }} 
                                     </p>
-                                    <p class="price font-bold text-sm xl:hidden">
+                                    <p class="price font-bold text-sm xl-1230:hidden">
                                         {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity | replaceBy }}
                                     </p>
                                     <div class="bottom flex gap-2 justify-start items-center">
@@ -348,7 +348,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="quantity mt-2 flex justify-start gap-4 items-center xl:hidden">
+                                    <div class="quantity mt-2 flex justify-start gap-4 items-center xl-1230:hidden">
                                         <div class="operators flex gap-2 justify-start items-center">
                                             <div class="decrease">
                                                 <a
@@ -384,7 +384,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                                         </button>
                                     </div>
                                 </div>
-                                <div class="shop-details hidden xl:flex w-full max-w-[112px] flex-col justify-between items-end">
+                                <div class="shop-details hidden xl-1230:flex w-full max-w-[112px] flex-col justify-between items-end">
                                     <p class="price font-['Bricolage-Grotesque'] font-bold text-sm text-black">
                                         {{ ((item.promotionalPrice) ? item.product.promotionalPrice : item.product.price) * item.quantity| replaceBy }}
                                     </p>
@@ -421,7 +421,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                             </div>
                         </div>
                         <div class="bottom">
-                            <div class="delete justify-end items-center hidden xl:flex">
+                            <div class="delete justify-end items-center hidden xl-1230:flex">
                                 <button
                                 (click)="this.removeItem(item.product, { promotionalPrice: item.promotionalPrice, selectedColorIndex: item.colorIndex, selectedSize: item.sizeIndex, quantity: item.quantity})"
                                 class="underline text-sm text-black"
@@ -438,7 +438,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                 </p>
             }
         </div>
-        <div class="modal-bottom absolute w-full bg-white bottom-0 py-6 px-4 xl:px-16 border-t-[1.5px] border-[#F5F5F5]">
+        <div class="modal-bottom absolute w-full bg-white bottom-0 py-6 px-4 xl-1230:px-16 border-t-[1.5px] border-[#F5F5F5]">
             <div class="subtotal flex justify-between items-center">
                 <p class="text-base text-primary font-['Bricolage-Grotesque'] font-medium leading-[22.4px]">
                     Subtotal
@@ -447,7 +447,7 @@ class="header duration-[.4s] py-0 xl:py-0 shadow-[0px_24px_40px_0px_rgba(0,0,0,0
                     {{ this.shoppingBagService.subtotal() | replaceBy }} AOA
                 </p>
             </div>
-            <div class="submit mt-6 xl:mt-12">
+            <div class="submit mt-6 xl-1230:mt-12">
                 <button
                 [disabled]="!(this.shoppingBagService.items().length > 0)"
                 (click)="order()"

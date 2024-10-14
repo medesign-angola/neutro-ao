@@ -13,7 +13,7 @@
                 <div class="order relative p-1 md:block">
                     <button
                     (click)="openOrderModal()"
-                    class="text-base bg-white text-primary xl:hidden font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
+                    class="text-base bg-white text-primary xl-1230:hidden font-['Bricolage-Grotesque'] flex gap-3 justify-center items-center"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -22,7 +22,7 @@
                     </button>
                     <button
                     (click)="toggleDesktopOrderModal()"
-                    class="text-base bg-white text-primary hidden xl:flex font-['Bricolage-Grotesque'] gap-3 justify-center items-center"
+                    class="text-base bg-white text-primary hidden xl-1230:flex font-['Bricolage-Grotesque'] gap-3 justify-center items-center"
                     >
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M7 15L12 20L17 15M7 9L12 4L17 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -31,7 +31,7 @@
                     </button>
                     @if (this.showOrderModal()) {
                         <div
-                        class="desktop-order-modal hidden xl:block absolute top-full w-max left-[50%] -translate-x-[50%] z-[2] bg-white p-4 rounded-lg shadow-[0px_16px_24px_0px_rgba(220,220,220,0.20)]"
+                        class="desktop-order-modal hidden xl-1230:block absolute top-full w-max left-[50%] -translate-x-[50%] z-[2] bg-white p-4 rounded-lg shadow-[0px_16px_24px_0px_rgba(220,220,220,0.20)]"
                         >
                             @for (radio of orderOptions; track $index) {
                                 <div class="radio cursor-pointer flex py-2 gap-x-3 justify-start items-center"
@@ -71,14 +71,14 @@
         />
     </div>
 
-    <div class="order-modal-bg w-full xl:hidden h-full fixed top-0 left-0 z-[101] bg-black/40"
+    <div class="order-modal-bg w-full xl-1230:hidden h-full fixed top-0 left-0 z-[101] bg-black/40"
     [ngClass]="{
         'hidden': (!this.showOrderModal() && this.firstTimeOpeningOrderModal()),
         'disappear': (!this.showOrderModal() && !this.firstTimeOpeningOrderModal()),
         'appear': this.showOrderModal()
     }"
     ></div>
-    <div class="bottom-modal xl:hidden duration-[.7s] p-6 h-[45vh] z-[102] fixed bg-white w-full rounded-t-3xl"
+    <div class="bottom-modal xl-1230:hidden duration-[.7s] p-6 h-[45vh] z-[102] fixed bg-white w-full rounded-t-3xl"
     [ngClass]="{
         'bottom-0': this.showOrderModal(),
         'bottom-[-50%]': !this.showOrderModal(),
