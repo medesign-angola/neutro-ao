@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { ImagePath } from '@core/data/models/image-path.model';
 
 @Component({
@@ -6,9 +6,13 @@ import { ImagePath } from '@core/data/models/image-path.model';
   templateUrl: './seek-excellence.component.html',
   styleUrl: './seek-excellence.component.css'
 })
-export class SeekExcellenceComponent {
+export class SeekExcellenceComponent implements OnInit {
   activeIndex: number = 0;
   activeBiggerIndexItem: number = 0;
+
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
+  theActiveProduct!: { product: string, images: ImagePath[] };
 
   productDetailed: { product: string, images: ImagePath[] }[] = [
     {
@@ -116,6 +120,10 @@ export class SeekExcellenceComponent {
     }
   ];
 
+  ngOnInit(): void {
+    this.activeProduct();
+  }
+
   showImage(index: number){
     this.activeIndex = index;
   }
@@ -129,7 +137,9 @@ export class SeekExcellenceComponent {
       return;
     }else{
       this.activeBiggerIndexItem--;
+      this.activeProduct();
     }
+
     this.showImage(0);
   }
 
@@ -138,12 +148,14 @@ export class SeekExcellenceComponent {
       return;
     }else{
       this.activeBiggerIndexItem++;
+      this.activeProduct();
     }
     this.showImage(0);
   }
 
   activeProduct(){
-    return this.productDetailed[this.activeBiggerIndexItem]
+    this.theActiveProduct = this.productDetailed[this.activeBiggerIndexItem]
+    this.changeDetectorRef.detectChanges();
   }
 
 }

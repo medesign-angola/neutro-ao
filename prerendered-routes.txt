@@ -1,5 +1,4 @@
 /about-us
-/coming-soon
 /contact-us
 /faqs
 /terms-and-services

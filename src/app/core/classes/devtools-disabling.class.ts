@@ -4,7 +4,7 @@ import { Directive, HostListener } from "@angular/core";
 export class DevToolsDisabling{
     
   @HostListener('contextmenu', ['$event']) onrightMouseClick($event: any){
-    return false; 
+    return false;
   }
 
   private ctrlShiftKey(e: any, keyCode: any):boolean {

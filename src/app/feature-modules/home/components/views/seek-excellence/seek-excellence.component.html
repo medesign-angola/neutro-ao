@@ -24,7 +24,7 @@
 
     <div class="images-container relative bg-[url('assets/images/static/utils/noise.png')] bg-cover bg-no-repeat h-[438px] md:h-[660px] lg:h-[860px] xl-1230:h-[960px] overflow-hidden">
         <!-- <div class="limited-container relative bg-red-400"> -->
-            @for (image of activeProduct().images; track $index) {
+            @for (image of theActiveProduct.images; track $index) {
                 <div class="images-preview duration-[.4s] absolute top-0 left-0 w-full xl-1230:left-[50%] xl-1230:translate-x-[-50%] xl-1230:max-w-[1000px] h-full"
                 [ngClass]="{
                     'opacity-0': $index !== activeIndex,
@@ -44,7 +44,7 @@
         <div class="chooser absolute bottom-4 md:bottom-8 xl-1230:bottom-[50%] xl-1230:translate-y-[50%] w-full">
             <div class="limited-container w-full flex justify-center xl-1230:justify-end items-center">
                 <div class="images-chip p-3 w-fit flex flex-row xl-1230:flex-col gap-4 justify-center items-center bg-white rounded-full">
-                    @for (image of activeProduct().images; track $index) {
+                    @for (image of theActiveProduct.images; track $index) {
                         <div
                         class="image border-[1.5px] border-[#EFEFEF] cursor-pointer relative overflow-hidden w-[56px] h-[56px] rounded-full"
                         (click)="showImage($index)"
