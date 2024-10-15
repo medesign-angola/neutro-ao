@@ -6,13 +6,14 @@ import { environment } from 'src/environments/environment.development';
 import { ModalSupporter } from '@core/data/classes/modal.class';
 import { isPlatformBrowser } from '@angular/common';
 import { Faq } from '@core/data/models/faq.model';
+import { DevToolsDisabling } from '@core/classes/devtools-disabling.class';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends DevToolsDisabling implements OnInit {
   
   private faqService = inject(FaqService);
   private router = inject(Router);
@@ -24,7 +25,9 @@ export class AppComponent implements OnInit {
   
   constructor(
     private changeDetectorRef: ChangeDetectorRef
-  ){ }
+  ){
+    super();
+  }
 
   ngOnInit(): void {
     this.router.events.subscribe(event => {
