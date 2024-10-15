@@ -6,6 +6,7 @@ import { ProductFacade } from '@core/facades/product.facade';
 import { takeUntil } from 'rxjs';
 import { HomeFacade } from '../../facades/home.facade';
 import { Testimonial } from '@core/data/models/testimonial.model';
+import { MetaTagsService } from '@shared/services/meta/meta-tags.service';
 
 @Component({
   selector: 'app-home',
@@ -16,159 +17,9 @@ export class HomeComponent extends Unsubcriber implements OnInit {
 
     private productFacade = inject(ProductFacade);
     private homeFacade= inject(HomeFacade);
+    private meta = inject(MetaTagsService);
 
-    defaultImagesBanner: CarouselItemsModel[] = [
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-1.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-1.png',
-        //             '1536x1536-height': 876,
-        //             '1536x1536-width': 516,
-        //             '2048x2048': 'assets/images/home/banner/img-1.png',
-        //             '2048x2048-height': 876,
-        //             '2048x2048-width': 516,
-        //             large: 'assets/images/home/banner/img-1.png',
-        //             'large-height': 876,
-        //             'large-width': 516,
-        //             medium: 'assets/images/home/banner/img-1.png',
-        //             'medium-height': 876,
-        //             'medium-width': 516,
-        //             medium_large: 'assets/images/home/banner/img-1.png',
-        //             'medium_large-height': 876,
-        //             'medium_large-width': 516,
-        //             thumbnail: 'assets/images/home/banner/img-1.png',
-        //             'thumbnail-height': 876,
-        //             'thumbnail-width': 516
-        //         }
-        //     },
-        // },
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-2.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-2.png',
-        //             '1536x1536-height': 876,
-        //             '1536x1536-width': 516,
-        //             '2048x2048': 'assets/images/home/banner/img-2.png',
-        //             '2048x2048-height': 876,
-        //             '2048x2048-width': 516,
-        //             large: 'assets/images/home/banner/img-2.png',
-        //             'large-height': 876,
-        //             'large-width': 516,
-        //             medium: 'assets/images/home/banner/img-2.png',
-        //             'medium-height': 876,
-        //             'medium-width': 516,
-        //             medium_large: 'assets/images/home/banner/img-2.png',
-        //             'medium_large-height': 876,
-        //             'medium_large-width': 516,
-        //             thumbnail: 'assets/images/home/banner/img-2.png',
-        //             'thumbnail-height': 876,
-        //             'thumbnail-width': 516
-        //         }
-        //     },
-        // },
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-3.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-3.png',
-        //             '1536x1536-height': 876,
-        //             '1536x1536-width': 441,
-        //             '2048x2048': 'assets/images/home/banner/img-3.png',
-        //             '2048x2048-height': 876,
-        //             '2048x2048-width': 441,
-        //             large: 'assets/images/home/banner/img-3.png',
-        //             'large-height': 876,
-        //             'large-width': 441,
-        //             medium: 'assets/images/home/banner/img-3.png',
-        //             'medium-height': 876,
-        //             'medium-width': 441,
-        //             medium_large: 'assets/images/home/banner/img-3.png',
-        //             'medium_large-height': 876,
-        //             'medium_large-width': 441,
-        //             thumbnail: 'assets/images/home/banner/img-3.png',
-        //             'thumbnail-height': 876,
-        //             'thumbnail-width': 441
-        //         }
-        //     },
-        // },
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-4.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-4.png',
-        //             '1536x1536-height': 900,
-        //             '1536x1536-width': 545,
-        //             '2048x2048': 'assets/images/home/banner/img-4.png',
-        //             '2048x2048-height': 900,
-        //             '2048x2048-width': 545,
-        //             large: 'assets/images/home/banner/img-4.png',
-        //             'large-height': 900,
-        //             'large-width': 545,
-        //             medium: 'assets/images/home/banner/img-4.png',
-        //             'medium-height': 900,
-        //             'medium-width': 545,
-        //             medium_large: 'assets/images/home/banner/img-4.png',
-        //             'medium_large-height': 900,
-        //             'medium_large-width': 545,
-        //             thumbnail: 'assets/images/home/banner/img-4.png',
-        //             'thumbnail-height': 900,
-        //             'thumbnail-width': 545
-        //         }
-        //     },
-        // },
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-5.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-5.png',
-        //             '1536x1536-height': 900,
-        //             '1536x1536-width': 521,
-        //             '2048x2048': 'assets/images/home/banner/img-5.png',
-        //             '2048x2048-height': 900,
-        //             '2048x2048-width': 521,
-        //             large: 'assets/images/home/banner/img-5.png',
-        //             'large-height': 900,
-        //             'large-width': 521,
-        //             medium: 'assets/images/home/banner/img-5.png',
-        //             'medium-height': 900,
-        //             'medium-width': 521,
-        //             medium_large: 'assets/images/home/banner/img-5.png',
-        //             'medium_large-height': 900,
-        //             'medium_large-width': 521,
-        //             thumbnail: 'assets/images/home/banner/img-5.png',
-        //             'thumbnail-height': 900,
-        //             'thumbnail-width': 521
-        //         }
-        //     },
-        // },
-        // {
-        //     imagePath: {
-        //         genericPath: 'assets/images/home/banner/img-6.png',
-        //         allSizes: {
-        //             '1536x1536': 'assets/images/home/banner/img-6.png',
-        //             '1536x1536-height': 876,
-        //             '1536x1536-width': 427,
-        //             '2048x2048': 'assets/images/home/banner/img-6.png',
-        //             '2048x2048-height': 876,
-        //             '2048x2048-width': 427,
-        //             large: 'assets/images/home/banner/img-6.png',
-        //             'large-height': 876,
-        //             'large-width': 427,
-        //             medium: 'assets/images/home/banner/img-6.png',
-        //             'medium-height': 876,
-        //             'medium-width': 427,
-        //             medium_large: 'assets/images/home/banner/img-6.png',
-        //             'medium_large-height': 876,
-        //             'medium_large-width': 427,
-        //             thumbnail: 'assets/images/home/banner/img-6.png',
-        //             'thumbnail-height': 876,
-        //             'thumbnail-width': 427
-        //         }
-        //     },
-        // },
-    ];
+    defaultImagesBanner: CarouselItemsModel[] = [];
 
     bannerItems: CarouselItemsModel[] = [];
     betterSaleHeadercategories: productGenderEnum[] = [];
@@ -205,19 +56,24 @@ export class HomeComponent extends Unsubcriber implements OnInit {
             .pipe(takeUntil(this.unsubcribe$))
             .subscribe((incoming: Testimonial[]) => this.testimonials = incoming)
 
+        this.meta.addMetaTags({
+            title: 'Neutro - It\'s about personality',
+            description: 'Uma cultura que inspira você a viver de forma autêntica',
+            image: 'assets/images/static/profile/profile.png',
+        });
     }
 
     fullfillBetterSaleProductCategories(){
         this.betterSaleProducts.forEach(product => {
-        if(this.betterSaleHeadercategories.includes(product.gender)) return;
-        this.betterSaleHeadercategories = [...this.betterSaleHeadercategories, product.gender];
+            if(this.betterSaleHeadercategories.includes(product.gender)) return;
+            this.betterSaleHeadercategories = [...this.betterSaleHeadercategories, product.gender];
         });
     }
 
     fullfillAllProductsCategories(){
         this.allProducts.forEach(product => {
-        if(this.productsHeadercategories.includes(product.gender)) return;
-        this.productsHeadercategories = [...this.productsHeadercategories, product.gender];
+            if(this.productsHeadercategories.includes(product.gender)) return;
+            this.productsHeadercategories = [...this.productsHeadercategories, product.gender];
         });
     }
 

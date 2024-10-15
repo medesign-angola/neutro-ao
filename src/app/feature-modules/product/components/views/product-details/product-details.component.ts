@@ -36,7 +36,7 @@ export class ProductDetailsComponent implements OnInit, OnChanges, AfterViewInit
     this.selectedSize = -1;
     this.fullfillImagesArrayOfActiveColor();
 
-    // this.addMeta();
+    this.addMeta();
 
   }
 
