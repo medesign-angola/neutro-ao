@@ -25,6 +25,7 @@
                         [ngSrc]="item.imagePath.genericPath"
                         [width]="item.imagePath.allSizes?.['large-width']"
                         [height]="item.imagePath.allSizes?.['large-height']"
+                        [priority]="'priority'"
                         [alt]="item.alternativeDescription ?? 'Imagem de banner ' + (item.indexOnBannerItems + 1)"
                         >
                     </div>
@@ -45,6 +46,7 @@
                         [ngSrc]="item.imagePath.genericPath"
                         [width]="item.imagePath.allSizes?.['large-width']"
                         [height]="item.imagePath.allSizes?.['large-height']"
+                        [priority]="'priority'"
                         [alt]="item.alternativeDescription ?? 'Imagem de banner ' + (item.indexOnBannerItems + 1)"
                         >
                     </div>
